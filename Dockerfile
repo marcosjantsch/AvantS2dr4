@@ -35,9 +35,10 @@ RUN python3.12 -m venv /opt/venv \
   && python -m pip install --upgrade pip setuptools wheel \
   && pip install --index-url https://download.pytorch.org/whl/cu124 torch torchvision torchaudio \
   && pip install -r requirements-coderoom.txt \
+  && pip install --no-deps arosics \
   && mkdir -p /opt/wheels \
   && curl -L "$S2DR4_WHEEL_URL" -o "$S2DR4_WHEEL_PATH" \
-  && pip install "$S2DR4_WHEEL_PATH"
+  && pip install --no-deps "$S2DR4_WHEEL_PATH"
 
 COPY . .
 
@@ -46,4 +47,3 @@ RUN mkdir -p /app/export /app/auth /content/output
 EXPOSE 8787
 
 CMD ["python", "app.py", "--host", "0.0.0.0", "--port", "8787"]
-
