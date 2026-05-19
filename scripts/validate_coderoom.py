@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 import importlib.util
 import json
 import os
@@ -10,6 +11,14 @@ from pathlib import Path
 
 def module_ok(name: str) -> bool:
     return importlib.util.find_spec(name) is not None
+
+
+def import_check(name: str) -> dict[str, str | bool]:
+    try:
+        importlib.import_module(name)
+    except Exception as exc:  # pragma: no cover - diagnostic script
+        return {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+    return {"ok": True}
 
 
 def main() -> None:
@@ -32,6 +41,14 @@ def main() -> None:
                 "rasterio",
                 "torch",
                 "s2dr4",
+            ]
+        },
+        "imports": {
+            name: import_check(name)
+            for name in [
+                "osgeo.gdal",
+                "arosics",
+                "s2dr4.inferutils",
             ]
         },
     }
@@ -57,6 +74,9 @@ def main() -> None:
     for name in ["ee", "geopandas", "torch", "s2dr4"]:
         if not data["modules"].get(name):
             hard_failures.append(f"Missing module: {name}")
+    for name, result in data["imports"].items():
+        if not result["ok"]:
+            hard_failures.append(f"Import failed: {name}: {result['error']}")
 
     if hard_failures:
         raise SystemExit("\n".join(hard_failures))
@@ -64,4 +84,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
