@@ -33,7 +33,7 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
     run_apt apt-get install -y \
       python3.12 python3.12-venv python3.12-dev \
       build-essential curl ca-certificates git \
-      gdal-bin libgdal-dev libspatialindex-dev
+      gdal-bin libgdal-dev python3-gdal libspatialindex-dev
   fi
 fi
 
@@ -43,7 +43,7 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
 fi
 
 say "Creating virtualenv at $VENV_DIR"
-"$PYTHON_BIN" -m venv "$VENV_DIR"
+"$PYTHON_BIN" -m venv --system-site-packages "$VENV_DIR"
 # shellcheck disable=SC1091
 source "$VENV_DIR/bin/activate"
 python -m pip install --upgrade pip setuptools wheel
@@ -59,7 +59,7 @@ fi
 
 say "Installing app and geospatial dependencies"
 pip install -r requirements-coderoom.txt
-pip install --no-deps arosics
+pip install --no-deps py_tools_ds==0.24.1 geoarray==0.19.2 arosics==1.13.2
 
 say "Downloading S2DR4 wheel into local CodeRoom cache"
 mkdir -p "$(dirname "$S2DR4_WHEEL_PATH")"
