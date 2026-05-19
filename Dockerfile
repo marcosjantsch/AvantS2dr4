@@ -39,6 +39,8 @@ RUN python3.12 -m venv --system-site-packages /opt/venv \
 
 COPY . .
 
+RUN python scripts/validate_coderoom.py
+
 RUN mkdir -p /app/export /app/auth /content/output
 
 EXPOSE 8787
