@@ -1,0 +1,23 @@
+-r requirements.txt
+
+# S2DR4 runtime dependencies. Torch is installed first by scripts/setup_coderoom.sh
+# so that a CUDA-enabled build is used when the CodeRoom has an NVIDIA GPU.
+mgrs
+utm
+geojson
+fiona
+rasterio
+geopy
+h3
+xmltodict
+rioxarray
+google-cloud
+gspread
+icecream
+pystac-client
+stackstac
+arosics
+einops
+boto3
+imagecodecs==2026.3.6
+

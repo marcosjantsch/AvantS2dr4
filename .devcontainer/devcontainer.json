@@ -1,0 +1,21 @@
+{
+  "name": "Avant Sentinel S2DR4",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--gpus=all"
+  ],
+  "forwardPorts": [
+    8787
+  ],
+  "postCreateCommand": "bash scripts/setup_coderoom.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  }
+}
+
