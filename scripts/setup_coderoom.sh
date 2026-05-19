@@ -59,13 +59,14 @@ fi
 
 say "Installing app and geospatial dependencies"
 pip install -r requirements-coderoom.txt
+pip install --no-deps arosics
 
 say "Downloading S2DR4 wheel into local CodeRoom cache"
 mkdir -p "$(dirname "$S2DR4_WHEEL_PATH")"
 if [[ ! -f "$S2DR4_WHEEL_PATH" ]]; then
   curl -L "$S2DR4_WHEEL_URL" -o "$S2DR4_WHEEL_PATH"
 fi
-pip install "$S2DR4_WHEEL_PATH"
+pip install --no-deps "$S2DR4_WHEEL_PATH"
 
 say "Creating export/auth folders"
 mkdir -p "$APP_EXPORT_DIR" auth
@@ -74,4 +75,3 @@ say "Validating environment"
 python scripts/validate_coderoom.py
 
 say "Done. Activate with: source $VENV_DIR/bin/activate"
-
