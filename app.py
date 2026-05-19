@@ -10,15 +10,24 @@ import uuid
 from datetime import date
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from types import ModuleType
 from urllib.parse import urlparse
-
-import sentinel_blocks
 
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
 JOBS: dict[str, dict] = {}
 JOBS_LOCK = threading.Lock()
+SENTINEL_BLOCKS: ModuleType | None = None
+
+
+def get_sentinel_blocks() -> ModuleType:
+    global SENTINEL_BLOCKS
+    if SENTINEL_BLOCKS is None:
+        import sentinel_blocks
+
+        SENTINEL_BLOCKS = sentinel_blocks
+    return SENTINEL_BLOCKS
 
 
 class AppHandler(SimpleHTTPRequestHandler):
@@ -30,19 +39,24 @@ class AppHandler(SimpleHTTPRequestHandler):
             self._send_file(STATIC_DIR / "index.html")
             return
         if parsed.path == "/api/summary":
-            self._send_json(sentinel_blocks.shapefile_summary())
+            sb = get_sentinel_blocks()
+            self._send_json(sb.shapefile_summary())
             return
         if parsed.path == "/api/manifest":
-            self._send_json(sentinel_blocks.load_manifest())
+            sb = get_sentinel_blocks()
+            self._send_json(sb.load_manifest())
             return
         if parsed.path == "/api/blocks.geojson":
-            self._send_json(sentinel_blocks.geojson_for_canvas())
+            sb = get_sentinel_blocks()
+            self._send_json(sb.geojson_for_canvas())
             return
         if parsed.path == "/api/farms.geojson":
-            self._send_json(sentinel_blocks.farm_geojson())
+            sb = get_sentinel_blocks()
+            self._send_json(sb.farm_geojson())
             return
         if parsed.path == "/api/superres/capability":
-            self._send_json(sentinel_blocks.superres_capability())
+            sb = get_sentinel_blocks()
+            self._send_json(sb.superres_capability())
             return
         if parsed.path.startswith("/api/jobs/"):
             job_id = parsed.path.removeprefix("/api/jobs/").strip("/")
@@ -62,25 +76,26 @@ class AppHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         try:
             payload = self._read_json()
+            sb = get_sentinel_blocks()
             if parsed.path == "/api/prepare":
-                result = sentinel_blocks.generate_blocks(
-                    block_size_m=int(payload.get("block_size_m") or sentinel_blocks.DEFAULT_BLOCK_SIZE_M),
-                    overlap_m=int(payload.get("overlap_m") or sentinel_blocks.DEFAULT_OVERLAP_M),
+                result = sb.generate_blocks(
+                    block_size_m=int(payload.get("block_size_m") or sb.DEFAULT_BLOCK_SIZE_M),
+                    overlap_m=int(payload.get("overlap_m") or sb.DEFAULT_OVERLAP_M),
                     write_files=True,
                 )
                 self._send_json(result)
                 return
             if parsed.path == "/api/auth/check":
-                self._send_json(sentinel_blocks.check_earth_engine())
+                self._send_json(sb.check_earth_engine())
                 return
             if parsed.path == "/api/auth/auto":
-                self._send_json(sentinel_blocks.check_earth_engine())
+                self._send_json(sb.check_earth_engine())
                 return
             if parsed.path == "/api/sentinel/search":
-                result = sentinel_blocks.search_sentinel(
+                result = sb.search_sentinel(
                     reference_date=payload.get("reference_date") or None,
-                    months=int(payload.get("months") or sentinel_blocks.DEFAULT_MONTHS),
-                    max_cloud=float(payload.get("max_cloud") or sentinel_blocks.DEFAULT_MAX_CLOUD),
+                    months=int(payload.get("months") or sb.DEFAULT_MONTHS),
+                    max_cloud=float(payload.get("max_cloud") or sb.DEFAULT_MAX_CLOUD),
                     farm_slug=payload.get("farm_slug") or None,
                     limit=int(payload["limit"]) if payload.get("limit") else None,
                 )
@@ -90,7 +105,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                 self._send_json(start_sentinel_job(payload))
                 return
             if parsed.path == "/api/superres/queue":
-                self._send_json(sentinel_blocks.prepare_superres_queue(farm_slug=payload.get("farm_slug") or None))
+                self._send_json(sb.prepare_superres_queue(farm_slug=payload.get("farm_slug") or None))
                 return
             self.send_error(404, "Not found")
         except Exception as exc:
@@ -131,20 +146,21 @@ class AppHandler(SimpleHTTPRequestHandler):
 
 def run(host: str = "127.0.0.1", port: int = 8787) -> None:
     STATIC_DIR.mkdir(exist_ok=True)
-    sentinel_blocks.EXPORT_DIR.mkdir(exist_ok=True)
+    Path(os.getenv("APP_EXPORT_DIR", str(BASE_DIR / "export"))).mkdir(parents=True, exist_ok=True)
     httpd = ThreadingHTTPServer((host, port), AppHandler)
-    print(f"Avant Sentinel Local running at http://{host}:{port}")
-    print("Press Ctrl+C to stop.")
+    print(f"Avant Sentinel Local running at http://{host}:{port}", flush=True)
+    print("Press Ctrl+C to stop.", flush=True)
     httpd.serve_forever()
 
 
 def start_sentinel_job(payload: dict) -> dict:
+    sb = get_sentinel_blocks()
     reference_date = payload.get("reference_date") or date.today().isoformat()
-    months = int(payload.get("months") or sentinel_blocks.DEFAULT_MONTHS)
-    max_cloud = float(payload.get("max_cloud") or sentinel_blocks.DEFAULT_MAX_CLOUD)
+    months = int(payload.get("months") or sb.DEFAULT_MONTHS)
+    max_cloud = float(payload.get("max_cloud") or sb.DEFAULT_MAX_CLOUD)
     farm_slug = payload.get("farm_slug") or None
     limit = int(payload["limit"]) if payload.get("limit") else None
-    blocks = sentinel_blocks.get_blocks(farm_slug=farm_slug, limit=limit)
+    blocks = sb.get_blocks(farm_slug=farm_slug, limit=limit)
     job_id = uuid.uuid4().hex[:12]
     job = {
         "id": job_id,
@@ -188,10 +204,11 @@ def run_sentinel_job(
 ) -> None:
     results = []
     try:
+        sb = get_sentinel_blocks()
         update_job(job_id, status="running", message="Autenticando Google Earth Engine")
-        ee = sentinel_blocks.init_earth_engine()
+        ee = sb.init_earth_engine()
         ref_date = date.fromisoformat(reference_date)
-        windows = sentinel_blocks.month_windows(ref_date, months=months)
+        windows = sb.month_windows(ref_date, months=months)
         total = len(blocks)
         for index, block in enumerate(blocks, start=1):
             update_job(
@@ -200,7 +217,7 @@ def run_sentinel_job(
                 progress=round(((index - 1) / total) * 100, 1) if total else 100,
                 message=f"Consultando {block['block_id']} ({block['fazenda']})",
             )
-            result = sentinel_blocks._search_block(ee, block, windows, max_cloud)
+            result = sb._search_block(ee, block, windows, max_cloud)
             results.append(result)
             with JOBS_LOCK:
                 JOBS[job_id]["results"] = results[-25:]
@@ -210,7 +227,7 @@ def run_sentinel_job(
                 progress=round((index / total) * 100, 1) if total else 100,
                 message=f"{block['block_id']} concluido",
             )
-        summary = sentinel_blocks.write_sentinel_outputs(
+        summary = sb.write_sentinel_outputs(
             results=results,
             reference_date=reference_date,
             months=months,
@@ -230,7 +247,8 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.prepare:
-        result = sentinel_blocks.generate_blocks(write_files=True)
+        sb = get_sentinel_blocks()
+        result = sb.generate_blocks(write_files=True)
         print(json.dumps({"export_dir": result["export_dir"], "block_count": result["block_count"]}, ensure_ascii=False))
         return
     run(args.host, args.port)
