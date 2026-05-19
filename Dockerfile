@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV APP_ENV=avantev02
@@ -13,17 +13,14 @@ WORKDIR /app
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-    software-properties-common \
     curl \
     ca-certificates \
     git \
     build-essential \
     gdal-bin \
     libgdal-dev \
+    python3-gdal \
     libspatialindex-dev \
-  && add-apt-repository ppa:deadsnakes/ppa -y \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends \
     python3.12 \
     python3.12-dev \
     python3.12-venv \
@@ -31,11 +28,11 @@ RUN apt-get update \
 
 COPY requirements.txt requirements-coderoom.txt ./
 
-RUN python3.12 -m venv /opt/venv \
+RUN python3.12 -m venv --system-site-packages /opt/venv \
   && python -m pip install --upgrade pip setuptools wheel \
   && pip install --index-url https://download.pytorch.org/whl/cu124 torch torchvision torchaudio \
   && pip install -r requirements-coderoom.txt \
-  && pip install --no-deps arosics \
+  && pip install --no-deps py_tools_ds==0.24.1 geoarray==0.19.2 arosics==1.13.2 \
   && mkdir -p /opt/wheels \
   && curl -L "$S2DR4_WHEEL_URL" -o "$S2DR4_WHEEL_PATH" \
   && pip install --no-deps "$S2DR4_WHEEL_PATH"
