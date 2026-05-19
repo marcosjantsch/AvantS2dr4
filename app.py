@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import threading
 import time
 import uuid
@@ -224,7 +225,7 @@ def run_sentinel_job(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Avant Sentinel local HTML app")
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8787)
+    parser.add_argument("--port", type=int, default=int(os.getenv("PORT", "8787")))
     parser.add_argument("--prepare", action="store_true", help="Create export manifests and exit")
     args = parser.parse_args()
 

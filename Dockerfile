@@ -43,6 +43,6 @@ RUN python scripts/validate_coderoom.py
 
 RUN mkdir -p /app/export /app/auth /content/output
 
-EXPOSE 8787
+EXPOSE 8080
 
-CMD ["python", "app.py", "--host", "0.0.0.0", "--port", "8787"]
+CMD ["python", "app.py", "--host", "0.0.0.0"]
