@@ -7,6 +7,7 @@ ENV APP_GEO_PATH=Data/VisitaGFP.shp
 ENV APP_EXPORT_DIR=export
 ENV S2DR4_WHEEL_URL=https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl
 ENV S2DR4_WHEEL_PATH=/opt/wheels/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl
+ENV PYTHONUNBUFFERED=1
 ENV PATH=/opt/venv/bin:$PATH
 
 WORKDIR /app
@@ -45,4 +46,4 @@ RUN mkdir -p /app/export /app/auth /content/output
 
 EXPOSE 8080
 
-CMD ["python", "app.py", "--host", "0.0.0.0"]
+CMD ["sh", "-c", "python app.py --host 0.0.0.0 --port ${PORT:-8080}"]
