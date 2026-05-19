@@ -16,8 +16,10 @@ gspread
 icecream
 pystac-client
 stackstac
-arosics
 einops
 boto3
 imagecodecs==2026.3.6
 
+# Do not install arosics here. Its dependency resolver pulls the latest GDAL
+# Python binding, which may not match the libgdal version in the CUDA image.
+# Dockerfile/setup install arosics with --no-deps after the geospatial stack.
