@@ -242,16 +242,17 @@ def run_sentinel_job(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Avant Sentinel local HTML app")
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=int(os.getenv("PORT", "8787")))
+    parser.add_argument("--port", type=int, default=None)
     parser.add_argument("--prepare", action="store_true", help="Create export manifests and exit")
     args = parser.parse_args()
+    port = int(os.getenv("PORT") or args.port or 8787)
 
     if args.prepare:
         sb = get_sentinel_blocks()
         result = sb.generate_blocks(write_files=True)
         print(json.dumps({"export_dir": result["export_dir"], "block_count": result["block_count"]}, ensure_ascii=False))
         return
-    run(args.host, args.port)
+    run(args.host, port)
 
 
 if __name__ == "__main__":
