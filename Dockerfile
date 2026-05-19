@@ -46,4 +46,4 @@ RUN mkdir -p /app/export /app/auth /content/output
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "python app.py --host 0.0.0.0 --port ${PORT:-8080}"]
+CMD ["python", "-u", "app.py", "--host", "0.0.0.0"]
