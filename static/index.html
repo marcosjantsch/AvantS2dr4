@@ -780,6 +780,7 @@
       setBusy(true);
       startTimer();
       setRun("Fila S2DR4", "Conferindo ambiente e preparando chamadas por bloco.", 18);
+      log("Evento Fila S2DR4 recebido. Preparando arquivos de fila.");
       try {
         const data = await api("/api/superres/queue", {
           method: "POST",
@@ -805,7 +806,9 @@
     async function downloadSuperresProducts() {
       setBusy(true);
       startTimer();
-      setRun("Baixando S2DR4", "Conferindo produtos de super-resolucao ja gerados.", 12);
+      setRun("Baixar S2DR4", "Evento recebido. Conferindo produtos de super-resolucao.", 8);
+      log("Evento Baixar S2DR4 recebido. Conferindo produtos gerados.");
+      let stopPulse = null;
       try {
         const payload = {farm_slug: selectedFarmSlug() || null};
         const params = new URLSearchParams();
@@ -814,7 +817,14 @@
         if (!products.items) {
           throw new Error("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.");
         }
-        setRun("Empacotando S2DR4", `${products.items} arquivos encontrados. Criando pacote ZIP.`, 55);
+        setRun("Empacotando S2DR4", `${products.items} arquivos encontrados. Criando pacote ZIP.`, 42);
+        log(`${products.items} produtos S2DR4 encontrados. Compactacao iniciada.`);
+        stopPulse = startProgressPulse("Empacotando S2DR4", [
+          "Criando pacote ZIP dos produtos.",
+          "Organizando arquivos por fazenda e bloco.",
+          "Mantendo a solicitacao ativa.",
+          "Finalizando pacote para download."
+        ], 45, 92);
         const bundle = await api("/api/superres/products/bundle", {
           method: "POST",
           body: JSON.stringify(payload)
@@ -831,9 +841,22 @@
         setRun("Erro ao baixar S2DR4", err.message, 100, "error");
         log(`Erro download S2DR4: ${err.message}`);
       } finally {
+        if (stopPulse) stopPulse();
         setBusy(false);
         stopTimer();
       }
+    }
+
+    function startProgressPulse(title, messages, start = 20, max = 95) {
+      let progress = start;
+      let index = 0;
+      setRun(title, messages[0], progress);
+      const handle = window.setInterval(() => {
+        progress = Math.min(max, progress + Math.max(1, Math.round((max - progress) * 0.18)));
+        index = (index + 1) % messages.length;
+        setRun(title, messages[index], progress);
+      }, 1100);
+      return () => window.clearInterval(handle);
     }
 
     async function toggleSentinelPreview(item, checked) {
