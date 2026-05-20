@@ -7,6 +7,7 @@ import mimetypes
 import os
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import threading
@@ -25,6 +26,25 @@ JOBS: dict[str, dict] = {}
 JOBS_LOCK = threading.Lock()
 SENTINEL_BLOCKS: ModuleType | None = None
 S2DR4_IMPORT_TIMEOUT_SECONDS = int(os.getenv("S2DR4_IMPORT_TIMEOUT_SECONDS", "75"))
+HOSTNAME = socket.gethostname()
+INSTANCE_ID = "/".join(
+    [
+        os.getenv("K_SERVICE") or "local-service",
+        os.getenv("K_REVISION") or "local-revision",
+        HOSTNAME,
+        uuid.uuid4().hex[:8],
+    ]
+)
+
+
+def runtime_info() -> dict:
+    return {
+        "instance_id": INSTANCE_ID,
+        "hostname": HOSTNAME,
+        "k_service": os.getenv("K_SERVICE") or "",
+        "k_revision": os.getenv("K_REVISION") or "",
+        "k_configuration": os.getenv("K_CONFIGURATION") or "",
+    }
 
 
 def export_dir() -> Path:
@@ -64,6 +84,34 @@ def remember_job(job: dict) -> None:
     save_job(job)
 
 
+def known_job_ids(limit: int = 12) -> list[str]:
+    ids = set(JOBS.keys())
+    try:
+        ids.update(path.stem for path in jobs_dir().glob("*.json"))
+    except Exception:
+        pass
+    return sorted(ids)[-limit:]
+
+
+def process_status(pid: int | None) -> dict:
+    if not pid:
+        return {}
+    data = {"pid": pid, "exists": False}
+    status_path = Path("/proc") / str(pid) / "status"
+    try:
+        if not status_path.exists():
+            return data
+        data["exists"] = True
+        wanted = {"State", "VmPeak", "VmSize", "VmRSS", "VmSwap", "Threads"}
+        for line in status_path.read_text(encoding="utf-8", errors="replace").splitlines():
+            key, _, value = line.partition(":")
+            if key in wanted:
+                data[key] = value.strip()
+    except Exception as exc:
+        data["error"] = f"{type(exc).__name__}: {exc}"
+    return data
+
+
 def get_sentinel_blocks() -> ModuleType:
     global SENTINEL_BLOCKS
     if SENTINEL_BLOCKS is None:
@@ -79,7 +127,7 @@ class AppHandler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path in {"/healthz", "/api/health"}:
-            self._send_json({"ok": True, "status": "ready"})
+            self._send_json({"ok": True, "status": "ready", "runtime": runtime_info()})
             return
         if parsed.path in {"/", "/index.html"}:
             self._send_file(STATIC_DIR / "index.html")
@@ -102,7 +150,9 @@ class AppHandler(SimpleHTTPRequestHandler):
             return
         if parsed.path == "/api/superres/capability":
             sb = get_sentinel_blocks()
-            self._send_json(sb.superres_capability())
+            result = sb.superres_capability()
+            result["runtime"] = runtime_info()
+            self._send_json(result)
             return
         if parsed.path == "/api/superres/products":
             sb = get_sentinel_blocks()
@@ -143,8 +193,20 @@ class AppHandler(SimpleHTTPRequestHandler):
             if not job:
                 job = load_job(job_id)
             if not job:
-                self._send_json({"ok": False, "error": "Job not found", "job_id": job_id}, status=404)
+                self._send_json(
+                    {
+                        "ok": False,
+                        "error": "Job not found",
+                        "job_id": job_id,
+                        "poll_runtime": runtime_info(),
+                        "known_job_ids": known_job_ids(),
+                        "jobs_dir": str(jobs_dir()),
+                    },
+                    status=404,
+                )
                 return
+            job = dict(job)
+            job["poll_runtime"] = runtime_info()
             self._send_json(job)
             return
         if parsed.path.startswith("/static/"):
@@ -267,6 +329,7 @@ def start_sentinel_job(payload: dict) -> dict:
     job = {
         "id": job_id,
         "type": "sentinel_search",
+        "runtime": runtime_info(),
         "status": "queued",
         "message": "Aguardando inicio",
         "current": 0,
@@ -285,7 +348,7 @@ def start_sentinel_job(payload: dict) -> dict:
         daemon=True,
     )
     thread.start()
-    return {"ok": True, "job_id": job_id, "total": len(blocks)}
+    return {"ok": True, "job_id": job_id, "total": len(blocks), "runtime": runtime_info()}
 
 
 def start_superres_job(payload: dict) -> dict:
@@ -305,6 +368,7 @@ def start_superres_job(payload: dict) -> dict:
     job = {
         "id": job_id,
         "type": "s2dr4_run",
+        "runtime": runtime_info(),
         "status": "queued",
         "message": "Aguardando inicio S2DR4",
         "current": 0,
@@ -323,7 +387,7 @@ def start_superres_job(payload: dict) -> dict:
         daemon=True,
     )
     thread.start()
-    return {"ok": True, "job_id": job_id, "total": len(rows), "queue_path": str(queue_path)}
+    return {"ok": True, "job_id": job_id, "total": len(rows), "queue_path": str(queue_path), "runtime": runtime_info()}
 
 
 def update_job(job_id: str, **fields) -> None:
@@ -473,6 +537,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
         cmd.append("--force")
 
     results: list[dict] = []
+    proc: subprocess.Popen | None = None
     try:
         update_job(
             job_id,
@@ -494,7 +559,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
             errors="replace",
             bufsize=1,
         )
-        update_job(job_id, pid=proc.pid)
+        update_job(job_id, pid=proc.pid, process_status=process_status(proc.pid))
 
         def pump_stdout() -> None:
             assert proc.stdout is not None
@@ -539,6 +604,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
                             f"TimeoutError: import do S2DR4 passou de "
                             f"{S2DR4_IMPORT_TIMEOUT_SECONDS}s. Ultimo estagio: {last_stdout or 'sem stdout'}."
                         ),
+                        process_status=process_status(proc.pid),
                         stdout_tail=tail_text(stdout_path),
                         stderr_tail=tail_text(stderr_path),
                     )
@@ -553,6 +619,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
                     job_id,
                     message=f"S2DR4 ainda ativo no subprocesso ({elapsed}s)",
                     process_elapsed_seconds=elapsed,
+                    process_status=process_status(proc.pid),
                     stdout_tail=tail_text(stdout_path, 2000),
                     stderr_tail=tail_text(stderr_path, 2000),
                 )
@@ -564,6 +631,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
         final_job = load_job(job_id) or {}
         if final_job.get("status") == "error":
             return
+        update_job(job_id, returncode=returncode, process_status=process_status(proc.pid))
         if returncode != 0:
             raise RuntimeError(
                 f"S2DR4 subprocesso terminou com codigo {returncode}. "
@@ -589,6 +657,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
             status="error",
             message="Erro S2DR4",
             error=f"{type(exc).__name__}: {exc}",
+            process_status=process_status(proc.pid if proc else None),
             stdout_tail=tail_text(stdout_path),
             stderr_tail=tail_text(stderr_path),
         )

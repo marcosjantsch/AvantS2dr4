@@ -42,6 +42,17 @@ Se o servico Cloud Run processar S2DR4 em segundo plano sem storage
 compartilhado, mantenha `max-instances=1`, CPU sempre alocada e memoria alta
 (por exemplo 4 GiB) para que o job continue na mesma instancia.
 
+Depois de publicar a imagem, aplique a configuracao recomendada do Cloud Run:
+
+```bash
+REGION=us-central1 SERVICE_NAME=avant-s2dr4 bash scripts/update_cloud_run.sh
+```
+
+Se o servico estiver em outra regiao, troque `REGION`. O app tambem retorna
+`runtime.instance_id` e `poll_runtime.instance_id` em `/api/jobs/<id>` para
+diagnosticar quando o polling cai em outra instancia ou quando o container foi
+reiniciado durante o S2DR4.
+
 ## Credenciais
 
 Nao envie chaves JSON para o GitHub. Coloque credenciais apenas no ambiente remoto
