@@ -1,4 +1,0 @@
-earthengine-api
-geopandas
-pyproj
-shapely
