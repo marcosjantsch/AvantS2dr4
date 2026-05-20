@@ -524,6 +524,7 @@
       centerLayer: null,
       sentinelLayers: new Map(),
       sentinelDownloads: new Map(),
+      s2dr4Logged: new Set(),
       timerStartedAt: null,
       timerHandle: null,
       activeJob: null
@@ -779,27 +780,62 @@
     async function prepareSuperresQueue() {
       setBusy(true);
       startTimer();
-      setRun("Fila S2DR4", "Conferindo ambiente e preparando chamadas por bloco.", 18);
-      log("Evento Fila S2DR4 recebido. Preparando arquivos de fila.");
+      setRun("S2DR4", "Evento recebido. Preparando fila e iniciando super-resolucao.", 4);
+      log("Evento Fila S2DR4 recebido. Preparando fila e iniciando super-resolucao.");
+      state.s2dr4Logged.clear();
       try {
-        const data = await api("/api/superres/queue", {
+        const start = await api("/api/jobs/s2dr4/start", {
           method: "POST",
           body: JSON.stringify({farm_slug: selectedFarmSlug() || null})
         });
-        const capability = data.capability;
-        els.s2Chip.textContent = capability.ready ? "S2DR4 pronto" : "S2DR4 requer Colab/Linux";
-        els.s2Chip.className = capability.ready ? "chip good" : "chip warn";
-        setRun("Fila S2DR4 pronta", `${data.items} itens em ${data.queue_path}.`, 100);
-        log(`Fila S2DR4 criada: ${data.items} itens.`);
-        if (!capability.ready) {
-          log(`S2DR4 nao roda automaticamente neste ambiente: ${capability.expected}.`);
-        }
+        els.s2Chip.textContent = "S2DR4 rodando";
+        els.s2Chip.className = "chip warn";
+        log(`S2DR4 iniciado: ${start.total} blocos. Fila: ${start.queue_path}.`);
+        await pollSuperresJob(start.job_id);
       } catch (err) {
         setRun("Erro S2DR4", err.message, 100, "error");
         log(`Erro S2DR4: ${err.message}`);
       } finally {
         setBusy(false);
         stopTimer();
+      }
+    }
+
+    async function pollSuperresJob(jobId) {
+      while (true) {
+        const job = await api(`/api/jobs/${jobId}`);
+        const progress = Number(job.progress || 0);
+        setRun(
+          job.status === "done" ? "S2DR4 concluido" : "S2DR4 rodando",
+          `${job.message} | ${job.current}/${job.total} blocos`,
+          progress
+        );
+        if (job.results && job.results.length) {
+          const latest = job.results[job.results.length - 1];
+          const logKey = latest ? `${latest.block_id}:${latest.status}` : "";
+          if (latest && latest.block_id && !state.s2dr4Logged.has(logKey)) {
+            state.s2dr4Logged.add(logKey);
+            log(`S2DR4 ${latest.block_id}: ${latest.status}.`);
+          }
+        }
+        if (job.status === "done") {
+          const summary = job.summary || {};
+          els.s2Chip.textContent = summary.errors ? "S2DR4 com alertas" : "S2DR4 pronto";
+          els.s2Chip.className = summary.errors ? "chip warn" : "chip good";
+          const bundle = summary.bundle ? ` Pacote: ${summary.bundle.file_name}.` : "";
+          setRun("S2DR4 concluido", `${summary.done || 0} novos, ${summary.skipped || 0} existentes, ${summary.errors || 0} erros.${bundle}`, 100);
+          log(`S2DR4 concluido: ${summary.done || 0} novos, ${summary.skipped || 0} existentes, ${summary.errors || 0} erros.`);
+          if (summary.bundle) {
+            log(`Pacote S2DR4 criado: ${summary.bundle.file_name}. Clique em Baixar S2DR4 para obter os produtos.`);
+          }
+          return;
+        }
+        if (job.status === "error") {
+          els.s2Chip.textContent = "S2DR4 erro";
+          els.s2Chip.className = "chip error";
+          throw new Error(job.error || job.message);
+        }
+        await sleep(1400);
       }
     }
 

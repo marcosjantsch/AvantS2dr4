@@ -135,6 +135,9 @@ class AppHandler(SimpleHTTPRequestHandler):
             if parsed.path == "/api/jobs/sentinel/start":
                 self._send_json(start_sentinel_job(payload))
                 return
+            if parsed.path == "/api/jobs/s2dr4/start":
+                self._send_json(start_superres_job(payload))
+                return
             if parsed.path == "/api/superres/queue":
                 self._send_json(sb.prepare_superres_queue(farm_slug=payload.get("farm_slug") or None))
                 return
@@ -231,6 +234,47 @@ def start_sentinel_job(payload: dict) -> dict:
     return {"ok": True, "job_id": job_id, "total": len(blocks)}
 
 
+def start_superres_job(payload: dict) -> dict:
+    sb = get_sentinel_blocks()
+    farm_slug = payload.get("farm_slug") or None
+    force = bool(payload.get("force"))
+    queue = sb.prepare_superres_queue(farm_slug=farm_slug)
+    queue_path = Path(queue["queue_path"])
+    if not queue["items"]:
+        raise ValueError("Nenhum Sentinel selecionado para executar S2DR4.")
+    capability = queue["capability"]
+    if not capability.get("ready"):
+        raise RuntimeError(f"S2DR4 indisponivel neste ambiente: {capability.get('expected')}")
+
+    from scripts import run_s2dr4_queue
+
+    rows = run_s2dr4_queue.read_queue(queue_path)
+    job_id = uuid.uuid4().hex[:12]
+    job = {
+        "id": job_id,
+        "type": "s2dr4_run",
+        "status": "queued",
+        "message": "Aguardando inicio S2DR4",
+        "current": 0,
+        "total": len(rows),
+        "progress": 0,
+        "started_at": time.time(),
+        "elapsed_seconds": 0,
+        "results": [],
+        "summary": None,
+        "error": None,
+    }
+    with JOBS_LOCK:
+        JOBS[job_id] = job
+    thread = threading.Thread(
+        target=run_superres_job,
+        args=(job_id, queue_path, rows, force),
+        daemon=True,
+    )
+    thread.start()
+    return {"ok": True, "job_id": job_id, "total": len(rows), "queue_path": str(queue_path)}
+
+
 def update_job(job_id: str, **fields) -> None:
     with JOBS_LOCK:
         job = JOBS[job_id]
@@ -281,6 +325,61 @@ def run_sentinel_job(
         update_job(job_id, status="done", message="Busca Sentinel concluida", progress=100, summary=summary)
     except Exception as exc:
         update_job(job_id, status="error", message="Erro na busca Sentinel", error=f"{type(exc).__name__}: {exc}")
+
+
+def run_superres_job(job_id: str, queue_path: Path, rows: list[dict[str, str]], force: bool) -> None:
+    results = []
+    run_started = time.time()
+    try:
+        from scripts import run_s2dr4_queue
+
+        update_job(job_id, status="running", message="Importando S2DR4", progress=2)
+        inferutils = run_s2dr4_queue.import_s2dr4()
+        total = len(rows)
+        for index, row in enumerate(rows, start=1):
+            block_id = row.get("block_id") or f"item {index}"
+            update_job(
+                job_id,
+                current=index - 1,
+                progress=round(((index - 1) / total) * 94 + 3, 1) if total else 100,
+                message=f"Executando S2DR4 em {block_id}",
+            )
+            result = run_s2dr4_queue.process_row(
+                inferutils=inferutils,
+                row=row,
+                mode="symlink",
+                force=force,
+            )
+            results.append(result)
+            with JOBS_LOCK:
+                JOBS[job_id]["results"] = results[-25:]
+            update_job(
+                job_id,
+                current=index,
+                progress=round((index / total) * 94 + 3, 1) if total else 100,
+                message=f"{block_id}: {result['status']}",
+            )
+
+        summary = {
+            "queue": str(queue_path),
+            "started_at": time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(run_started)),
+            "finished_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "elapsed_seconds": round(time.time() - run_started, 1),
+            "total": len(rows),
+            "done": sum(1 for item in results if item["status"] == "done"),
+            "skipped": sum(1 for item in results if item["status"] == "skipped_existing"),
+            "errors": sum(1 for item in results if item["status"] == "error"),
+            "results": results,
+        }
+        summary_path = queue_path.with_name("s2dr4_run_summary.json")
+        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+        bundle = run_s2dr4_queue.bundle_run_products(summary, summary_path)
+        if bundle:
+            summary["bundle"] = bundle
+            summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+        update_job(job_id, status="done", message="S2DR4 concluido", progress=100, summary=summary)
+    except Exception as exc:
+        update_job(job_id, status="error", message="Erro S2DR4", error=f"{type(exc).__name__}: {exc}")
 
 
 def main() -> None:
