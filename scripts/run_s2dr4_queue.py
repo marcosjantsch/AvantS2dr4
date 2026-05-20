@@ -17,6 +17,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue.csv"
 LAST_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue_last.csv"
 CONTENT_OUTPUT = Path("/content/output")
+CONTENT_DATAPATH = Path("/content/datapath")
+CONTENT_LOGS = Path("/content/logs")
 TRUE_VALUES = {"1", "true", "yes", "on"}
 S2DR4_MODEL_NAME = "S2DR4-GL-20241022.1"
 PRODUCT_EXTENSIONS = {".tif", ".tiff", ".jp2", ".vrt", ".png", ".jpg", ".jpeg"}
@@ -45,6 +47,23 @@ def configure_runtime_environment() -> None:
     os.environ.setdefault("S2DR4_MODEL_PATH", str(model_path))
     os.environ.setdefault("S2DR4_MODEL", str(model_path))
     os.environ.setdefault("SYSTEM_MODEL", str(model_path))
+    if os.getenv("S2DR4_COLAB_COMPAT", "1").lower() in TRUE_VALUES:
+        # The compiled S2DR4 package checks Colab runtime markers before it reaches
+        # the local inference path. CPU Colab runtimes expose COLAB_GPU=0.
+        os.environ.setdefault("COLAB_GPU", "0")
+        ensure_colab_compat_dirs()
+
+
+def ensure_colab_compat_dirs() -> None:
+    try:
+        for path in [CONTENT_OUTPUT, CONTENT_DATAPATH, CONTENT_LOGS]:
+            path.mkdir(parents=True, exist_ok=True)
+    except PermissionError as exc:
+        raise PermissionError(
+            "Cannot create /content folders required by S2DR4 Colab compatibility. "
+            "Run in a container/VM where /content is writable, or create it once with: "
+            "sudo mkdir -p /content/output /content/datapath /content/logs && sudo chown -R $USER:$USER /content"
+        ) from exc
 
 
 def memory_mb() -> float | None:
@@ -64,10 +83,15 @@ def print_runtime_diagnostics() -> None:
         "force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
         "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
         "nvidia_visible_devices": os.getenv("NVIDIA_VISIBLE_DEVICES", ""),
+        "colab_compat": os.getenv("S2DR4_COLAB_COMPAT", "1"),
+        "colab_gpu": os.getenv("COLAB_GPU", ""),
         "omp_num_threads": os.getenv("OMP_NUM_THREADS", ""),
         "s2dr4_model": str(model_file),
         "s2dr4_model_cached": model_file.exists(),
         "s2dr4_model_size_bytes": model_file.stat().st_size if model_file.exists() else 0,
+        "content_output_exists": CONTENT_OUTPUT.exists(),
+        "content_datapath_exists": CONTENT_DATAPATH.exists(),
+        "content_logs_exists": CONTENT_LOGS.exists(),
         "memory_mb": memory_mb(),
     }
     print(f"[s2dr4] Runtime: {json.dumps(payload, ensure_ascii=False, sort_keys=True)}", flush=True)
@@ -214,8 +238,9 @@ def process_row(
                 "expected_extensions": sorted(PRODUCT_EXTENSIONS),
                 "error": (
                     "S2DR4 terminou sem excecao, mas nao gerou nenhum produto raster/imagem. "
-                    "O stdout do processo pode indicar restricao do pacote, por exemplo execucao "
-                    "suportada apenas no Google Colab."
+                    "A compatibilidade Colab local foi aplicada quando S2DR4_COLAB_COMPAT=1; "
+                    "se o stdout ainda indicar restricao do pacote, a trava esta dentro do binario "
+                    "S2DR4 e precisa de build/fonte do fornecedor."
                 ),
             }
             write_block_manifest(manifest_path, failed)

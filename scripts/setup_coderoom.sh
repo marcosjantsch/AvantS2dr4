@@ -80,8 +80,15 @@ if [[ "$actual_model_bytes" != "$S2DR4_MODEL_BYTES" ]]; then
   exit 1
 fi
 
-say "Creating export/auth folders"
+say "Creating export/auth/content folders"
 mkdir -p "$APP_EXPORT_DIR" auth
+if [[ ! -d /content ]]; then
+  run_apt mkdir -p /content
+  if [[ -n "${USER:-}" ]]; then
+    run_apt chown -R "$USER:$USER" /content || true
+  fi
+fi
+mkdir -p /content/output /content/datapath /content/logs
 
 say "Validating environment"
 python scripts/validate_coderoom.py

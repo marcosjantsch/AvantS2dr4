@@ -80,7 +80,11 @@ python app.py --prepare
 
 O pacote do notebook Gamma Earth atual e um wheel Linux Python 3.12. Nesta maquina
 local Windows/Python 3.11, o app prepara as chamadas e a selecao Sentinel. Para
-rodar a inferencia S2DR4, use um ambiente Linux/Colab com GPU e instale:
+rodar a inferencia S2DR4, use o CodeRoom/Cloud Run Linux preparado por
+`README_CODEROOM.md`; o runner emula os marcadores minimos do Colab
+(`COLAB_GPU=0` e pastas `/content/...`) para manter apenas a inferencia local.
+
+Se for testar manualmente em um Linux Python 3.12, instale:
 
 ```python
 !pip -q install https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl

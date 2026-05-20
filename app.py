@@ -25,7 +25,15 @@ STATIC_DIR = BASE_DIR / "static"
 JOBS: dict[str, dict] = {}
 JOBS_LOCK = threading.Lock()
 SENTINEL_BLOCKS: ModuleType | None = None
-S2DR4_IMPORT_TIMEOUT_SECONDS = int(os.getenv("S2DR4_IMPORT_TIMEOUT_SECONDS", "75"))
+S2DR4_IMPORT_TIMEOUT_SECONDS = int(os.getenv("S2DR4_IMPORT_TIMEOUT_SECONDS", "300"))
+S2DR4_COLAB_ONLY_MARKER = "designed to run only on Google Colab"
+S2DR4_COLAB_ONLY_ERROR = (
+    "O pacote S2DR4 recusou a execucao neste ambiente: a propria biblioteca informou "
+    "que este modulo foi desenhado para rodar apenas no Google Colab. O app aplica uma "
+    "camada de compatibilidade local com COLAB_GPU=0 e pastas /content; se esta mensagem "
+    "continuar aparecendo, a restricao esta dentro do binario S2DR4 e precisa de uma build "
+    "sem essa trava ou do codigo-fonte do fornecedor."
+)
 HOSTNAME = socket.gethostname()
 INSTANCE_ID = "/".join(
     [
@@ -471,12 +479,20 @@ def handle_s2dr4_stdout_line(job_id: str, line: str, total: int, results: list[d
     stripped = line.strip()
     if not stripped:
         return
+    if S2DR4_COLAB_ONLY_MARKER.lower() in stripped.lower():
+        update_job(
+            job_id,
+            message="S2DR4 recusou ambiente fora do Google Colab",
+            last_stdout=stripped,
+            s2dr4_environment_error=S2DR4_COLAB_ONLY_ERROR,
+        )
+        return
     if stripped.startswith("[s2dr4] Importing"):
         message = "Importando dependencias S2DR4"
         if "torch" in stripped.lower():
             message = "Importando PyTorch"
         elif "s2dr4.inferutils" in stripped:
-            message = "Importando S2DR4"
+            message = "Aquecendo S2DR4 em CPU"
         update_job(job_id, message=message, progress=2, last_stdout=stripped, import_started_at=time.time())
         return
     if stripped.startswith("[s2dr4] Torch imported"):
@@ -592,7 +608,8 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
                 last_stdout = str(job.get("last_stdout") or "")
                 import_started_at = float(job.get("import_started_at") or process_started_at)
                 if (
-                    last_stdout.startswith("[s2dr4] Importing")
+                    S2DR4_IMPORT_TIMEOUT_SECONDS > 0
+                    and last_stdout.startswith("[s2dr4] Importing")
                     and time.time() - import_started_at > S2DR4_IMPORT_TIMEOUT_SECONDS
                 ):
                     update_job(
@@ -643,6 +660,7 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
         errors = int(summary.get("errors") or 0)
         completed = int(summary.get("done") or 0) + int(summary.get("skipped") or 0)
         if errors and not completed:
+            colab_only = S2DR4_COLAB_ONLY_MARKER.lower() in stdout_tail.lower()
             first_error = next(
                 (
                     item.get("error")
@@ -651,10 +669,12 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
                 ),
                 "S2DR4 terminou sem gerar produtos raster/imagem.",
             )
+            if colab_only:
+                first_error = S2DR4_COLAB_ONLY_ERROR
             update_job(
                 job_id,
                 status="error",
-                message="S2DR4 terminou sem produtos",
+                message="S2DR4 bloqueado fora do Google Colab" if colab_only else "S2DR4 terminou sem produtos",
                 current=summary.get("total", len(rows)),
                 progress=100,
                 summary=summary,

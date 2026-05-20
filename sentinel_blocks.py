@@ -615,16 +615,25 @@ def superres_capability() -> dict[str, Any]:
     model_path = default_s2dr4_model_path()
     model_cached = model_path.exists()
     ready = is_linux and py_ok and package_ok
+    colab_compat = os.getenv("S2DR4_COLAB_COMPAT", "1")
+    default_colab_gpu = "0" if colab_compat.lower() in {"1", "true", "yes", "on"} else ""
     return {
         "ready": ready,
         "platform": platform.platform(),
         "python": sys.version.split()[0],
         "package_s2dr4": package_ok,
         "force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
+        "colab_compat": colab_compat,
+        "colab_gpu": os.getenv("COLAB_GPU", default_colab_gpu),
         "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
         "model_path": str(model_path),
         "model_cached": model_cached,
         "model_size_bytes": model_path.stat().st_size if model_cached else 0,
+        "content_dirs": {
+            "output": Path("/content/output").exists(),
+            "datapath": Path("/content/datapath").exists(),
+            "logs": Path("/content/logs").exists(),
+        },
         "expected": "Linux com Python 3.12 e pacote s2dr4 instalado",
         "wheel": "https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl",
         "model": "https://storage.googleapis.com/0x7ff601307fa3/S2DR4-GL-20241022.1",

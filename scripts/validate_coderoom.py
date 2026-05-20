@@ -44,6 +44,8 @@ def default_s2dr4_model_path() -> Path:
 
 
 def main() -> None:
+    os.environ.setdefault("S2DR4_COLAB_COMPAT", "1")
+    os.environ.setdefault("COLAB_GPU", "0")
     model_path = default_s2dr4_model_path()
     data = {
         "platform": platform.platform(),
@@ -54,9 +56,19 @@ def main() -> None:
         "app_geo_path": os.getenv("APP_GEO_PATH", "Data/VisitaGFP.shp"),
         "app_export_dir": os.getenv("APP_EXPORT_DIR", "export"),
         "s2dr4_force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
+        "s2dr4_colab_compat": os.getenv("S2DR4_COLAB_COMPAT", ""),
+        "colab_gpu": os.getenv("COLAB_GPU", ""),
         "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
         "nvidia_visible_devices": os.getenv("NVIDIA_VISIBLE_DEVICES", ""),
         "s2dr4_model": file_info(model_path),
+        "content_dirs": {
+            name: file_info(path)
+            for name, path in {
+                "output": "/content/output",
+                "datapath": "/content/datapath",
+                "logs": "/content/logs",
+            }.items()
+        },
         "shapefile_exists": Path(os.getenv("APP_GEO_PATH", "Data/VisitaGFP.shp")).exists(),
         "modules": {
             name: module_ok(name)

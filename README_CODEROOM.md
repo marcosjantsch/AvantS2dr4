@@ -219,20 +219,30 @@ export/s2dr4_run_summary.json
 ## Como o runner S2DR4 funciona
 
 O notebook original grava em `/content/output`. Para manter isso compativel fora
-do Colab, o runner cria um link simbolico:
+do Colab, o runner ativa `S2DR4_COLAB_COMPAT=1`, define `COLAB_GPU=0` como em um
+runtime Colab CPU e cria as pastas esperadas pelo wheel:
+
+```text
+/content/output
+/content/datapath
+/content/logs
+```
+
+Para cada bloco, o runner cria um link simbolico:
 
 ```text
 /content/output -> export/<fazenda>/blocks/<block_id>/s2dr4
 ```
 
-Assim, a biblioteca S2DR4 continua achando o caminho esperado, mas cada bloco
-fica separado na estrutura do projeto.
+Assim, a biblioteca S2DR4 continua achando os marcadores e caminhos esperados,
+mas a inferencia roda no ambiente local/CodeRoom e cada bloco fica separado na
+estrutura do projeto.
 
 Se o ambiente nao permitir criar `/content`, rode uma vez:
 
 ```bash
-sudo mkdir -p /content
-sudo chown "$USER:$USER" /content
+sudo mkdir -p /content/output /content/datapath /content/logs
+sudo chown -R "$USER:$USER" /content
 ```
 
 ## Observacao de licenca

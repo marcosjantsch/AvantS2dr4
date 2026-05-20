@@ -15,7 +15,10 @@ ENV S2DR4_MODEL=/var/local/S2DR3/S2DR4-GL-20241022.1
 ENV SYSTEM_MODEL=/var/local/S2DR3/S2DR4-GL-20241022.1
 ENV S2DR4_MODEL_BYTES=840950890
 ENV S2DR4_FORCE_CPU=1
+ENV S2DR4_IMPORT_TIMEOUT_SECONDS=300
 ENV S2DR4_TORCH_THREADS=1
+ENV S2DR4_COLAB_COMPAT=1
+ENV COLAB_GPU=0
 ENV CUDA_VISIBLE_DEVICES=
 ENV NVIDIA_VISIBLE_DEVICES=none
 ENV MPLBACKEND=Agg
@@ -66,9 +69,9 @@ RUN python3.12 -m venv --system-site-packages /opt/venv \
 
 COPY . .
 
-RUN python scripts/validate_coderoom.py
+RUN mkdir -p /app/export /app/auth /content/output /content/datapath /content/logs
 
-RUN mkdir -p /app/export /app/auth /content/output
+RUN python scripts/validate_coderoom.py
 
 EXPOSE 8080
 
