@@ -9,6 +9,7 @@ import platform
 import re
 import sys
 import unicodedata
+import zipfile
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -649,3 +650,154 @@ def prepare_superres_queue(farm_slug: str | None = None) -> dict[str, Any]:
         "items": len(rows),
         "capability": superres_capability(),
     }
+
+
+def collect_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    products = []
+    for block in get_blocks(farm_slug=farm_slug):
+        output_dir = export_dir / block["fazenda_slug"] / "blocks" / block["block_id"] / "s2dr4"
+        if not output_dir.exists():
+            continue
+        for path in sorted(output_dir.rglob("*")):
+            if not path.is_file() or path.suffix.lower() == ".zip":
+                continue
+            products.append(
+                {
+                    "block_id": block["block_id"],
+                    "fazenda": block["fazenda"],
+                    "fazenda_slug": block["fazenda_slug"],
+                    "path": str(path.resolve()),
+                    "relative_path": str(path.relative_to(export_dir)).replace("\\", "/"),
+                    "size_bytes": path.stat().st_size,
+                }
+            )
+    return {
+        "ok": True,
+        "products": products,
+        "items": len(products),
+        "size_bytes": sum(item["size_bytes"] for item in products),
+    }
+
+
+def bundle_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    collected = collect_superres_products(farm_slug=farm_slug)
+    products = collected["products"]
+    if not products:
+        raise ValueError("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.")
+
+    bundle_dir = export_dir / "s2dr4_downloads"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    slug = farm_slug or "todos"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    bundle_path = bundle_dir / f"s2dr4_produtos_{slug}_{timestamp}.zip"
+    with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for item in products:
+            zf.write(item["path"], arcname=item["relative_path"])
+        summary_path = export_dir / "s2dr4_run_summary.json"
+        if summary_path.exists():
+            zf.write(summary_path, arcname=summary_path.name)
+    return {
+        "ok": True,
+        "bundle": str(bundle_path.resolve()),
+        "file_name": bundle_path.name,
+        "items": collected["items"],
+        "size_bytes": collected["size_bytes"],
+        "download_url": f"/api/superres/products/download?name={bundle_path.name}",
+    }
+
+
+def resolve_superres_bundle(name: str) -> Path:
+    bundle_dir = get_paths().export_dir / "s2dr4_downloads"
+    path = (bundle_dir / Path(name).name).resolve()
+    if bundle_dir.resolve() not in path.parents:
+        raise ValueError("Nome de pacote invalido")
+    if not path.exists() or path.suffix.lower() != ".zip":
+        raise FileNotFoundError(f"Pacote nao encontrado: {name}")
+    return path
+
+
+def sentinel_preview(fazenda_slug: str, block_id: str) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    block = _find_block(manifest, fazenda_slug, block_id)
+    if not block:
+        raise ValueError(f"Bloco nao encontrado: {fazenda_slug}/{block_id}")
+
+    sentinel_path = export_dir / fazenda_slug / "blocks" / block_id / "sentinel.json"
+    if not sentinel_path.exists():
+        raise ValueError(f"Sentinel ainda nao selecionado para o bloco {block_id}")
+
+    result = json.loads(sentinel_path.read_text(encoding="utf-8"))
+    image_info = result.get("image") or {}
+    system_id = image_info.get("system:id")
+    image_date = image_info.get("date")
+    if not system_id or not image_date:
+        raise ValueError(f"Imagem Sentinel invalida para o bloco {block_id}")
+
+    ee = init_earth_engine()
+    geom = ee.Geometry(block["geometry"])
+    image = ee.Image(system_id).clip(geom)
+    vis_params = {
+        "bands": ["B4", "B3", "B2"],
+        "min": 0,
+        "max": 3000,
+        "gamma": 1.2,
+    }
+    map_id = image.getMapId(vis_params)
+    download_url = image.select(["B4", "B3", "B2"]).getDownloadURL(
+        {
+            "name": f"{block_id}_{image_date}_sentinel2_rgb",
+            "region": geom,
+            "scale": 10,
+            "format": "GEO_TIFF",
+        }
+    )
+    return {
+        "ok": True,
+        "block_id": block_id,
+        "fazenda": block["fazenda"],
+        "fazenda_slug": fazenda_slug,
+        "image": image_info,
+        "tile_url": map_id["tile_fetcher"].url_format,
+        "download_url": download_url,
+        "bounds": _geometry_bounds(block["geometry"]),
+    }
+
+
+def _find_block(manifest: dict[str, Any], fazenda_slug: str, block_id: str) -> dict[str, Any] | None:
+    for farm in manifest.get("farms", []):
+        if farm.get("slug") != fazenda_slug:
+            continue
+        for block in farm.get("blocks", []):
+            if block.get("block_id") == block_id:
+                return block
+    return None
+
+
+def _geometry_bounds(geometry: dict[str, Any]) -> list[list[float]]:
+    coordinates = geometry.get("coordinates") or []
+    points: list[tuple[float, float]] = []
+
+    def collect(value: Any) -> None:
+        if (
+            isinstance(value, list)
+            and len(value) >= 2
+            and isinstance(value[0], (int, float))
+            and isinstance(value[1], (int, float))
+        ):
+            points.append((float(value[0]), float(value[1])))
+            return
+        if isinstance(value, list):
+            for item in value:
+                collect(item)
+
+    collect(coordinates)
+    if not points:
+        raise ValueError("Geometria sem coordenadas para calcular bounds")
+    lons = [point[0] for point in points]
+    lats = [point[1] for point in points]
+    return [[min(lats), min(lons)], [max(lats), max(lons)]]

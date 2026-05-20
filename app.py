@@ -4,6 +4,7 @@ import argparse
 import json
 import mimetypes
 import os
+import shutil
 import threading
 import time
 import uuid
@@ -11,7 +12,7 @@ from datetime import date
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from types import ModuleType
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -60,6 +61,33 @@ class AppHandler(SimpleHTTPRequestHandler):
         if parsed.path == "/api/superres/capability":
             sb = get_sentinel_blocks()
             self._send_json(sb.superres_capability())
+            return
+        if parsed.path == "/api/superres/products":
+            sb = get_sentinel_blocks()
+            params = parse_qs(parsed.query)
+            self._send_json(sb.collect_superres_products(farm_slug=(params.get("farm_slug") or [None])[0] or None))
+            return
+        if parsed.path == "/api/superres/products/download":
+            try:
+                sb = get_sentinel_blocks()
+                params = parse_qs(parsed.query)
+                path = sb.resolve_superres_bundle((params.get("name") or [""])[0])
+                self._send_download(path)
+            except Exception as exc:
+                self._send_json({"ok": False, "error": str(exc), "type": type(exc).__name__}, status=500)
+            return
+        if parsed.path == "/api/sentinel/preview":
+            try:
+                sb = get_sentinel_blocks()
+                params = parse_qs(parsed.query)
+                self._send_json(
+                    sb.sentinel_preview(
+                        fazenda_slug=(params.get("fazenda_slug") or [""])[0],
+                        block_id=(params.get("block_id") or [""])[0],
+                    )
+                )
+            except Exception as exc:
+                self._send_json({"ok": False, "error": str(exc), "type": type(exc).__name__}, status=500)
             return
         if parsed.path.startswith("/api/jobs/"):
             job_id = parsed.path.removeprefix("/api/jobs/").strip("/")
@@ -110,6 +138,9 @@ class AppHandler(SimpleHTTPRequestHandler):
             if parsed.path == "/api/superres/queue":
                 self._send_json(sb.prepare_superres_queue(farm_slug=payload.get("farm_slug") or None))
                 return
+            if parsed.path == "/api/superres/products/bundle":
+                self._send_json(sb.bundle_superres_products(farm_slug=payload.get("farm_slug") or None))
+                return
             self.send_error(404, "Not found")
         except Exception as exc:
             self._send_json({"ok": False, "error": str(exc), "type": type(exc).__name__}, status=500)
@@ -142,6 +173,16 @@ class AppHandler(SimpleHTTPRequestHandler):
         self.send_header("Content-Length", str(len(raw)))
         self.end_headers()
         self.wfile.write(raw)
+
+    def _send_download(self, path: Path) -> None:
+        ctype = mimetypes.guess_type(str(path))[0] or "application/octet-stream"
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(path.stat().st_size))
+        self.send_header("Content-Disposition", f'attachment; filename="{path.name}"')
+        self.end_headers()
+        with path.open("rb") as fh:
+            shutil.copyfileobj(fh, self.wfile)
 
     def log_message(self, format: str, *args) -> None:
         print(f"{self.address_string()} - {format % args}")

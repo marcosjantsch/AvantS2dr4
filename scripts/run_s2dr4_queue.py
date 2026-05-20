@@ -7,6 +7,7 @@ import os
 import shutil
 import sys
 import time
+import zipfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -155,6 +156,36 @@ def choose_queue(path_arg: str | None) -> Path:
     return LAST_QUEUE
 
 
+def bundle_run_products(summary: dict[str, Any], summary_path: Path) -> dict[str, Any] | None:
+    product_paths = []
+    for result in summary["results"]:
+        for item in result.get("products") or []:
+            path = Path(item)
+            if path.exists() and path.is_file():
+                product_paths.append(path)
+    if not product_paths:
+        return None
+
+    bundle_dir = summary_path.parent / "s2dr4_downloads"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    bundle_path = bundle_dir / f"s2dr4_run_produtos_{timestamp}.zip"
+    with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for path in product_paths:
+            try:
+                arcname = path.relative_to(summary_path.parent).as_posix()
+            except ValueError:
+                arcname = path.name
+            zf.write(path, arcname=arcname)
+        zf.write(summary_path, arcname=summary_path.name)
+    return {
+        "path": str(bundle_path),
+        "file_name": bundle_path.name,
+        "items": len(product_paths),
+        "size_bytes": sum(path.stat().st_size for path in product_paths),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run S2DR4 inference for an Avant queue")
     parser.add_argument("--queue", default=None, help="CSV queue path. Defaults to export/s2dr4_queue.csv")
@@ -208,10 +239,15 @@ def main() -> None:
     }
     summary_path = queue_path.with_name("s2dr4_run_summary.json")
     summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    bundle = bundle_run_products(summary, summary_path)
+    if bundle:
+        summary["bundle"] = bundle
+        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({k: summary[k] for k in ["total", "done", "skipped", "errors", "elapsed_seconds"]}, indent=2))
     print(f"[s2dr4] Summary: {summary_path}")
+    if bundle:
+        print(f"[s2dr4] Products ZIP: {bundle['path']}")
 
 
 if __name__ == "__main__":
     main()
-
