@@ -1,4 +1,0 @@
-block_id,fazenda,fazenda_slug,center_lon,center_lat,size_m,overlap_m,step_m,metric_crs,center_inside_farm,farm_intersection_area_m2,block_folder
-fortaleza_harley_001,Fortaleza - Harley,fortaleza_harley,-48.054703172012076,-5.0831514432560345,4000,200,3800,EPSG:32722,False,3296532.063159145,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza_harley\blocks\fortaleza_harley_001
-fortaleza_harley_002,Fortaleza - Harley,fortaleza_harley,-48.05485871752753,-5.0488200526554525,4000,200,3800,EPSG:32722,True,7061313.100923485,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza_harley\blocks\fortaleza_harley_002
-fortaleza_harley_003,Fortaleza - Harley,fortaleza_harley,-48.05501319540778,-5.014488621089828,4000,200,3800,EPSG:32722,False,31638.616085532864,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza_harley\blocks\fortaleza_harley_003

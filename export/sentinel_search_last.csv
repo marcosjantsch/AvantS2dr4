@@ -1,2 +1,0 @@
-block_id,fazenda,status,month,center_lon,center_lat,image_date,cloud_percent,mgrs_tile,system_id,s2dr4_call
-maria_izabel_001,Maria Izabel,fallback_best_cloud,2026-05,-47.88474580350792,-5.976097430032443,2026-05-06,7.8293,22MHU,COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU,"s2dr4.inferutils.test(lonlat=(-47.88474580,-5.97609743), date='2026-05-06')"
