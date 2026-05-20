@@ -442,8 +442,7 @@
             <button id="prepareBtn">Preparar blocos</button>
             <button id="authBtn" class="secondary">Login GEE</button>
             <button id="searchBtn" class="secondary">Buscar Sentinel</button>
-            <button id="superresBtn" class="warning">Fila S2DR4</button>
-            <button id="downloadSuperresBtn" class="secondary">Baixar S2DR4</button>
+            <button id="downloadSuperresBtn" class="warning">Baixar S2DR4</button>
             <button id="reloadBtn" class="neutral">Recarregar</button>
           </div>
         </div>
@@ -524,6 +523,7 @@
       centerLayer: null,
       sentinelLayers: new Map(),
       sentinelDownloads: new Map(),
+      s2dr4Logged: new Set(),
       timerStartedAt: null,
       timerHandle: null,
       activeJob: null
@@ -544,7 +544,6 @@
       prepareBtn: document.querySelector("#prepareBtn"),
       authBtn: document.querySelector("#authBtn"),
       searchBtn: document.querySelector("#searchBtn"),
-      superresBtn: document.querySelector("#superresBtn"),
       downloadSuperresBtn: document.querySelector("#downloadSuperresBtn"),
       reloadBtn: document.querySelector("#reloadBtn"),
       runTitle: document.querySelector("#runTitle"),
@@ -776,55 +775,77 @@
       }
     }
 
-    async function prepareSuperresQueue() {
-      setBusy(true);
-      startTimer();
-      setRun("Fila S2DR4", "Conferindo ambiente e preparando chamadas por bloco.", 18);
-      log("Evento Fila S2DR4 recebido. Preparando arquivos de fila.");
-      try {
-        const data = await api("/api/superres/queue", {
-          method: "POST",
-          body: JSON.stringify({farm_slug: selectedFarmSlug() || null})
-        });
-        const capability = data.capability;
-        els.s2Chip.textContent = capability.ready ? "S2DR4 pronto" : "S2DR4 requer Colab/Linux";
-        els.s2Chip.className = capability.ready ? "chip good" : "chip warn";
-        setRun("Fila S2DR4 pronta", `${data.items} itens em ${data.queue_path}.`, 100);
-        log(`Fila S2DR4 criada: ${data.items} itens.`);
-        if (!capability.ready) {
-          log(`S2DR4 nao roda automaticamente neste ambiente: ${capability.expected}.`);
+    async function pollSuperresJob(jobId) {
+      while (true) {
+        const job = await api(`/api/jobs/${jobId}`);
+        const progress = Number(job.progress || 0);
+        setRun(
+          job.status === "done" ? "S2DR4 concluido" : "S2DR4 rodando",
+          `${job.message} | ${job.current}/${job.total} blocos`,
+          progress
+        );
+        if (job.results && job.results.length) {
+          const latest = job.results[job.results.length - 1];
+          const logKey = latest ? `${latest.block_id}:${latest.status}` : "";
+          if (latest && latest.block_id && !state.s2dr4Logged.has(logKey)) {
+            state.s2dr4Logged.add(logKey);
+            log(`S2DR4 ${latest.block_id}: ${latest.status}.`);
+          }
         }
-      } catch (err) {
-        setRun("Erro S2DR4", err.message, 100, "error");
-        log(`Erro S2DR4: ${err.message}`);
-      } finally {
-        setBusy(false);
-        stopTimer();
+        if (job.status === "done") {
+          const summary = job.summary || {};
+          els.s2Chip.textContent = summary.errors ? "S2DR4 com alertas" : "S2DR4 pronto";
+          els.s2Chip.className = summary.errors ? "chip warn" : "chip good";
+          const bundle = summary.bundle ? ` Pacote: ${summary.bundle.file_name}.` : "";
+          setRun("S2DR4 concluido", `${summary.done || 0} novos, ${summary.skipped || 0} existentes, ${summary.errors || 0} erros.${bundle}`, 100);
+          log(`S2DR4 concluido: ${summary.done || 0} novos, ${summary.skipped || 0} existentes, ${summary.errors || 0} erros.`);
+          if (summary.bundle) {
+            log(`Pacote S2DR4 criado: ${summary.bundle.file_name}. Clique em Baixar S2DR4 para obter os produtos.`);
+          }
+          return;
+        }
+        if (job.status === "error") {
+          els.s2Chip.textContent = "S2DR4 erro";
+          els.s2Chip.className = "chip error";
+          throw new Error(job.error || job.message);
+        }
+        await sleep(1400);
       }
     }
 
     async function downloadSuperresProducts() {
       setBusy(true);
       startTimer();
-      setRun("Baixar S2DR4", "Evento recebido. Conferindo produtos de super-resolucao.", 8);
-      log("Evento Baixar S2DR4 recebido. Conferindo produtos gerados.");
       let stopPulse = null;
       try {
         const payload = {farm_slug: selectedFarmSlug() || null};
+        setRun("Baixar S2DR4", "Evento recebido. Preparando fila e iniciando super-resolucao.", 4);
+        log("Evento Baixar S2DR4 recebido. Preparando fila, executando S2DR4 e baixando produtos.");
+        state.s2dr4Logged.clear();
+        const start = await api("/api/jobs/s2dr4/start", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        els.s2Chip.textContent = "S2DR4 rodando";
+        els.s2Chip.className = "chip warn";
+        log(`S2DR4 iniciado: ${start.total} blocos. Fila: ${start.queue_path}.`);
+        await pollSuperresJob(start.job_id);
+
+        setRun("Conferindo S2DR4", "Buscando produtos gerados para download.", 38);
         const params = new URLSearchParams();
         if (payload.farm_slug) params.set("farm_slug", payload.farm_slug);
         const products = await api(`/api/superres/products?${params.toString()}`);
         if (!products.items) {
-          throw new Error("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.");
+          throw new Error("S2DR4 terminou, mas nenhum produto foi encontrado para baixar.");
         }
-        setRun("Empacotando S2DR4", `${products.items} arquivos encontrados. Criando pacote ZIP.`, 42);
+        setRun("Empacotando S2DR4", `${products.items} arquivos encontrados. Criando pacote ZIP.`, 72);
         log(`${products.items} produtos S2DR4 encontrados. Compactacao iniciada.`);
         stopPulse = startProgressPulse("Empacotando S2DR4", [
           "Criando pacote ZIP dos produtos.",
           "Organizando arquivos por fazenda e bloco.",
           "Mantendo a solicitacao ativa.",
           "Finalizando pacote para download."
-        ], 45, 92);
+        ], 74, 96);
         const bundle = await api("/api/superres/products/bundle", {
           method: "POST",
           body: JSON.stringify(payload)
@@ -993,7 +1014,7 @@
     }
 
     function setBusy(busy) {
-      [els.prepareBtn, els.authBtn, els.searchBtn, els.superresBtn, els.downloadSuperresBtn, els.reloadBtn].forEach(btn => {
+      [els.prepareBtn, els.authBtn, els.searchBtn, els.downloadSuperresBtn, els.reloadBtn].forEach(btn => {
         btn.disabled = busy;
       });
     }
@@ -1018,7 +1039,6 @@
     els.prepareBtn.addEventListener("click", prepareBlocks);
     els.authBtn.addEventListener("click", checkAuth);
     els.searchBtn.addEventListener("click", startSentinelSearch);
-    els.superresBtn.addEventListener("click", prepareSuperresQueue);
     els.downloadSuperresBtn.addEventListener("click", downloadSuperresProducts);
     els.farmSelect.addEventListener("change", () => {
       renderMap();
