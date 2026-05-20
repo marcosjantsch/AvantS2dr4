@@ -640,6 +640,30 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
         if not summary_path.exists():
             raise RuntimeError(f"S2DR4 terminou sem gerar resumo: {summary_path}")
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        errors = int(summary.get("errors") or 0)
+        completed = int(summary.get("done") or 0) + int(summary.get("skipped") or 0)
+        if errors and not completed:
+            first_error = next(
+                (
+                    item.get("error")
+                    for item in summary.get("results", [])
+                    if item.get("status") == "error" and item.get("error")
+                ),
+                "S2DR4 terminou sem gerar produtos raster/imagem.",
+            )
+            update_job(
+                job_id,
+                status="error",
+                message="S2DR4 terminou sem produtos",
+                current=summary.get("total", len(rows)),
+                progress=100,
+                summary=summary,
+                error=first_error,
+                returncode=returncode,
+                stdout_tail=stdout_tail,
+                stderr_tail=stderr_tail,
+            )
+            return
         update_job(
             job_id,
             status="done",

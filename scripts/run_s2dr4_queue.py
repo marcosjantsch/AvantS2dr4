@@ -19,6 +19,7 @@ LAST_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue_last.csv"
 CONTENT_OUTPUT = Path("/content/output")
 TRUE_VALUES = {"1", "true", "yes", "on"}
 S2DR4_MODEL_NAME = "S2DR4-GL-20241022.1"
+PRODUCT_EXTENSIONS = {".tif", ".tiff", ".jp2", ".vrt", ".png", ".jpg", ".jpeg"}
 
 
 def default_s2dr4_model_path() -> Path:
@@ -133,14 +134,19 @@ def ensure_content_output(target_dir: Path, mode: str) -> tuple[str, Path]:
     return "shared", CONTENT_OUTPUT
 
 
+def is_product_file(path: Path) -> bool:
+    return path.is_file() and path.suffix.lower() in PRODUCT_EXTENSIONS
+
+
 def copy_new_outputs(shared_dir: Path, target_dir: Path, started_at: float) -> list[str]:
     copied = []
-    for src in shared_dir.glob("*"):
-        if not src.is_file():
+    for src in shared_dir.rglob("*"):
+        if not is_product_file(src):
             continue
         if src.stat().st_mtime + 0.5 < started_at:
             continue
-        dst = target_dir / src.name
+        dst = target_dir / src.relative_to(shared_dir)
+        dst.parent.mkdir(parents=True, exist_ok=True)
         if src.resolve() != dst.resolve():
             shutil.copy2(src, dst)
         copied.append(str(dst))
@@ -148,7 +154,9 @@ def copy_new_outputs(shared_dir: Path, target_dir: Path, started_at: float) -> l
 
 
 def existing_products(output_dir: Path) -> list[Path]:
-    return sorted(output_dir.glob("*.tif")) + sorted(output_dir.glob("*.tiff"))
+    if not output_dir.exists():
+        return []
+    return sorted(path for path in output_dir.rglob("*") if is_product_file(path))
 
 
 def write_block_manifest(path: Path, payload: dict[str, Any]) -> None:
@@ -196,6 +204,22 @@ def process_row(
         products = [str(p) for p in existing_products(output_dir)]
         if actual_mode == "shared":
             products = copy_new_outputs(active_output, output_dir, started_at)
+        if not products:
+            failed = {
+                **payload,
+                "status": "error",
+                "finished_at": datetime.now().isoformat(timespec="seconds"),
+                "elapsed_seconds": round(time.time() - started_at, 1),
+                "products": [],
+                "expected_extensions": sorted(PRODUCT_EXTENSIONS),
+                "error": (
+                    "S2DR4 terminou sem excecao, mas nao gerou nenhum produto raster/imagem. "
+                    "O stdout do processo pode indicar restricao do pacote, por exemplo execucao "
+                    "suportada apenas no Google Colab."
+                ),
+            }
+            write_block_manifest(manifest_path, failed)
+            return failed
         completed = {
             **payload,
             "status": "done",

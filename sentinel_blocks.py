@@ -34,6 +34,7 @@ DEFAULT_EE_PROJECT = "ee-mapa01"
 DEFAULT_APP_ENV = "avantev02"
 SENTINEL_COLLECTION = "COPERNICUS/S2_SR_HARMONIZED"
 S2DR4_MODEL_NAME = "S2DR4-GL-20241022.1"
+S2DR4_PRODUCT_EXTENSIONS = {".tif", ".tiff", ".jp2", ".vrt", ".png", ".jpg", ".jpeg"}
 
 
 def default_s2dr4_model_path() -> Path:
@@ -691,14 +692,27 @@ def collect_superres_products(farm_slug: str | None = None, block_id: str | None
     manifest = load_manifest()
     export_dir = Path(manifest["export_dir"])
     products = []
+    diagnostics = []
     for block in get_blocks(farm_slug=farm_slug):
         if block_id and block["block_id"] != block_id:
             continue
         output_dir = export_dir / block["fazenda_slug"] / "blocks" / block["block_id"] / "s2dr4"
         if not output_dir.exists():
             continue
+        block_manifest = output_dir / "s2dr4_manifest.json"
+        if block_manifest.exists():
+            try:
+                diagnostics.append(json.loads(block_manifest.read_text(encoding="utf-8")))
+            except json.JSONDecodeError:
+                diagnostics.append(
+                    {
+                        "block_id": block["block_id"],
+                        "status": "invalid_manifest",
+                        "path": str(block_manifest.resolve()),
+                    }
+                )
         for path in sorted(output_dir.rglob("*")):
-            if not path.is_file() or path.suffix.lower() == ".zip":
+            if not path.is_file() or path.suffix.lower() not in S2DR4_PRODUCT_EXTENSIONS:
                 continue
             products.append(
                 {
@@ -715,6 +729,7 @@ def collect_superres_products(farm_slug: str | None = None, block_id: str | None
         "products": products,
         "items": len(products),
         "size_bytes": sum(item["size_bytes"] for item in products),
+        "diagnostics": diagnostics,
     }
 
 
@@ -724,7 +739,10 @@ def bundle_superres_products(farm_slug: str | None = None, block_id: str | None 
     collected = collect_superres_products(farm_slug=farm_slug, block_id=block_id)
     products = collected["products"]
     if not products:
-        raise ValueError("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.")
+        raise ValueError(
+            "Nenhum produto raster/imagem S2DR4 encontrado. "
+            "O processamento pode ter terminado sem gerar arquivos de imagem; confira o resumo da execucao."
+        )
 
     bundle_dir = export_dir / "s2dr4_downloads"
     bundle_dir.mkdir(parents=True, exist_ok=True)
