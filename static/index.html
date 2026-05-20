@@ -443,6 +443,7 @@
             <button id="authBtn" class="secondary">Login GEE</button>
             <button id="searchBtn" class="secondary">Buscar Sentinel</button>
             <button id="superresBtn" class="warning">Fila S2DR4</button>
+            <button id="downloadSuperresBtn" class="secondary">Baixar S2DR4</button>
             <button id="reloadBtn" class="neutral">Recarregar</button>
           </div>
         </div>
@@ -544,6 +545,7 @@
       authBtn: document.querySelector("#authBtn"),
       searchBtn: document.querySelector("#searchBtn"),
       superresBtn: document.querySelector("#superresBtn"),
+      downloadSuperresBtn: document.querySelector("#downloadSuperresBtn"),
       reloadBtn: document.querySelector("#reloadBtn"),
       runTitle: document.querySelector("#runTitle"),
       runMessage: document.querySelector("#runMessage"),
@@ -800,6 +802,40 @@
       }
     }
 
+    async function downloadSuperresProducts() {
+      setBusy(true);
+      startTimer();
+      setRun("Baixando S2DR4", "Conferindo produtos de super-resolucao ja gerados.", 12);
+      try {
+        const payload = {farm_slug: selectedFarmSlug() || null};
+        const params = new URLSearchParams();
+        if (payload.farm_slug) params.set("farm_slug", payload.farm_slug);
+        const products = await api(`/api/superres/products?${params.toString()}`);
+        if (!products.items) {
+          throw new Error("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.");
+        }
+        setRun("Empacotando S2DR4", `${products.items} arquivos encontrados. Criando pacote ZIP.`, 55);
+        const bundle = await api("/api/superres/products/bundle", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        const link = document.createElement("a");
+        link.href = bundle.download_url;
+        link.download = bundle.file_name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setRun("Download S2DR4 pronto", `${bundle.items} produtos no pacote ${bundle.file_name}.`, 100);
+        log(`Pacote S2DR4 pronto: ${bundle.file_name} (${bundle.items} arquivos).`);
+      } catch (err) {
+        setRun("Erro ao baixar S2DR4", err.message, 100, "error");
+        log(`Erro download S2DR4: ${err.message}`);
+      } finally {
+        setBusy(false);
+        stopTimer();
+      }
+    }
+
     async function toggleSentinelPreview(item, checked) {
       initMap();
       const key = resultKey(item);
@@ -934,7 +970,7 @@
     }
 
     function setBusy(busy) {
-      [els.prepareBtn, els.authBtn, els.searchBtn, els.superresBtn, els.reloadBtn].forEach(btn => {
+      [els.prepareBtn, els.authBtn, els.searchBtn, els.superresBtn, els.downloadSuperresBtn, els.reloadBtn].forEach(btn => {
         btn.disabled = busy;
       });
     }
@@ -960,6 +996,7 @@
     els.authBtn.addEventListener("click", checkAuth);
     els.searchBtn.addEventListener("click", startSentinelSearch);
     els.superresBtn.addEventListener("click", prepareSuperresQueue);
+    els.downloadSuperresBtn.addEventListener("click", downloadSuperresProducts);
     els.farmSelect.addEventListener("change", () => {
       renderMap();
       setRun("Mapa atualizado", `${selectedFarmName()} selecionada.`, 0);

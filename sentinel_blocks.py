@@ -9,6 +9,7 @@ import platform
 import re
 import sys
 import unicodedata
+import zipfile
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -649,6 +650,74 @@ def prepare_superres_queue(farm_slug: str | None = None) -> dict[str, Any]:
         "items": len(rows),
         "capability": superres_capability(),
     }
+
+
+def collect_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    products = []
+    for block in get_blocks(farm_slug=farm_slug):
+        output_dir = export_dir / block["fazenda_slug"] / "blocks" / block["block_id"] / "s2dr4"
+        if not output_dir.exists():
+            continue
+        for path in sorted(output_dir.rglob("*")):
+            if not path.is_file() or path.suffix.lower() == ".zip":
+                continue
+            products.append(
+                {
+                    "block_id": block["block_id"],
+                    "fazenda": block["fazenda"],
+                    "fazenda_slug": block["fazenda_slug"],
+                    "path": str(path.resolve()),
+                    "relative_path": str(path.relative_to(export_dir)).replace("\\", "/"),
+                    "size_bytes": path.stat().st_size,
+                }
+            )
+    return {
+        "ok": True,
+        "products": products,
+        "items": len(products),
+        "size_bytes": sum(item["size_bytes"] for item in products),
+    }
+
+
+def bundle_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    collected = collect_superres_products(farm_slug=farm_slug)
+    products = collected["products"]
+    if not products:
+        raise ValueError("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.")
+
+    bundle_dir = export_dir / "s2dr4_downloads"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    slug = farm_slug or "todos"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    bundle_path = bundle_dir / f"s2dr4_produtos_{slug}_{timestamp}.zip"
+    with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for item in products:
+            zf.write(item["path"], arcname=item["relative_path"])
+        summary_path = export_dir / "s2dr4_run_summary.json"
+        if summary_path.exists():
+            zf.write(summary_path, arcname=summary_path.name)
+    return {
+        "ok": True,
+        "bundle": str(bundle_path.resolve()),
+        "file_name": bundle_path.name,
+        "items": collected["items"],
+        "size_bytes": collected["size_bytes"],
+        "download_url": f"/api/superres/products/download?name={bundle_path.name}",
+    }
+
+
+def resolve_superres_bundle(name: str) -> Path:
+    bundle_dir = get_paths().export_dir / "s2dr4_downloads"
+    path = (bundle_dir / Path(name).name).resolve()
+    if bundle_dir.resolve() not in path.parents:
+        raise ValueError("Nome de pacote invalido")
+    if not path.exists() or path.suffix.lower() != ".zip":
+        raise FileNotFoundError(f"Pacote nao encontrado: {name}")
+    return path
 
 
 def sentinel_preview(fazenda_slug: str, block_id: str) -> dict[str, Any]:
