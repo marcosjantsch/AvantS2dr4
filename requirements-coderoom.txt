@@ -2,6 +2,9 @@
 
 # S2DR4 runtime dependencies. Torch is installed first by scripts/setup_coderoom.sh
 # so that a CUDA-enabled build is used when the CodeRoom has an NVIDIA GPU.
+# Ubuntu's python3-gdal package is compiled against NumPy 1.x.
+numpy<2
+tqdm
 mgrs
 utm
 geojson
@@ -18,7 +21,7 @@ pystac-client
 stackstac
 einops
 boto3
-imagecodecs==2026.3.6
+imagecodecs==2024.12.30
 cartopy
 cmocean
 folium!=0.12.0,>=0.6.0
