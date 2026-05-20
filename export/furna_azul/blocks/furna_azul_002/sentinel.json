@@ -1,0 +1,29 @@
+{
+  "block_id": "furna_azul_002",
+  "fazenda": "Furna Azul",
+  "fazenda_slug": "furna_azul",
+  "center_lon": -48.02046572060438,
+  "center_lat": -5.082994031707935,
+  "status": "selected",
+  "month": "2026-04",
+  "candidate_count": 1,
+  "image": {
+    "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+    "MGRS_TILE": "22MHV",
+    "PROCESSING_BASELINE": "05.12",
+    "SENSING_ORBIT_NUMBER": 81,
+    "SPACECRAFT_NAME": "Sentinel-2B",
+    "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+    "system:index": "20260426T133139_20260426T133141_T22MHV",
+    "system:time_start": 1777210422931,
+    "date": "2026-04-26"
+  },
+  "s2dr4": {
+    "lonlat": [
+      -48.02046572060438,
+      -5.082994031707935
+    ],
+    "date": "2026-04-26",
+    "python_call": "s2dr4.inferutils.test(lonlat=(-48.02046572,-5.08299403), date='2026-04-26')"
+  }
+}

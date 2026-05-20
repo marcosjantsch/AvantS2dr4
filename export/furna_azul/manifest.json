@@ -1,0 +1,134 @@
+{
+  "fazenda": "Furna Azul",
+  "slug": "furna_azul",
+  "feature_count": 1,
+  "block_count": 3,
+  "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul",
+  "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks.geojson",
+  "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks.csv",
+  "blocks": [
+    {
+      "block_id": "furna_azul_001",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 195404.34073440882,
+      "center_lon": -48.02030729316203,
+      "center_lat": -5.117324312486393,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.00220273846805,
+              -5.135308422354373
+            ],
+            [
+              -48.00237108117968,
+              -5.099171903810917
+            ],
+            [
+              -48.03841083951427,
+              -5.099339090107236
+            ],
+            [
+              -48.03824451348618,
+              -5.13547679955118
+            ],
+            [
+              -48.00220273846805,
+              -5.135308422354373
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "furna_azul_002",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 3742681.8597665518,
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.00236269265017,
+              -5.100978730833904
+            ],
+            [
+              -48.00252989122169,
+              -5.064842168557809
+            ],
+            [
+              -48.03856774706948,
+              -5.0650082236165375
+            ],
+            [
+              -48.03840255147628,
+              -5.1011459766722185
+            ],
+            [
+              -48.00236269265017,
+              -5.100978730833904
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "furna_azul_003",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 1918969.3839723056,
+      "center_lon": -47.986229349478236,
+      "center_lat": -5.082834807501913,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.96812594208665,
+              -5.10081798042987
+            ],
+            [
+              -47.96829504318057,
+              -5.064682562685731
+            ],
+            [
+              -48.00433175553814,
+              -5.064850518840694
+            ],
+            [
+              -48.00416465710771,
+              -5.100987140996591
+            ],
+            [
+              -47.96812594208665,
+              -5.10081798042987
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

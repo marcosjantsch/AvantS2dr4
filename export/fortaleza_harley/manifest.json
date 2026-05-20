@@ -1,0 +1,134 @@
+{
+  "fazenda": "Fortaleza - Harley",
+  "slug": "fortaleza_harley",
+  "feature_count": 1,
+  "block_count": 3,
+  "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley",
+  "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks.geojson",
+  "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks.csv",
+  "blocks": [
+    {
+      "block_id": "fortaleza_harley_001",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 3296532.063159145,
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.03660053015398,
+              -5.101137662253426
+            ],
+            [
+              -48.03676582590391,
+              -5.0649999683958855
+            ],
+            [
+              -48.07280481222543,
+              -5.065164122062661
+            ],
+            [
+              -48.072641519765085,
+              -5.101302993065474
+            ],
+            [
+              -48.03660053015398,
+              -5.101137662253426
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "fortaleza_harley_002",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": true,
+      "farm_intersection_area_m2": 7061313.100923485,
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.03675758938955,
+              -5.066806854174412
+            ],
+            [
+              -48.03692175431507,
+              -5.030669116990659
+            ],
+            [
+              -48.072958850872695,
+              -5.030832152485159
+            ],
+            [
+              -48.07279667553292,
+              -5.066971066695475
+            ],
+            [
+              -48.03675758938955,
+              -5.066806854174412
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "fortaleza_harley_003",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 31638.616085532864,
+      "center_lon": -48.05501319540778,
+      "center_lat": -5.014488621089828,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.03691357433456,
+              -5.032476004928206
+            ],
+            [
+              -48.037076608729414,
+              -4.996338224709823
+            ],
+            [
+              -48.07311182853833,
+              -4.996500142144016
+            ],
+            [
+              -48.07295077002893,
+              -5.032639099271079
+            ],
+            [
+              -48.03691357433456,
+              -5.032476004928206
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+block_id,fazenda,fazenda_slug,center_lon,center_lat,size_m,overlap_m,step_m,metric_crs,center_inside_farm,farm_intersection_area_m2,block_folder
+fortaleza_001,Fortaleza,fortaleza,-48.088941691333,-5.0833070418658615,4000,200,3800,EPSG:32722,False,791552.9407111307,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza\blocks\fortaleza_001
+fortaleza_002,Fortaleza,fortaleza,-48.054703172012076,-5.0831514432560345,4000,200,3800,EPSG:32722,False,12069.898789388624,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza\blocks\fortaleza_002
+fortaleza_003,Fortaleza,fortaleza,-48.089095434925085,-5.048974595098219,4000,200,3800,EPSG:32722,True,5738481.73770669,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza\blocks\fortaleza_003
+fortaleza_004,Fortaleza,fortaleza,-48.05485871752753,-5.0488200526554525,4000,200,3800,EPSG:32722,False,1148961.5477181445,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\fortaleza\blocks\fortaleza_004

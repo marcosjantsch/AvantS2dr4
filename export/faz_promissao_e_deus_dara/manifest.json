@@ -1,0 +1,216 @@
+{
+  "fazenda": "Faz_Promissão e Deus Dará",
+  "slug": "faz_promissao_e_deus_dara",
+  "feature_count": 1,
+  "block_count": 5,
+  "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara",
+  "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks.geojson",
+  "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks.csv",
+  "blocks": [
+    {
+      "block_id": "faz_promissao_e_deus_dara_001",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32723",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 505847.4576596455,
+      "center_lon": -47.43509069212747,
+      "center_lat": -5.050935448306136,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.417130994444975,
+              -5.069079888750901
+            ],
+            [
+              -47.41699700436523,
+              -5.032925859080055
+            ],
+            [
+              -47.45304939292472,
+              -5.03279098394712
+            ],
+            [
+              -47.45318537677484,
+              -5.06894403988759
+            ],
+            [
+              -47.417130994444975,
+              -5.069079888750901
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_002",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32723",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 8710600.89681816,
+      "center_lon": -47.40083953754398,
+      "center_lat": -5.051063139963373,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.38287843109464,
+              -5.069207086504071
+            ],
+            [
+              -47.382746335343114,
+              -5.033052145111473
+            ],
+            [
+              -47.41879964698174,
+              -5.0329191626378496
+            ],
+            [
+              -47.41893373675636,
+              -5.069073143963753
+            ],
+            [
+              -47.38287843109464,
+              -5.069207086504071
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_003",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32723",
+      "center_inside_farm": true,
+      "farm_intersection_area_m2": 5424823.535907924,
+      "center_lon": -47.366587512112396,
+      "center_lat": -5.051189026990748,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.34862500330113,
+              -5.069332473017594
+            ],
+            [
+              -47.34849480211448,
+              -5.03317663288542
+            ],
+            [
+              -47.384549023787486,
+              -5.033045543308187
+            ],
+            [
+              -47.38468121924641,
+              -5.069200437039073
+            ],
+            [
+              -47.34862500330113,
+              -5.069332473017594
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_004",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32723",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 1829105.4641520241,
+      "center_lon": -47.33233462822769,
+      "center_lat": -5.051313109163821,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_004",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.31437072346197,
+              -5.069456048067903
+            ],
+            [
+              -47.31424241707343,
+              -5.0332993221799525
+            ],
+            [
+              -47.35029753573441,
+              -5.033170125732827
+            ],
+            [
+              -47.350427836640854,
+              -5.069325918886598
+            ],
+            [
+              -47.31437072346197,
+              -5.069456048067903
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_005",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32723",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 909680.6528303121,
+      "center_lon": -47.40071353478459,
+      "center_lat": -5.016716380284367,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_005",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.382752917386235,
+              -5.034859893216253
+            ],
+            [
+              -47.38262173133229,
+              -4.998704910513278
+            ],
+            [
+              -47.41867316203707,
+              -4.998572840009143
+            ],
+            [
+              -47.4188063283827,
+              -5.034726862741708
+            ],
+            [
+              -47.382752917386235,
+              -5.034859893216253
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

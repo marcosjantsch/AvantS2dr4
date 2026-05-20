@@ -1,0 +1,2 @@
+block_id,fazenda,fazenda_slug,center_lon,center_lat,size_m,overlap_m,step_m,metric_crs,center_inside_farm,farm_intersection_area_m2,block_folder
+agua_bonita_001,Agua Bonita,agua_bonita,-47.98313815902177,-5.082977356620926,4000,200,3800,EPSG:32723,True,766664.2231026132,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\agua_bonita\blocks\agua_bonita_001

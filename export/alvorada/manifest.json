@@ -1,0 +1,175 @@
+{
+  "fazenda": "Alvorada",
+  "slug": "alvorada",
+  "feature_count": 1,
+  "block_count": 4,
+  "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada",
+  "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks.geojson",
+  "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks.csv",
+  "blocks": [
+    {
+      "block_id": "alvorada_001",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 2393588.826421347,
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.00236269265017,
+              -5.100978730833904
+            ],
+            [
+              -48.00252989122169,
+              -5.064842168557809
+            ],
+            [
+              -48.03856774706948,
+              -5.0650082236165375
+            ],
+            [
+              -48.03840255147628,
+              -5.1011459766722185
+            ],
+            [
+              -48.00236269265017,
+              -5.100978730833904
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "alvorada_002",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 2823286.9271947797,
+      "center_lon": -47.986229349478236,
+      "center_lat": -5.082834807501913,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.96812594208665,
+              -5.10081798042987
+            ],
+            [
+              -47.96829504318057,
+              -5.064682562685731
+            ],
+            [
+              -48.00433175553814,
+              -5.064850518840694
+            ],
+            [
+              -48.00416465710771,
+              -5.100987140996591
+            ],
+            [
+              -47.96812594208665,
+              -5.10081798042987
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "alvorada_003",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 1113271.9428456728,
+      "center_lon": -48.02062306776486,
+      "center_lat": -5.048663709579723,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.00252155989169,
+              -5.066648997760123
+            ],
+            [
+              -48.00268761462226,
+              -5.030512392043714
+            ],
+            [
+              -48.03872358099975,
+              -5.030677315978899
+            ],
+            [
+              -48.03855951554582,
+              -5.066815112354821
+            ],
+            [
+              -48.00252155989169,
+              -5.066648997760123
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "alvorada_004",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 469413.65867177537,
+      "center_lon": -47.98638849800219,
+      "center_lat": -5.04850556614946,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_004",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -47.968286617049834,
+              -5.066489334664339
+            ],
+            [
+              -47.96845456128837,
+              -5.030353873364492
+            ],
+            [
+              -48.00448938447259,
+              -5.030520685446675
+            ],
+            [
+              -48.00432342919807,
+              -5.066657351036848
+            ],
+            [
+              -47.968286617049834,
+              -5.066489334664339
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

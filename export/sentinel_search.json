@@ -1,0 +1,1869 @@
+{
+  "created_at": "2026-05-19T09:43:28",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "reference_date": "2026-05-19",
+  "months": 3,
+  "max_cloud": 5.0,
+  "queried_blocks": 64,
+  "matches_under_cloud": 29,
+  "fallback_matches": 35,
+  "missing_blocks": [],
+  "results": [
+    {
+      "block_id": "agua_bonita_001",
+      "fazenda": "Agua Bonita",
+      "fazenda_slug": "agua_bonita",
+      "center_lon": -47.98313815902177,
+      "center_lat": -5.082977356620926,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98313815902177,
+          -5.082977356620926
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98313816,-5.08297736), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "alvorada_001",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02046572060438,
+          -5.082994031707935
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02046572,-5.08299403), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "alvorada_002",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "center_lon": -47.986229349478236,
+      "center_lat": -5.082834807501913,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.986229349478236,
+          -5.082834807501913
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98622935,-5.08283481), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "alvorada_003",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "center_lon": -48.02062306776486,
+      "center_lat": -5.048663709579723,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02062306776486,
+          -5.048663709579723
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02062307,-5.04866371), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "alvorada_004",
+      "fazenda": "Alvorada",
+      "fazenda_slug": "alvorada",
+      "center_lon": -47.98638849800219,
+      "center_lat": -5.04850556614946,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98638849800219,
+          -5.04850556614946
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98638850,-5.04850557), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_001",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "center_lon": -47.43509069212747,
+      "center_lat": -5.050935448306136,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 2,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 2.281472,
+        "MGRS_TILE": "23MKQ",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T23MKQ",
+        "system:index": "20260426T133139_20260426T133141_T23MKQ",
+        "system:time_start": 1777210420829,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.43509069212747,
+          -5.050935448306136
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.43509069,-5.05093545), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_002",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "center_lon": -47.40083953754398,
+      "center_lat": -5.051063139963373,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 2,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 2.281472,
+        "MGRS_TILE": "23MKQ",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T23MKQ",
+        "system:index": "20260426T133139_20260426T133141_T23MKQ",
+        "system:time_start": 1777210420829,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.40083953754398,
+          -5.051063139963373
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.40083954,-5.05106314), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_003",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "center_lon": -47.366587512112396,
+      "center_lat": -5.051189026990748,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 2,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 2.281472,
+        "MGRS_TILE": "23MKQ",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T23MKQ",
+        "system:index": "20260426T133139_20260426T133141_T23MKQ",
+        "system:time_start": 1777210420829,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.366587512112396,
+          -5.051189026990748
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.36658751,-5.05118903), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_004",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "center_lon": -47.33233462822769,
+      "center_lat": -5.051313109163821,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 2,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 2.281472,
+        "MGRS_TILE": "23MKQ",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T23MKQ",
+        "system:index": "20260426T133139_20260426T133141_T23MKQ",
+        "system:time_start": 1777210420829,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.33233462822769,
+          -5.051313109163821
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.33233463,-5.05131311), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "faz_promissao_e_deus_dara_005",
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "fazenda_slug": "faz_promissao_e_deus_dara",
+      "center_lon": -47.40071353478459,
+      "center_lat": -5.016716380284367,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 2,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 2.281472,
+        "MGRS_TILE": "23MKQ",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T23MKQ",
+        "system:index": "20260426T133139_20260426T133141_T23MKQ",
+        "system:time_start": 1777210420829,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.40071353478459,
+          -5.016716380284367
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.40071353,-5.01671638), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "fortaleza_001",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "center_lon": -48.088941691333,
+      "center_lat": -5.0833070418658615,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 5,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 43.223593,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 124,
+        "SPACECRAFT_NAME": "Sentinel-2A",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T134221_20260506T134221_T22MHV",
+        "system:index": "20260506T134221_20260506T134221_T22MHV",
+        "system:time_start": 1778075034266,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.088941691333,
+          -5.0833070418658615
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.08894169,-5.08330704), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "fortaleza_002",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.054703172012076,
+          -5.0831514432560345
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05470317,-5.08315144), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "fortaleza_003",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "center_lon": -48.089095434925085,
+      "center_lat": -5.048974595098219,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 5,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 43.223593,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 124,
+        "SPACECRAFT_NAME": "Sentinel-2A",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T134221_20260506T134221_T22MHV",
+        "system:index": "20260506T134221_20260506T134221_T22MHV",
+        "system:time_start": 1778075034266,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.089095434925085,
+          -5.048974595098219
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.08909543,-5.04897460), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "fortaleza_004",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 8,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 29.203051,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHV",
+        "system:index": "20260506T133139_20260506T133232_T22MHV",
+        "system:time_start": 1778074423931,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.05485871752753,
+          -5.0488200526554525
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05485872,-5.04882005), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "fortaleza_harley_001",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.054703172012076,
+          -5.0831514432560345
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05470317,-5.08315144), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "fortaleza_harley_002",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 8,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 29.203051,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHV",
+        "system:index": "20260506T133139_20260506T133232_T22MHV",
+        "system:time_start": 1778074423931,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.05485871752753,
+          -5.0488200526554525
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05485872,-5.04882005), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "fortaleza_harley_003",
+      "fazenda": "Fortaleza - Harley",
+      "fazenda_slug": "fortaleza_harley",
+      "center_lon": -48.05501319540778,
+      "center_lat": -5.014488621089828,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 7,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 42.731389,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2C",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260501T133221_20260501T133224_T22MHV",
+        "system:index": "20260501T133221_20260501T133224_T22MHV",
+        "system:time_start": 1777642427804,
+        "date": "2026-05-01"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.05501319540778,
+          -5.014488621089828
+        ],
+        "date": "2026-05-01",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05501320,-5.01448862), date='2026-05-01')"
+      }
+    },
+    {
+      "block_id": "furna_azul_001",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "center_lon": -48.02030729316203,
+      "center_lat": -5.117324312486393,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02030729316203,
+          -5.117324312486393
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02030729,-5.11732431), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "furna_azul_002",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02046572060438,
+          -5.082994031707935
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02046572,-5.08299403), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "furna_azul_003",
+      "fazenda": "Furna Azul",
+      "fazenda_slug": "furna_azul",
+      "center_lon": -47.986229349478236,
+      "center_lat": -5.082834807501913,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.986229349478236,
+          -5.082834807501913
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98622935,-5.08283481), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_001",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.88474580350792,
+      "center_lat": -5.976097430032443,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.88474580350792,
+          -5.976097430032443
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88474580,-5.97609743), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_002",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.85045407812508,
+      "center_lat": -5.97627648566593,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.85045407812508,
+          -5.97627648566593
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.85045408,-5.97627649), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_003",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.81616131298323,
+      "center_lat": -5.976453407029298,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.81616131298323,
+          -5.976453407029298
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.81616131,-5.97645341), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_004",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.91885497021607,
+      "center_lat": -5.941585063625067,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.91885497021607,
+          -5.941585063625067
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.91885497,-5.94158506), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_005",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.884566422006756,
+      "center_lat": -5.9417652050652565,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.884566422006756,
+          -5.9417652050652565
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88456642,-5.94176521), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_006",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.85027682189546,
+      "center_lat": -5.941943224898656,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.85027682189546,
+          -5.941943224898656
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.85027682,-5.94194322), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_007",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.81598618234356,
+      "center_lat": -5.942119122807618,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.81598618234356,
+          -5.942119122807618
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.81598618,-5.94211912), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_008",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.91867452812732,
+      "center_lat": -5.907253838771438,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.91867452812732,
+          -5.907253838771438
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.91867453,-5.90725384), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_009",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.88438809240792,
+      "center_lat": -5.907432932191868,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.88438809240792,
+          -5.907432932191868
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88438809,-5.90743293), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_010",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.85010060510676,
+      "center_lat": -5.907609916347863,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.85010060510676,
+          -5.907609916347863
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.85010061,-5.90760992), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_011",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.88421081439113,
+      "center_lat": -5.873100611686375,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.88421081439113,
+          -5.873100611686375
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88421081,-5.87310061), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "maria_izabel_012",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.849925427442514,
+      "center_lat": -5.873276560286923,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.849925427442514,
+          -5.873276560286923
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.84992543,-5.87327656), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "montes_alto_001",
+      "fazenda": "Montes Alto",
+      "fazenda_slug": "montes_alto",
+      "center_lon": -47.98329677739647,
+      "center_lat": -5.1173075242014106,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98329677739647,
+          -5.1173075242014106
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98329678,-5.11730752), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "montes_alto_002",
+      "fazenda": "Montes Alto",
+      "fazenda_slug": "montes_alto",
+      "center_lon": -47.98313815902177,
+      "center_lat": -5.082977356620926,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98313815902177,
+          -5.082977356620926
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98313816,-5.08297736), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "placemark_001",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.95483393921217,
+      "center_lat": -6.250372081268659,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.95483393921217,
+          -6.250372081268659
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.95483394,-6.25037208), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_002",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.92052688482436,
+      "center_lat": -6.250563892977362,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.92052688482436,
+          -6.250563892977362
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.92052688,-6.25056389), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_003",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.988945431998864,
+      "center_lat": -6.215849390181249,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.988945431998864,
+          -6.215849390181249
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98894543,-6.21584939), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_004",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.95464168154553,
+      "center_lat": -6.21604236009404,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.95464168154553,
+          -6.21604236009404
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.95464168,-6.21604236), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_005",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.920336851579464,
+      "center_lat": -6.216233110285313,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.920336851579464,
+          -6.216233110285313
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.92033685,-6.21623311), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_006",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.98875204225571,
+      "center_lat": -6.181520692383952,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98875204225571,
+          -6.181520692383952
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98875204,-6.18152069), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_007",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.95445050339196,
+      "center_lat": -6.181712588560503,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.95445050339196,
+          -6.181712588560503
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.95445050,-6.18171259), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_008",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.920147885359164,
+      "center_lat": -6.181902277365922,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.920147885359164,
+          -6.181902277365922
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.92014789,-6.18190228), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_009",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.885844200641834,
+      "center_lat": -6.18208975846162,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.885844200641834,
+          -6.18208975846162
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88584420,-6.18208976), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_010",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.98855974416446,
+      "center_lat": -6.147191944370612,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98855974416446,
+          -6.147191944370612
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98855974,-6.14719194), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_011",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.954260404407776,
+      "center_lat": -6.147382766943257,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.954260404407776,
+          -6.147382766943257
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.95426040,-6.14738277), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_012",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.919959985823745,
+      "center_lat": -6.147571394493648,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.919959985823745,
+          -6.147571394493648
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.91995999,-6.14757139), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_013",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.88565850089294,
+      "center_lat": -6.147757826685111,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.88565850089294,
+          -6.147757826685111
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88565850,-6.14775783), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_014",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.851355962097905,
+      "center_lat": -6.147942063184868,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.851355962097905,
+          -6.147942063184868
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.85135596,-6.14794206), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_015",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.95407138425127,
+      "center_lat": -6.113052895517553,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.95407138425127,
+          -6.113052895517553
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.95407138,-6.11305290), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "placemark_016",
+      "fazenda": "Placemark",
+      "fazenda_slug": "placemark",
+      "center_lon": -47.919773152635415,
+      "center_lat": -6.11324046194299,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.919773152635415,
+          -6.11324046194299
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.91977315,-6.11324046), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "santa_maria_001",
+      "fazenda": "Santa Maria",
+      "fazenda_slug": "santa_maria",
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 8,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 29.203051,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHV",
+        "system:index": "20260506T133139_20260506T133232_T22MHV",
+        "system:time_start": 1778074423931,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.05485871752753,
+          -5.0488200526554525
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05485872,-5.04882005), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "santa_maria_002",
+      "fazenda": "Santa Maria",
+      "fazenda_slug": "santa_maria",
+      "center_lon": -48.02062306776486,
+      "center_lat": -5.048663709579723,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02062306776486,
+          -5.048663709579723
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02062307,-5.04866371), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "santa_rosa_001",
+      "fazenda": "Santa Rosa",
+      "fazenda_slug": "santa_rosa",
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.054703172012076,
+          -5.0831514432560345
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05470317,-5.08315144), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "santa_rosa_002",
+      "fazenda": "Santa Rosa",
+      "fazenda_slug": "santa_rosa",
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02046572060438,
+          -5.082994031707935
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02046572,-5.08299403), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "santo_antonio_001",
+      "fazenda": "Santo Antonio",
+      "fazenda_slug": "santo_antonio",
+      "center_lon": -47.98329677739647,
+      "center_lat": -5.1173075242014106,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98329677739647,
+          -5.1173075242014106
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98329678,-5.11730752), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "santo_antonio_002",
+      "fazenda": "Santo Antonio",
+      "fazenda_slug": "santo_antonio",
+      "center_lon": -47.98313815902177,
+      "center_lat": -5.082977356620926,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98313815902177,
+          -5.082977356620926
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98313816,-5.08297736), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tapetao_001",
+      "fazenda": "Tapetão",
+      "fazenda_slug": "tapetao",
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.054703172012076,
+          -5.0831514432560345
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05470317,-5.08315144), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tapetao_002",
+      "fazenda": "Tapetão",
+      "fazenda_slug": "tapetao",
+      "center_lon": -48.02046572060438,
+      "center_lat": -5.082994031707935,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02046572060438,
+          -5.082994031707935
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02046572,-5.08299403), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tapetao_003",
+      "fazenda": "Tapetão",
+      "fazenda_slug": "tapetao",
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 8,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 29.203051,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHV",
+        "system:index": "20260506T133139_20260506T133232_T22MHV",
+        "system:time_start": 1778074423931,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.05485871752753,
+          -5.0488200526554525
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.05485872,-5.04882005), date='2026-05-06')"
+      }
+    },
+    {
+      "block_id": "tapetao_004",
+      "fazenda": "Tapetão",
+      "fazenda_slug": "tapetao",
+      "center_lon": -48.02062306776486,
+      "center_lat": -5.048663709579723,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.02062306776486,
+          -5.048663709579723
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.02062307,-5.04866371), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tracks_001",
+      "fazenda": "TRACKS",
+      "fazenda_slug": "tracks",
+      "center_lon": -48.01753484778917,
+      "center_lat": -5.117147027025504,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.01753484778917,
+          -5.117147027025504
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.01753485,-5.11714703), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tracks_002",
+      "fazenda": "TRACKS",
+      "fazenda_slug": "tracks",
+      "center_lon": -47.98329677739647,
+      "center_lat": -5.1173075242014106,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98329677739647,
+          -5.1173075242014106
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98329678,-5.11730752), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tracks_003",
+      "fazenda": "TRACKS",
+      "fazenda_slug": "tracks",
+      "center_lon": -48.017374415714656,
+      "center_lat": -5.082817941625247,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -48.017374415714656,
+          -5.082817941625247
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-48.01737442,-5.08281794), date='2026-04-26')"
+      }
+    },
+    {
+      "block_id": "tracks_004",
+      "fazenda": "TRACKS",
+      "fazenda_slug": "tracks",
+      "center_lon": -47.98313815902177,
+      "center_lat": -5.082977356620926,
+      "status": "selected",
+      "month": "2026-04",
+      "candidate_count": 1,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 3.398176,
+        "MGRS_TILE": "22MHV",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260426T133139_20260426T133141_T22MHV",
+        "system:index": "20260426T133139_20260426T133141_T22MHV",
+        "system:time_start": 1777210422931,
+        "date": "2026-04-26"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.98313815902177,
+          -5.082977356620926
+        ],
+        "date": "2026-04-26",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.98313816,-5.08297736), date='2026-04-26')"
+      }
+    }
+  ]
+}

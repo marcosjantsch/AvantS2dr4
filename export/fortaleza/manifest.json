@@ -1,0 +1,175 @@
+{
+  "fazenda": "Fortaleza",
+  "slug": "fortaleza",
+  "feature_count": 1,
+  "block_count": 4,
+  "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza",
+  "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks.geojson",
+  "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks.csv",
+  "blocks": [
+    {
+      "block_id": "fortaleza_001",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 791552.9407111307,
+      "center_lon": -48.088941691333,
+      "center_lat": -5.0833070418658615,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.07083944222907,
+              -5.101294774405386
+            ],
+            [
+              -48.07100283486162,
+              -5.065155961918943
+            ],
+            [
+              -48.107042938638315,
+              -5.065318213901412
+            ],
+            [
+              -48.10688154960306,
+              -5.101458189896699
+            ],
+            [
+              -48.07083944222907,
+              -5.101294774405386
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "fortaleza_002",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 12069.898789388624,
+      "center_lon": -48.054703172012076,
+      "center_lat": -5.0831514432560345,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.03660053015398,
+              -5.101137662253426
+            ],
+            [
+              -48.03676582590391,
+              -5.0649999683958855
+            ],
+            [
+              -48.07280481222543,
+              -5.065164122062661
+            ],
+            [
+              -48.072641519765085,
+              -5.101302993065474
+            ],
+            [
+              -48.03660053015398,
+              -5.101137662253426
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "fortaleza_003",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": true,
+      "farm_intersection_area_m2": 5738481.73770669,
+      "center_lon": -48.089095434925085,
+      "center_lat": -5.048974595098219,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.07099469317763,
+              -5.066962903626088
+            ],
+            [
+              -48.07115696800437,
+              -5.030824047926239
+            ],
+            [
+              -48.10719518172692,
+              -5.030985194689708
+            ],
+            [
+              -48.10703489679151,
+              -5.0671252137810585
+            ],
+            [
+              -48.07099469317763,
+              -5.066962903626088
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "block_id": "fortaleza_004",
+      "fazenda": "Fortaleza",
+      "fazenda_slug": "fortaleza",
+      "size_m": 4000,
+      "overlap_m": 200,
+      "step_m": 3800,
+      "metric_crs": "EPSG:32722",
+      "center_inside_farm": false,
+      "farm_intersection_area_m2": 1148961.5477181445,
+      "center_lon": -48.05485871752753,
+      "center_lat": -5.0488200526554525,
+      "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_004",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -48.03675758938955,
+              -5.066806854174412
+            ],
+            [
+              -48.03692175431507,
+              -5.030669116990659
+            ],
+            [
+              -48.072958850872695,
+              -5.030832152485159
+            ],
+            [
+              -48.07279667553292,
+              -5.066971066695475
+            ],
+            [
+              -48.03675758938955,
+              -5.066806854174412
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

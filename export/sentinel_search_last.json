@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-05-19T18:09:53",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "reference_date": "2026-05-19",
+  "months": 3,
+  "max_cloud": 5.0,
+  "queried_blocks": 1,
+  "matches_under_cloud": 0,
+  "fallback_matches": 1,
+  "results": [
+    {
+      "block_id": "maria_izabel_001",
+      "fazenda": "Maria Izabel",
+      "fazenda_slug": "maria_izabel",
+      "center_lon": -47.88474580350792,
+      "center_lat": -5.976097430032443,
+      "status": "fallback_best_cloud",
+      "month": "2026-05",
+      "candidate_count": 6,
+      "image": {
+        "CLOUDY_PIXEL_PERCENTAGE": 7.8293,
+        "MGRS_TILE": "22MHU",
+        "PROCESSING_BASELINE": "05.12",
+        "SENSING_ORBIT_NUMBER": 81,
+        "SPACECRAFT_NAME": "Sentinel-2B",
+        "system:id": "COPERNICUS/S2_SR_HARMONIZED/20260506T133139_20260506T133232_T22MHU",
+        "system:index": "20260506T133139_20260506T133232_T22MHU",
+        "system:time_start": 1778074438540,
+        "date": "2026-05-06"
+      },
+      "s2dr4": {
+        "lonlat": [
+          -47.88474580350792,
+          -5.976097430032443
+        ],
+        "date": "2026-05-06",
+        "python_call": "s2dr4.inferutils.test(lonlat=(-47.88474580,-5.97609743), date='2026-05-06')"
+      }
+    }
+  ]
+}

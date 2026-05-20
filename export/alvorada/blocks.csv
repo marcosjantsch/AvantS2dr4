@@ -1,0 +1,5 @@
+block_id,fazenda,fazenda_slug,center_lon,center_lat,size_m,overlap_m,step_m,metric_crs,center_inside_farm,farm_intersection_area_m2,block_folder
+alvorada_001,Alvorada,alvorada,-48.02046572060438,-5.082994031707935,4000,200,3800,EPSG:32722,False,2393588.826421347,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\alvorada\blocks\alvorada_001
+alvorada_002,Alvorada,alvorada,-47.986229349478236,-5.082834807501913,4000,200,3800,EPSG:32722,False,2823286.9271947797,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\alvorada\blocks\alvorada_002
+alvorada_003,Alvorada,alvorada,-48.02062306776486,-5.048663709579723,4000,200,3800,EPSG:32722,False,1113271.9428456728,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\alvorada\blocks\alvorada_003
+alvorada_004,Alvorada,alvorada,-47.98638849800219,-5.04850556614946,4000,200,3800,EPSG:32722,False,469413.65867177537,C:\02\19  Baixa Imagens - Sentinel_SurperResolução\export\alvorada\blocks\alvorada_004

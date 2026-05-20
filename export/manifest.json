@@ -1,0 +1,2791 @@
+{
+  "created_at": "2026-05-19T18:27:05",
+  "shapefile": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\Data\\VisitaGFP.shp",
+  "export_dir": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export",
+  "fazenda_column": "FAZENDA",
+  "block_size_m": 4000,
+  "overlap_m": 200,
+  "step_m": 3800,
+  "farm_count": 14,
+  "block_count": 64,
+  "farms": [
+    {
+      "fazenda": "Agua Bonita",
+      "slug": "agua_bonita",
+      "feature_count": 1,
+      "block_count": 1,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\agua_bonita",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\agua_bonita\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\agua_bonita\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "agua_bonita_001",
+          "fazenda": "Agua Bonita",
+          "fazenda_slug": "agua_bonita",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 766664.2231026132,
+          "center_lon": -47.98313815902177,
+          "center_lat": -5.082977356620926,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\agua_bonita\\blocks\\agua_bonita_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ],
+                [
+                  -47.96503609228583,
+                  -5.064991708171589
+                ],
+                [
+                  -48.001073828379155,
+                  -5.0648254529834835
+                ],
+                [
+                  -48.00124122723033,
+                  -5.100961895392354
+                ],
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Alvorada",
+      "slug": "alvorada",
+      "feature_count": 1,
+      "block_count": 4,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "alvorada_001",
+          "fazenda": "Alvorada",
+          "fazenda_slug": "alvorada",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2393588.826421347,
+          "center_lon": -48.02046572060438,
+          "center_lat": -5.082994031707935,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ],
+                [
+                  -48.00252989122169,
+                  -5.064842168557809
+                ],
+                [
+                  -48.03856774706948,
+                  -5.0650082236165375
+                ],
+                [
+                  -48.03840255147628,
+                  -5.1011459766722185
+                ],
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "alvorada_002",
+          "fazenda": "Alvorada",
+          "fazenda_slug": "alvorada",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2823286.9271947797,
+          "center_lon": -47.986229349478236,
+          "center_lat": -5.082834807501913,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96812594208665,
+                  -5.10081798042987
+                ],
+                [
+                  -47.96829504318057,
+                  -5.064682562685731
+                ],
+                [
+                  -48.00433175553814,
+                  -5.064850518840694
+                ],
+                [
+                  -48.00416465710771,
+                  -5.100987140996591
+                ],
+                [
+                  -47.96812594208665,
+                  -5.10081798042987
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "alvorada_003",
+          "fazenda": "Alvorada",
+          "fazenda_slug": "alvorada",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1113271.9428456728,
+          "center_lon": -48.02062306776486,
+          "center_lat": -5.048663709579723,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ],
+                [
+                  -48.00268761462226,
+                  -5.030512392043714
+                ],
+                [
+                  -48.03872358099975,
+                  -5.030677315978899
+                ],
+                [
+                  -48.03855951554582,
+                  -5.066815112354821
+                ],
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "alvorada_004",
+          "fazenda": "Alvorada",
+          "fazenda_slug": "alvorada",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 469413.65867177537,
+          "center_lon": -47.98638849800219,
+          "center_lat": -5.04850556614946,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\alvorada\\blocks\\alvorada_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.968286617049834,
+                  -5.066489334664339
+                ],
+                [
+                  -47.96845456128837,
+                  -5.030353873364492
+                ],
+                [
+                  -48.00448938447259,
+                  -5.030520685446675
+                ],
+                [
+                  -48.00432342919807,
+                  -5.066657351036848
+                ],
+                [
+                  -47.968286617049834,
+                  -5.066489334664339
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Faz_Promissão e Deus Dará",
+      "slug": "faz_promissao_e_deus_dara",
+      "feature_count": 1,
+      "block_count": 5,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "faz_promissao_e_deus_dara_001",
+          "fazenda": "Faz_Promissão e Deus Dará",
+          "fazenda_slug": "faz_promissao_e_deus_dara",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 505847.4576596455,
+          "center_lon": -47.43509069212747,
+          "center_lat": -5.050935448306136,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.417130994444975,
+                  -5.069079888750901
+                ],
+                [
+                  -47.41699700436523,
+                  -5.032925859080055
+                ],
+                [
+                  -47.45304939292472,
+                  -5.03279098394712
+                ],
+                [
+                  -47.45318537677484,
+                  -5.06894403988759
+                ],
+                [
+                  -47.417130994444975,
+                  -5.069079888750901
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "faz_promissao_e_deus_dara_002",
+          "fazenda": "Faz_Promissão e Deus Dará",
+          "fazenda_slug": "faz_promissao_e_deus_dara",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 8710600.89681816,
+          "center_lon": -47.40083953754398,
+          "center_lat": -5.051063139963373,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.38287843109464,
+                  -5.069207086504071
+                ],
+                [
+                  -47.382746335343114,
+                  -5.033052145111473
+                ],
+                [
+                  -47.41879964698174,
+                  -5.0329191626378496
+                ],
+                [
+                  -47.41893373675636,
+                  -5.069073143963753
+                ],
+                [
+                  -47.38287843109464,
+                  -5.069207086504071
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "faz_promissao_e_deus_dara_003",
+          "fazenda": "Faz_Promissão e Deus Dará",
+          "fazenda_slug": "faz_promissao_e_deus_dara",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 5424823.535907924,
+          "center_lon": -47.366587512112396,
+          "center_lat": -5.051189026990748,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.34862500330113,
+                  -5.069332473017594
+                ],
+                [
+                  -47.34849480211448,
+                  -5.03317663288542
+                ],
+                [
+                  -47.384549023787486,
+                  -5.033045543308187
+                ],
+                [
+                  -47.38468121924641,
+                  -5.069200437039073
+                ],
+                [
+                  -47.34862500330113,
+                  -5.069332473017594
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "faz_promissao_e_deus_dara_004",
+          "fazenda": "Faz_Promissão e Deus Dará",
+          "fazenda_slug": "faz_promissao_e_deus_dara",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1829105.4641520241,
+          "center_lon": -47.33233462822769,
+          "center_lat": -5.051313109163821,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.31437072346197,
+                  -5.069456048067903
+                ],
+                [
+                  -47.31424241707343,
+                  -5.0332993221799525
+                ],
+                [
+                  -47.35029753573441,
+                  -5.033170125732827
+                ],
+                [
+                  -47.350427836640854,
+                  -5.069325918886598
+                ],
+                [
+                  -47.31437072346197,
+                  -5.069456048067903
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "faz_promissao_e_deus_dara_005",
+          "fazenda": "Faz_Promissão e Deus Dará",
+          "fazenda_slug": "faz_promissao_e_deus_dara",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 909680.6528303121,
+          "center_lon": -47.40071353478459,
+          "center_lat": -5.016716380284367,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\faz_promissao_e_deus_dara\\blocks\\faz_promissao_e_deus_dara_005",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.382752917386235,
+                  -5.034859893216253
+                ],
+                [
+                  -47.38262173133229,
+                  -4.998704910513278
+                ],
+                [
+                  -47.41867316203707,
+                  -4.998572840009143
+                ],
+                [
+                  -47.4188063283827,
+                  -5.034726862741708
+                ],
+                [
+                  -47.382752917386235,
+                  -5.034859893216253
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Fortaleza",
+      "slug": "fortaleza",
+      "feature_count": 1,
+      "block_count": 4,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "fortaleza_001",
+          "fazenda": "Fortaleza",
+          "fazenda_slug": "fortaleza",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 791552.9407111307,
+          "center_lon": -48.088941691333,
+          "center_lat": -5.0833070418658615,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.07083944222907,
+                  -5.101294774405386
+                ],
+                [
+                  -48.07100283486162,
+                  -5.065155961918943
+                ],
+                [
+                  -48.107042938638315,
+                  -5.065318213901412
+                ],
+                [
+                  -48.10688154960306,
+                  -5.101458189896699
+                ],
+                [
+                  -48.07083944222907,
+                  -5.101294774405386
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "fortaleza_002",
+          "fazenda": "Fortaleza",
+          "fazenda_slug": "fortaleza",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 12069.898789388624,
+          "center_lon": -48.054703172012076,
+          "center_lat": -5.0831514432560345,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ],
+                [
+                  -48.03676582590391,
+                  -5.0649999683958855
+                ],
+                [
+                  -48.07280481222543,
+                  -5.065164122062661
+                ],
+                [
+                  -48.072641519765085,
+                  -5.101302993065474
+                ],
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "fortaleza_003",
+          "fazenda": "Fortaleza",
+          "fazenda_slug": "fortaleza",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 5738481.73770669,
+          "center_lon": -48.089095434925085,
+          "center_lat": -5.048974595098219,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.07099469317763,
+                  -5.066962903626088
+                ],
+                [
+                  -48.07115696800437,
+                  -5.030824047926239
+                ],
+                [
+                  -48.10719518172692,
+                  -5.030985194689708
+                ],
+                [
+                  -48.10703489679151,
+                  -5.0671252137810585
+                ],
+                [
+                  -48.07099469317763,
+                  -5.066962903626088
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "fortaleza_004",
+          "fazenda": "Fortaleza",
+          "fazenda_slug": "fortaleza",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1148961.5477181445,
+          "center_lon": -48.05485871752753,
+          "center_lat": -5.0488200526554525,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza\\blocks\\fortaleza_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ],
+                [
+                  -48.03692175431507,
+                  -5.030669116990659
+                ],
+                [
+                  -48.072958850872695,
+                  -5.030832152485159
+                ],
+                [
+                  -48.07279667553292,
+                  -5.066971066695475
+                ],
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Fortaleza - Harley",
+      "slug": "fortaleza_harley",
+      "feature_count": 1,
+      "block_count": 3,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "fortaleza_harley_001",
+          "fazenda": "Fortaleza - Harley",
+          "fazenda_slug": "fortaleza_harley",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 3296532.063159145,
+          "center_lon": -48.054703172012076,
+          "center_lat": -5.0831514432560345,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ],
+                [
+                  -48.03676582590391,
+                  -5.0649999683958855
+                ],
+                [
+                  -48.07280481222543,
+                  -5.065164122062661
+                ],
+                [
+                  -48.072641519765085,
+                  -5.101302993065474
+                ],
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "fortaleza_harley_002",
+          "fazenda": "Fortaleza - Harley",
+          "fazenda_slug": "fortaleza_harley",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 7061313.100923485,
+          "center_lon": -48.05485871752753,
+          "center_lat": -5.0488200526554525,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ],
+                [
+                  -48.03692175431507,
+                  -5.030669116990659
+                ],
+                [
+                  -48.072958850872695,
+                  -5.030832152485159
+                ],
+                [
+                  -48.07279667553292,
+                  -5.066971066695475
+                ],
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "fortaleza_harley_003",
+          "fazenda": "Fortaleza - Harley",
+          "fazenda_slug": "fortaleza_harley",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 31638.616085532864,
+          "center_lon": -48.05501319540778,
+          "center_lat": -5.014488621089828,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\fortaleza_harley\\blocks\\fortaleza_harley_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03691357433456,
+                  -5.032476004928206
+                ],
+                [
+                  -48.037076608729414,
+                  -4.996338224709823
+                ],
+                [
+                  -48.07311182853833,
+                  -4.996500142144016
+                ],
+                [
+                  -48.07295077002893,
+                  -5.032639099271079
+                ],
+                [
+                  -48.03691357433456,
+                  -5.032476004928206
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Furna Azul",
+      "slug": "furna_azul",
+      "feature_count": 1,
+      "block_count": 3,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "furna_azul_001",
+          "fazenda": "Furna Azul",
+          "fazenda_slug": "furna_azul",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 195404.34073440882,
+          "center_lon": -48.02030729316203,
+          "center_lat": -5.117324312486393,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00220273846805,
+                  -5.135308422354373
+                ],
+                [
+                  -48.00237108117968,
+                  -5.099171903810917
+                ],
+                [
+                  -48.03841083951427,
+                  -5.099339090107236
+                ],
+                [
+                  -48.03824451348618,
+                  -5.13547679955118
+                ],
+                [
+                  -48.00220273846805,
+                  -5.135308422354373
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "furna_azul_002",
+          "fazenda": "Furna Azul",
+          "fazenda_slug": "furna_azul",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 3742681.8597665518,
+          "center_lon": -48.02046572060438,
+          "center_lat": -5.082994031707935,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ],
+                [
+                  -48.00252989122169,
+                  -5.064842168557809
+                ],
+                [
+                  -48.03856774706948,
+                  -5.0650082236165375
+                ],
+                [
+                  -48.03840255147628,
+                  -5.1011459766722185
+                ],
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "furna_azul_003",
+          "fazenda": "Furna Azul",
+          "fazenda_slug": "furna_azul",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1918969.3839723056,
+          "center_lon": -47.986229349478236,
+          "center_lat": -5.082834807501913,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\furna_azul\\blocks\\furna_azul_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96812594208665,
+                  -5.10081798042987
+                ],
+                [
+                  -47.96829504318057,
+                  -5.064682562685731
+                ],
+                [
+                  -48.00433175553814,
+                  -5.064850518840694
+                ],
+                [
+                  -48.00416465710771,
+                  -5.100987140996591
+                ],
+                [
+                  -47.96812594208665,
+                  -5.10081798042987
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Maria Izabel",
+      "slug": "maria_izabel",
+      "feature_count": 1,
+      "block_count": 12,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "maria_izabel_001",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 3047112.375589539,
+          "center_lon": -47.88474580350792,
+          "center_lat": -5.976097430032443,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.86679189996656,
+                  -5.994261796379284
+                ],
+                [
+                  -47.866603704418694,
+                  -5.958122062022062
+                ],
+                [
+                  -47.902698526250035,
+                  -5.957933036521369
+                ],
+                [
+                  -47.90288908339631,
+                  -5.994071616270058
+                ],
+                [
+                  -47.86679189996656,
+                  -5.994261796379284
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_002",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 4063967.4591853544,
+          "center_lon": -47.85045407812508,
+          "center_lat": -5.97627648566593,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.832498502128814,
+                  -5.994440270539719
+                ],
+                [
+                  -47.83231255044645,
+                  -5.958299452641625
+                ],
+                [
+                  -47.86840847314412,
+                  -5.958112666733984
+                ],
+                [
+                  -47.86859678678084,
+                  -5.994252343702744
+                ],
+                [
+                  -47.832498502128814,
+                  -5.994440270539719
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_003",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 191002.24081489607,
+          "center_lon": -47.81616131298323,
+          "center_lat": -5.976453407029298,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.79820407092617,
+                  -5.994616603764564
+                ],
+                [
+                  -47.798020363443364,
+                  -5.958474715322844
+                ],
+                [
+                  -47.83411737388721,
+                  -5.958290169341568
+                ],
+                [
+                  -47.83430344367612,
+                  -5.994430930535209
+                ],
+                [
+                  -47.79820407092617,
+                  -5.994616603764564
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_004",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 308527.16359929927,
+          "center_lon": -47.91885497021607,
+          "center_lat": -5.941585063625067,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.90090330700553,
+                  -5.9597494769400665
+                ],
+                [
+                  -47.900713981578804,
+                  -5.923610788485289
+                ],
+                [
+                  -47.9368054597107,
+                  -5.923420633464907
+                ],
+                [
+                  -47.93699713256914,
+                  -5.959558153772799
+                ],
+                [
+                  -47.90090330700553,
+                  -5.9597494769400665
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_005",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 12224913.302548824,
+          "center_lon": -47.884566422006756,
+          "center_lat": -5.9417652050652565,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_005",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.86661308667995,
+                  -5.9599290500049715
+                ],
+                [
+                  -47.86642599166238,
+                  -5.9237892651442845
+                ],
+                [
+                  -47.902518583438656,
+                  -5.923601336387987
+                ],
+                [
+                  -47.90270802624595,
+                  -5.959739966777288
+                ],
+                [
+                  -47.86661308667995,
+                  -5.9599290500049715
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_006",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 13023501.904558836,
+          "center_lon": -47.85027682189546,
+          "center_lat": -5.941943224898656,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_006",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.832321820842466,
+                  -5.960106494798354
+                ],
+                [
+                  -47.8321369565701,
+                  -5.923965626525514
+                ],
+                [
+                  -47.86823064887662,
+                  -5.923779924368604
+                ],
+                [
+                  -47.868417861292556,
+                  -5.959919651847644
+                ],
+                [
+                  -47.832321820842466,
+                  -5.960106494798354
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_007",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 598807.6686826929,
+          "center_lon": -47.81598618234356,
+          "center_lat": -5.942119122807618,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_007",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.798029521957496,
+                  -5.96028181100357
+                ],
+                [
+                  -47.79784688876237,
+                  -5.924139872314291
+                ],
+                [
+                  -47.833941668482964,
+                  -5.923956397088119
+                ],
+                [
+                  -47.83412665017129,
+                  -5.960097208663245
+                ],
+                [
+                  -47.798029521957496,
+                  -5.96028181100357
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_008",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 75743.41192084287,
+          "center_lon": -47.91867452812732,
+          "center_lat": -5.907253838771438,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_008",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.90072342001452,
+                  -5.92541772416912
+                ],
+                [
+                  -47.90053520789638,
+                  -5.889278985369496
+                ],
+                [
+                  -47.93662446942536,
+                  -5.889089939954176
+                ],
+                [
+                  -47.93681501517291,
+                  -5.92522751074485
+                ],
+                [
+                  -47.90072342001452,
+                  -5.92541772416912
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_009",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 6857705.979843812,
+          "center_lon": -47.88438809240792,
+          "center_lat": -5.907432932191868,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_009",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.86643531890554,
+                  -5.925596255645167
+                ],
+                [
+                  -47.866249324082254,
+                  -5.889456420569111
+                ],
+                [
+                  -47.90233969891761,
+                  -5.889269588427711
+                ],
+                [
+                  -47.902528027726156,
+                  -5.925408269168717
+                ],
+                [
+                  -47.86643531890554,
+                  -5.925596255645167
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_010",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 7439716.1102200225,
+          "center_lon": -47.85010060510676,
+          "center_lat": -5.907609916347863,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_010",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.83214617260394,
+                  -5.9257726711938
+                ],
+                [
+                  -47.83196239540952,
+                  -5.889631752833546
+                ],
+                [
+                  -47.86805387044106,
+                  -5.889447134299388
+                ],
+                [
+                  -47.86823998197244,
+                  -5.925586912000573
+                ],
+                [
+                  -47.83214617260394,
+                  -5.9257726711938
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_011",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 449450.55893021583,
+          "center_lon": -47.88421081439113,
+          "center_lat": -5.873100611686375,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_011",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.86625859632406,
+                  -5.891263413573559
+                ],
+                [
+                  -47.86607370136105,
+                  -5.855123528570282
+                ],
+                [
+                  -47.902161872365674,
+                  -5.854937792915053
+                ],
+                [
+                  -47.902349087513635,
+                  -5.891076523718801
+                ],
+                [
+                  -47.86625859632406,
+                  -5.891263413573559
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "maria_izabel_012",
+          "fazenda": "Maria Izabel",
+          "fazenda_slug": "maria_izabel",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1732358.7124573083,
+          "center_lon": -47.849925427442514,
+          "center_lat": -5.873276560286923,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\maria_izabel\\blocks\\maria_izabel_012",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.83197155709773,
+                  -5.891438799999016
+                ],
+                [
+                  -47.83178886665121,
+                  -5.855297831838735
+                ],
+                [
+                  -47.86787813751998,
+                  -5.855114296800119
+                ],
+                [
+                  -47.86806314850102,
+                  -5.891254124435261
+                ],
+                [
+                  -47.83197155709773,
+                  -5.891438799999016
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Montes Alto",
+      "slug": "montes_alto",
+      "feature_count": 1,
+      "block_count": 2,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\montes_alto",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\montes_alto\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\montes_alto\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "montes_alto_001",
+          "fazenda": "Montes Alto",
+          "fazenda_slug": "montes_alto",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1080280.2837183368,
+          "center_lon": -47.98329677739647,
+          "center_lat": -5.1173075242014106,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\montes_alto\\blocks\\montes_alto_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ],
+                [
+                  -47.965193190103776,
+                  -5.0993224621520366
+                ],
+                [
+                  -48.00123282865258,
+                  -5.099155074363029
+                ],
+                [
+                  -48.001401373014275,
+                  -5.135291473027091
+                ],
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "montes_alto_002",
+          "fazenda": "Montes Alto",
+          "fazenda_slug": "montes_alto",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 5109.250766014623,
+          "center_lon": -47.98313815902177,
+          "center_lat": -5.082977356620926,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\montes_alto\\blocks\\montes_alto_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ],
+                [
+                  -47.96503609228583,
+                  -5.064991708171589
+                ],
+                [
+                  -48.001073828379155,
+                  -5.0648254529834835
+                ],
+                [
+                  -48.00124122723033,
+                  -5.100961895392354
+                ],
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Placemark",
+      "slug": "placemark",
+      "feature_count": 2,
+      "block_count": 16,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "placemark_001",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 625603.4473040715,
+          "center_lon": -47.95483393921217,
+          "center_lat": -6.250372081268659,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.93687873177413,
+                  -6.26854186192737
+                ],
+                [
+                  -47.93667702276183,
+                  -6.232404750181243
+                ],
+                [
+                  -47.972787910919074,
+                  -6.232202259837699
+                ],
+                [
+                  -47.97299209139355,
+                  -6.268338188470179
+                ],
+                [
+                  -47.93687873177413,
+                  -6.26854186192737
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_002",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 659741.5679081951,
+          "center_lon": -47.92052688482436,
+          "center_lat": -6.250563892977362,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.902569938196294,
+                  -6.268733054046971
+                ],
+                [
+                  -47.9023705774454,
+                  -6.232594831688923
+                ],
+                [
+                  -47.93848259553033,
+                  -6.232394684233186
+                ],
+                [
+                  -47.93868442812533,
+                  -6.268531737165819
+                ],
+                [
+                  -47.902569938196294,
+                  -6.268733054046971
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_003",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1101367.157997361,
+          "center_lon": -47.988945431998864,
+          "center_lat": -6.215849390181249,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.970992569249596,
+                  -6.234019243660654
+                ],
+                [
+                  -47.970789655077034,
+                  -6.197883202309757
+                ],
+                [
+                  -48.00689706612842,
+                  -6.197679506254623
+                ],
+                [
+                  -48.00710243754032,
+                  -6.233814350954514
+                ],
+                [
+                  -47.970992569249596,
+                  -6.234019243660654
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_004",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 12226108.573758135,
+          "center_lon": -47.95464168154553,
+          "center_lat": -6.21604236009404,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.936687079969566,
+                  -6.234211607098044
+                ],
+                [
+                  -47.93648650054884,
+                  -6.198074442271006
+                ],
+                [
+                  -47.972595054309735,
+                  -6.197873075742064
+                ],
+                [
+                  -47.97279809135391,
+                  -6.234009057602503
+                ],
+                [
+                  -47.936687079969566,
+                  -6.234211607098044
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_005",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 6078001.431708114,
+          "center_lon": -47.920336851579464,
+          "center_lat": -6.216233110285313,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_005",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.90238051756883,
+                  -6.234401744132863
+                ],
+                [
+                  -47.90218227326057,
+                  -6.1982634688319544
+                ],
+                [
+                  -47.938291956588465,
+                  -6.198064432188644
+                ],
+                [
+                  -47.9384926588999,
+                  -6.234201538209496
+                ],
+                [
+                  -47.90238051756883,
+                  -6.234401744132863
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_006",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1425363.5194444065,
+          "center_lon": -47.98875204225571,
+          "center_lat": -6.181520692383952,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_006",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.9707997722232,
+                  -6.199690005703047
+                ],
+                [
+                  -47.97059800042426,
+                  -6.163553911421628
+                ],
+                [
+                  -48.00670309058456,
+                  -6.163351352040761
+                ],
+                [
+                  -48.00690730579072,
+                  -6.199486249819064
+                ],
+                [
+                  -47.9707997722232,
+                  -6.199690005703047
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_007",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 14187221.805094864,
+          "center_lon": -47.95445050339196,
+          "center_lat": -6.181712588560503,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_007",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.93649650128602,
+                  -6.199881301834624
+                ],
+                [
+                  -47.93629705109624,
+                  -6.163744084215924
+                ],
+                [
+                  -47.972403283603306,
+                  -6.163543841362702
+                ],
+                [
+                  -47.972605177582196,
+                  -6.199679876161014
+                ],
+                [
+                  -47.93649650128602,
+                  -6.199881301834624
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_008",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 8867650.894063203,
+          "center_lon": -47.920147885359164,
+          "center_lat": -6.181902277365922,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_008",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.902192157570795,
+                  -6.200070383915828
+                ],
+                [
+                  -47.90199502934872,
+                  -6.163932055960525
+                ],
+                [
+                  -47.938102391064184,
+                  -6.16373412999235
+                ],
+                [
+                  -47.93830196345289,
+                  -6.199871288812134
+                ],
+                [
+                  -47.902192157570795,
+                  -6.200070383915828
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_009",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2842484.5005702293,
+          "center_lon": -47.885844200641834,
+          "center_lat": -6.18208975846162,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_009",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.86788675356514,
+                  -6.200257251609122
+                ],
+                [
+                  -47.86769194766517,
+                  -6.1641178263199015
+                ],
+                [
+                  -47.90380042544858,
+                  -6.16392221759007
+                ],
+                [
+                  -47.903997675888355,
+                  -6.200060487430756
+                ],
+                [
+                  -47.86788675356514,
+                  -6.200257251609122
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_010",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 211438.69783802397,
+          "center_lon": -47.98855974416446,
+          "center_lat": -6.147191944370612,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_010",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.97060806046084,
+                  -6.165360717454189
+                ],
+                [
+                  -47.97040743067282,
+                  -6.129224570532343
+                ],
+                [
+                  -48.0065102130783,
+                  -6.129023147686076
+                ],
+                [
+                  -48.00671327244577,
+                  -6.16515809825185
+                ],
+                [
+                  -47.97060806046084,
+                  -6.165360717454189
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_011",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 12754621.22498745,
+          "center_lon": -47.954260404407776,
+          "center_lat": -6.147382766943257,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_011",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.93630699538086,
+                  -6.165550946411892
+                ],
+                [
+                  -47.936108674063476,
+                  -6.12941367629083
+                ],
+                [
+                  -47.97221259845508,
+                  -6.12921455697524
+                ],
+                [
+                  -47.97241334973159,
+                  -6.1653506444212915
+                ],
+                [
+                  -47.93630699538086,
+                  -6.165550946411892
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_012",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 15222867.869633337,
+          "center_lon": -47.919959985823745,
+          "center_lat": -6.147571394493648,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_012",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.9020048578635,
+                  -6.165738973669905
+                ],
+                [
+                  -47.90180884537321,
+                  -6.12960059334872
+                ],
+                [
+                  -47.93791389861669,
+                  -6.129403777919181
+                ],
+                [
+                  -47.93811234144145,
+                  -6.165540989248553
+                ],
+                [
+                  -47.9020048578635,
+                  -6.165738973669905
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_013",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": true,
+          "farm_intersection_area_m2": 9422930.511778759,
+          "center_lon": -47.88565850089294,
+          "center_lat": -6.147757826685111,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_013",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.867701660392456,
+                  -6.165924798892596
+                ],
+                [
+                  -47.8675079570816,
+                  -6.129785321372392
+                ],
+                [
+                  -47.90361412604064,
+                  -6.12959081018019
+                ],
+                [
+                  -47.90381026005696,
+                  -6.165729132393897
+                ],
+                [
+                  -47.867701660392456,
+                  -6.165924798892596
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_014",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 182292.91947774595,
+          "center_lon": -47.851355962097905,
+          "center_lat": -6.147942063184868,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_014",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.83339741545335,
+                  -6.166108421748249
+                ],
+                [
+                  -47.833206021670144,
+                  -6.129967860032109
+                ],
+                [
+                  -47.86931329320635,
+                  -6.129775653424444
+                ],
+                [
+                  -47.86950711806169,
+                  -6.16591507352149
+                ],
+                [
+                  -47.83339741545335,
+                  -6.166108421748249
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_015",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 933885.4011831882,
+          "center_lon": -47.95407138425127,
+          "center_lat": -6.113052895517553,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_015",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.9361185619134,
+                  -6.131220541104684
+                ],
+                [
+                  -47.93592136911196,
+                  -6.095083218770611
+                ],
+                [
+                  -47.972022998522334,
+                  -6.0948852228553605
+                ],
+                [
+                  -47.97222260745728,
+                  -6.131021362658964
+                ],
+                [
+                  -47.9361185619134,
+                  -6.131220541104684
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "placemark_016",
+          "fazenda": "Placemark",
+          "fazenda_slug": "placemark",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2186562.569824666,
+          "center_lon": -47.919773152635415,
+          "center_lat": -6.11324046194299,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\placemark\\blocks\\placemark_016",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.901818618110234,
+                  -6.13140751366918
+                ],
+                [
+                  -47.90162372099939,
+                  -6.095269081270682
+                ],
+                [
+                  -47.937726478907216,
+                  -6.09507337624406
+                ],
+                [
+                  -47.93792379252471,
+                  -6.131210639793629
+                ],
+                [
+                  -47.901818618110234,
+                  -6.13140751366918
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Santa Maria",
+      "slug": "santa_maria",
+      "feature_count": 1,
+      "block_count": 2,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_maria",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_maria\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_maria\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "santa_maria_001",
+          "fazenda": "Santa Maria",
+          "fazenda_slug": "santa_maria",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1153310.5844074574,
+          "center_lon": -48.05485871752753,
+          "center_lat": -5.0488200526554525,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_maria\\blocks\\santa_maria_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ],
+                [
+                  -48.03692175431507,
+                  -5.030669116990659
+                ],
+                [
+                  -48.072958850872695,
+                  -5.030832152485159
+                ],
+                [
+                  -48.07279667553292,
+                  -5.066971066695475
+                ],
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "santa_maria_002",
+          "fazenda": "Santa Maria",
+          "fazenda_slug": "santa_maria",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 988602.0965107635,
+          "center_lon": -48.02062306776486,
+          "center_lat": -5.048663709579723,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_maria\\blocks\\santa_maria_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ],
+                [
+                  -48.00268761462226,
+                  -5.030512392043714
+                ],
+                [
+                  -48.03872358099975,
+                  -5.030677315978899
+                ],
+                [
+                  -48.03855951554582,
+                  -5.066815112354821
+                ],
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Santa Rosa",
+      "slug": "santa_rosa",
+      "feature_count": 1,
+      "block_count": 2,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_rosa",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_rosa\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_rosa\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "santa_rosa_001",
+          "fazenda": "Santa Rosa",
+          "fazenda_slug": "santa_rosa",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1610296.7408465967,
+          "center_lon": -48.054703172012076,
+          "center_lat": -5.0831514432560345,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_rosa\\blocks\\santa_rosa_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ],
+                [
+                  -48.03676582590391,
+                  -5.0649999683958855
+                ],
+                [
+                  -48.07280481222543,
+                  -5.065164122062661
+                ],
+                [
+                  -48.072641519765085,
+                  -5.101302993065474
+                ],
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "santa_rosa_002",
+          "fazenda": "Santa Rosa",
+          "fazenda_slug": "santa_rosa",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2515183.9293808066,
+          "center_lon": -48.02046572060438,
+          "center_lat": -5.082994031707935,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santa_rosa\\blocks\\santa_rosa_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ],
+                [
+                  -48.00252989122169,
+                  -5.064842168557809
+                ],
+                [
+                  -48.03856774706948,
+                  -5.0650082236165375
+                ],
+                [
+                  -48.03840255147628,
+                  -5.1011459766722185
+                ],
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Santo Antonio",
+      "slug": "santo_antonio",
+      "feature_count": 1,
+      "block_count": 2,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santo_antonio",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santo_antonio\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santo_antonio\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "santo_antonio_001",
+          "fazenda": "Santo Antonio",
+          "fazenda_slug": "santo_antonio",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 245455.99182463752,
+          "center_lon": -47.98329677739647,
+          "center_lat": -5.1173075242014106,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santo_antonio\\blocks\\santo_antonio_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ],
+                [
+                  -47.965193190103776,
+                  -5.0993224621520366
+                ],
+                [
+                  -48.00123282865258,
+                  -5.099155074363029
+                ],
+                [
+                  -48.001401373014275,
+                  -5.135291473027091
+                ],
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "santo_antonio_002",
+          "fazenda": "Santo Antonio",
+          "fazenda_slug": "santo_antonio",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 928500.5254614133,
+          "center_lon": -47.98313815902177,
+          "center_lat": -5.082977356620926,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\santo_antonio\\blocks\\santo_antonio_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ],
+                [
+                  -47.96503609228583,
+                  -5.064991708171589
+                ],
+                [
+                  -48.001073828379155,
+                  -5.0648254529834835
+                ],
+                [
+                  -48.00124122723033,
+                  -5.100961895392354
+                ],
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "Tapetão",
+      "slug": "tapetao",
+      "feature_count": 1,
+      "block_count": 4,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "tapetao_001",
+          "fazenda": "Tapetão",
+          "fazenda_slug": "tapetao",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 945952.2549647219,
+          "center_lon": -48.054703172012076,
+          "center_lat": -5.0831514432560345,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks\\tapetao_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ],
+                [
+                  -48.03676582590391,
+                  -5.0649999683958855
+                ],
+                [
+                  -48.07280481222543,
+                  -5.065164122062661
+                ],
+                [
+                  -48.072641519765085,
+                  -5.101302993065474
+                ],
+                [
+                  -48.03660053015398,
+                  -5.101137662253426
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tapetao_002",
+          "fazenda": "Tapetão",
+          "fazenda_slug": "tapetao",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2366337.9703940973,
+          "center_lon": -48.02046572060438,
+          "center_lat": -5.082994031707935,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks\\tapetao_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ],
+                [
+                  -48.00252989122169,
+                  -5.064842168557809
+                ],
+                [
+                  -48.03856774706948,
+                  -5.0650082236165375
+                ],
+                [
+                  -48.03840255147628,
+                  -5.1011459766722185
+                ],
+                [
+                  -48.00236269265017,
+                  -5.100978730833904
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tapetao_003",
+          "fazenda": "Tapetão",
+          "fazenda_slug": "tapetao",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 675371.8708614504,
+          "center_lon": -48.05485871752753,
+          "center_lat": -5.0488200526554525,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks\\tapetao_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ],
+                [
+                  -48.03692175431507,
+                  -5.030669116990659
+                ],
+                [
+                  -48.072958850872695,
+                  -5.030832152485159
+                ],
+                [
+                  -48.07279667553292,
+                  -5.066971066695475
+                ],
+                [
+                  -48.03675758938955,
+                  -5.066806854174412
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tapetao_004",
+          "fazenda": "Tapetão",
+          "fazenda_slug": "tapetao",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32722",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 3096843.422859065,
+          "center_lon": -48.02062306776486,
+          "center_lat": -5.048663709579723,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tapetao\\blocks\\tapetao_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ],
+                [
+                  -48.00268761462226,
+                  -5.030512392043714
+                ],
+                [
+                  -48.03872358099975,
+                  -5.030677315978899
+                ],
+                [
+                  -48.03855951554582,
+                  -5.066815112354821
+                ],
+                [
+                  -48.00252155989169,
+                  -5.066648997760123
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fazenda": "TRACKS",
+      "slug": "tracks",
+      "feature_count": 1,
+      "block_count": 4,
+      "folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks",
+      "blocks_geojson": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks.geojson",
+      "blocks_csv": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks.csv",
+      "blocks": [
+        {
+          "block_id": "tracks_001",
+          "fazenda": "TRACKS",
+          "fazenda_slug": "tracks",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 635129.4107347912,
+          "center_lon": -48.01753484778917,
+          "center_lat": -5.117147027025504,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks\\tracks_001",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.999599318779865,
+                  -5.135299950227123
+                ],
+                [
+                  -47.99943087524279,
+                  -5.099163491605425
+                ],
+                [
+                  -48.03546936863195,
+                  -5.098994189801192
+                ],
+                [
+                  -48.035639828501964,
+                  -5.135129442453873
+                ],
+                [
+                  -47.999599318779865,
+                  -5.135299950227123
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tracks_002",
+          "fazenda": "TRACKS",
+          "fazenda_slug": "tracks",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 1327686.1207123105,
+          "center_lon": -47.98329677739647,
+          "center_lat": -5.1173075242014106,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks\\tracks_002",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ],
+                [
+                  -47.965193190103776,
+                  -5.0993224621520366
+                ],
+                [
+                  -48.00123282865258,
+                  -5.099155074363029
+                ],
+                [
+                  -48.001401373014275,
+                  -5.135291473027091
+                ],
+                [
+                  -47.96535971781514,
+                  -5.135460053151797
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tracks_003",
+          "fazenda": "TRACKS",
+          "fazenda_slug": "tracks",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 815326.3389692216,
+          "center_lon": -48.017374415714656,
+          "center_lat": -5.082817941625247,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks\\tracks_003",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.99943926879644,
+                  -5.100970315632478
+                ],
+                [
+                  -47.999271970084685,
+                  -5.064833813272059
+                ],
+                [
+                  -48.035308561317756,
+                  -5.06466565701904
+                ],
+                [
+                  -48.03547786265965,
+                  -5.100800953532861
+                ],
+                [
+                  -47.99943926879644,
+                  -5.100970315632478
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "block_id": "tracks_004",
+          "fazenda": "TRACKS",
+          "fazenda_slug": "tracks",
+          "size_m": 4000,
+          "overlap_m": 200,
+          "step_m": 3800,
+          "metric_crs": "EPSG:32723",
+          "center_inside_farm": false,
+          "farm_intersection_area_m2": 2089473.1432959544,
+          "center_lon": -47.98313815902177,
+          "center_lat": -5.082977356620926,
+          "block_folder": "C:\\02\\19  Baixa Imagens - Sentinel_SurperResolução\\export\\tracks\\blocks\\tracks_004",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ],
+                [
+                  -47.96503609228583,
+                  -5.064991708171589
+                ],
+                [
+                  -48.001073828379155,
+                  -5.0648254529834835
+                ],
+                [
+                  -48.00124122723033,
+                  -5.100961895392354
+                ],
+                [
+                  -47.96520148819167,
+                  -5.1011293427951125
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
