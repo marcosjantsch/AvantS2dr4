@@ -17,6 +17,3 @@ export
 server.log
 server.err.log
 *.log
-
-vendor/wheels/*.whl
-

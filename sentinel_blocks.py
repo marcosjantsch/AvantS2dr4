@@ -33,6 +33,17 @@ DEFAULT_MONTHS = 3
 DEFAULT_EE_PROJECT = "ee-mapa01"
 DEFAULT_APP_ENV = "avantev02"
 SENTINEL_COLLECTION = "COPERNICUS/S2_SR_HARMONIZED"
+S2DR4_MODEL_NAME = "S2DR4-GL-20241022.1"
+
+
+def default_s2dr4_model_path() -> Path:
+    env_path = os.getenv("S2DR4_MODEL_PATH") or os.getenv("S2DR4_MODEL")
+    if env_path:
+        return Path(env_path)
+    vendor_path = BASE_DIR / "vendor" / "models" / S2DR4_MODEL_NAME
+    if vendor_path.exists():
+        return vendor_path
+    return Path("/var/local/S2DR3") / S2DR4_MODEL_NAME
 
 
 @dataclass(frozen=True)
@@ -600,6 +611,8 @@ def superres_capability() -> dict[str, Any]:
     is_linux = platform.system().lower() == "linux"
     py_ok = sys.version_info[:2] == (3, 12)
     package_ok = importlib.util.find_spec("s2dr4") is not None
+    model_path = default_s2dr4_model_path()
+    model_cached = model_path.exists()
     ready = is_linux and py_ok and package_ok
     return {
         "ready": ready,
@@ -608,11 +621,16 @@ def superres_capability() -> dict[str, Any]:
         "package_s2dr4": package_ok,
         "force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
         "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
+        "model_path": str(model_path),
+        "model_cached": model_cached,
+        "model_size_bytes": model_path.stat().st_size if model_cached else 0,
         "expected": "Linux com Python 3.12 e pacote s2dr4 instalado",
         "wheel": "https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl",
+        "model": "https://storage.googleapis.com/0x7ff601307fa3/S2DR4-GL-20241022.1",
         "note": (
             "Neste ambiente o app consegue autenticar o GEE e preparar a fila. "
-            "No Cloud Run o app usa PyTorch CPU por padrao para evitar estouro de memoria no import CUDA."
+            "No Cloud Run o app usa PyTorch CPU e cache local do modelo para evitar downloads pesados "
+            "durante o processamento."
         ),
     }
 

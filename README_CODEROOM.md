@@ -21,6 +21,16 @@ https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux
 Ele e especifico para Linux + Python 3.12. O setup baixa o wheel para
 `vendor/wheels/` dentro do CodeRoom e instala dali.
 
+O S2DR4 tambem usa um modelo externo grande:
+
+```text
+https://storage.googleapis.com/0x7ff601307fa3/S2DR4-GL-20241022.1
+```
+
+No Docker/Cloud Run esse modelo e baixado uma vez no build da imagem para
+`/var/local/S2DR3/S2DR4-GL-20241022.1`. No setup local/CodeRoom ele fica em
+`vendor/models/`, que nao deve ser enviado ao GitHub por ter cerca de 841 MB.
+
 ## Arquivos importantes
 
 - `app.py`: servidor HTML local
@@ -117,6 +127,7 @@ Procure por:
 
 - `python_ok: true`
 - `modules.s2dr4: true`
+- `s2dr4_model.exists: true`
 - `torch.cuda_available: true` em ambiente com GPU. Em Docker/Cloud Run sem GPU,
   `false` e esperado e o Dockerfile usa PyTorch CPU para manter o import estavel.
 

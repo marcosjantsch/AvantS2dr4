@@ -18,6 +18,17 @@ DEFAULT_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue.csv"
 LAST_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue_last.csv"
 CONTENT_OUTPUT = Path("/content/output")
 TRUE_VALUES = {"1", "true", "yes", "on"}
+S2DR4_MODEL_NAME = "S2DR4-GL-20241022.1"
+
+
+def default_s2dr4_model_path() -> Path:
+    env_path = os.getenv("S2DR4_MODEL_PATH") or os.getenv("S2DR4_MODEL")
+    if env_path:
+        return Path(env_path)
+    vendor_path = PROJECT_ROOT / "vendor" / "models" / S2DR4_MODEL_NAME
+    if vendor_path.exists():
+        return vendor_path
+    return Path("/var/local/S2DR3") / S2DR4_MODEL_NAME
 
 
 def configure_runtime_environment() -> None:
@@ -29,6 +40,10 @@ def configure_runtime_environment() -> None:
     if os.getenv("S2DR4_FORCE_CPU", "").lower() in TRUE_VALUES:
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
         os.environ["NVIDIA_VISIBLE_DEVICES"] = "none"
+    model_path = default_s2dr4_model_path()
+    os.environ.setdefault("S2DR4_MODEL_PATH", str(model_path))
+    os.environ.setdefault("S2DR4_MODEL", str(model_path))
+    os.environ.setdefault("SYSTEM_MODEL", str(model_path))
 
 
 def memory_mb() -> float | None:
@@ -41,6 +56,7 @@ def memory_mb() -> float | None:
 
 
 def print_runtime_diagnostics() -> None:
+    model_file = default_s2dr4_model_path()
     payload = {
         "python": sys.version.split()[0],
         "platform": sys.platform,
@@ -48,6 +64,9 @@ def print_runtime_diagnostics() -> None:
         "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
         "nvidia_visible_devices": os.getenv("NVIDIA_VISIBLE_DEVICES", ""),
         "omp_num_threads": os.getenv("OMP_NUM_THREADS", ""),
+        "s2dr4_model": str(model_file),
+        "s2dr4_model_cached": model_file.exists(),
+        "s2dr4_model_size_bytes": model_file.stat().st_size if model_file.exists() else 0,
         "memory_mb": memory_mb(),
     }
     print(f"[s2dr4] Runtime: {json.dumps(payload, ensure_ascii=False, sort_keys=True)}", flush=True)

@@ -19,6 +19,4 @@ server.err.log
 
 export/**
 !export/.gitkeep
-
-vendor/wheels/*.whl
-
+vendor/models/

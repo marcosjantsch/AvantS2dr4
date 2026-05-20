@@ -69,6 +69,17 @@ if [[ ! -f "$S2DR4_WHEEL_PATH" ]]; then
 fi
 pip install --no-deps "$S2DR4_WHEEL_PATH"
 
+say "Downloading S2DR4 model into local cache"
+mkdir -p "$(dirname "$S2DR4_MODEL_PATH")"
+if [[ ! -f "$S2DR4_MODEL_PATH" ]]; then
+  curl -L "$S2DR4_MODEL_URL" -o "$S2DR4_MODEL_PATH"
+fi
+actual_model_bytes="$(wc -c < "$S2DR4_MODEL_PATH" | tr -d ' ')"
+if [[ "$actual_model_bytes" != "$S2DR4_MODEL_BYTES" ]]; then
+  echo "Unexpected S2DR4 model size: $actual_model_bytes bytes. Expected $S2DR4_MODEL_BYTES." >&2
+  exit 1
+fi
+
 say "Creating export/auth folders"
 mkdir -p "$APP_EXPORT_DIR" auth
 
