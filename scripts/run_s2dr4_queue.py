@@ -54,7 +54,7 @@ def ensure_content_output(target_dir: Path, mode: str) -> tuple[str, Path]:
             if any(CONTENT_OUTPUT.iterdir()):
                 backup = CONTENT_OUTPUT.with_name(f"output.backup.{datetime.now().strftime('%Y%m%d%H%M%S')}")
                 CONTENT_OUTPUT.rename(backup)
-                print(f"[s2dr4] Existing /content/output moved to {backup}")
+                print(f"[s2dr4] Existing /content/output moved to {backup}", flush=True)
             else:
                 CONTENT_OUTPUT.rmdir()
         CONTENT_OUTPUT.symlink_to(target_dir, target_is_directory=True)
@@ -122,7 +122,7 @@ def process_row(
     write_block_manifest(manifest_path, {**payload, "status": "running"})
 
     try:
-        print(f"[s2dr4] {block_id}: lonlat=({lon:.8f}, {lat:.8f}) date={image_date}")
+        print(f"[s2dr4] {block_id}: lonlat=({lon:.8f}, {lat:.8f}) date={image_date}", flush=True)
         inferutils.test(lonlat=(lon, lat), date=image_date)
         products = [str(p) for p in existing_products(output_dir)]
         if actual_mode == "shared":
@@ -207,14 +207,16 @@ def main() -> None:
     if not rows:
         raise SystemExit(f"No rows to process in {queue_path}")
 
+    print("[s2dr4] Importing s2dr4.inferutils", flush=True)
     inferutils = import_s2dr4()
+    print("[s2dr4] Import complete", flush=True)
     run_started = time.time()
     results = []
-    print(f"[s2dr4] Queue: {queue_path}")
-    print(f"[s2dr4] Items: {len(rows)}")
+    print(f"[s2dr4] Queue: {queue_path}", flush=True)
+    print(f"[s2dr4] Items: {len(rows)}", flush=True)
 
     for index, row in enumerate(rows, start=1):
-        print(f"[s2dr4] Processing {index}/{len(rows)}")
+        print(f"[s2dr4] Processing {index}/{len(rows)}", flush=True)
         result = process_row(
             inferutils=inferutils,
             row=row,
@@ -222,7 +224,7 @@ def main() -> None:
             force=args.force,
         )
         results.append(result)
-        print(f"[s2dr4] {result['block_id']}: {result['status']}")
+        print(f"[s2dr4] {result['block_id']}: {result['status']}", flush=True)
         if result["status"] == "error" and args.stop_on_error:
             break
 
@@ -243,10 +245,10 @@ def main() -> None:
     if bundle:
         summary["bundle"] = bundle
         summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({k: summary[k] for k in ["total", "done", "skipped", "errors", "elapsed_seconds"]}, indent=2))
-    print(f"[s2dr4] Summary: {summary_path}")
+    print(json.dumps({k: summary[k] for k in ["total", "done", "skipped", "errors", "elapsed_seconds"]}, indent=2), flush=True)
+    print(f"[s2dr4] Summary: {summary_path}", flush=True)
     if bundle:
-        print(f"[s2dr4] Products ZIP: {bundle['path']}")
+        print(f"[s2dr4] Products ZIP: {bundle['path']}", flush=True)
 
 
 if __name__ == "__main__":

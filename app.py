@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import mimetypes
 import os
+import re
 import shutil
+import subprocess
+import sys
 import threading
 import time
 import uuid
@@ -20,6 +24,43 @@ STATIC_DIR = BASE_DIR / "static"
 JOBS: dict[str, dict] = {}
 JOBS_LOCK = threading.Lock()
 SENTINEL_BLOCKS: ModuleType | None = None
+
+
+def export_dir() -> Path:
+    return Path(os.getenv("APP_EXPORT_DIR", str(BASE_DIR / "export")))
+
+
+def jobs_dir() -> Path:
+    path = export_dir() / "jobs"
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def job_file(job_id: str) -> Path:
+    return jobs_dir() / f"{job_id}.json"
+
+
+def save_job(job: dict) -> None:
+    path = job_file(job["id"])
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(job, ensure_ascii=False, indent=2), encoding="utf-8")
+    tmp.replace(path)
+
+
+def load_job(job_id: str) -> dict | None:
+    path = job_file(job_id)
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
+def remember_job(job: dict) -> None:
+    with JOBS_LOCK:
+        JOBS[job["id"]] = job
+    save_job(job)
 
 
 def get_sentinel_blocks() -> ModuleType:
@@ -99,7 +140,9 @@ class AppHandler(SimpleHTTPRequestHandler):
             with JOBS_LOCK:
                 job = JOBS.get(job_id)
             if not job:
-                self.send_error(404, "Job not found")
+                job = load_job(job_id)
+            if not job:
+                self._send_json({"ok": False, "error": "Job not found", "job_id": job_id}, status=404)
                 return
             self._send_json(job)
             return
@@ -203,7 +246,8 @@ class AppHandler(SimpleHTTPRequestHandler):
 
 def run(host: str = "127.0.0.1", port: int = 8787) -> None:
     STATIC_DIR.mkdir(exist_ok=True)
-    Path(os.getenv("APP_EXPORT_DIR", str(BASE_DIR / "export"))).mkdir(parents=True, exist_ok=True)
+    export_dir().mkdir(parents=True, exist_ok=True)
+    jobs_dir()
     httpd = ThreadingHTTPServer((host, port), AppHandler)
     print(f"Avant Sentinel Local running at http://{host}:{port}", flush=True)
     print("Press Ctrl+C to stop.", flush=True)
@@ -233,8 +277,7 @@ def start_sentinel_job(payload: dict) -> dict:
         "summary": None,
         "error": None,
     }
-    with JOBS_LOCK:
-        JOBS[job_id] = job
+    remember_job(job)
     thread = threading.Thread(
         target=run_sentinel_job,
         args=(job_id, blocks, reference_date, months, max_cloud, bool(farm_slug or limit)),
@@ -256,9 +299,7 @@ def start_superres_job(payload: dict) -> dict:
     if not capability.get("ready"):
         raise RuntimeError(f"S2DR4 indisponivel neste ambiente: {capability.get('expected')}")
 
-    from scripts import run_s2dr4_queue
-
-    rows = run_s2dr4_queue.read_queue(queue_path)
+    rows = read_queue_rows(queue_path)
     job_id = uuid.uuid4().hex[:12]
     job = {
         "id": job_id,
@@ -274,10 +315,9 @@ def start_superres_job(payload: dict) -> dict:
         "summary": None,
         "error": None,
     }
-    with JOBS_LOCK:
-        JOBS[job_id] = job
+    remember_job(job)
     thread = threading.Thread(
-        target=run_superres_job,
+        target=run_superres_subprocess_job,
         args=(job_id, queue_path, rows, force),
         daemon=True,
     )
@@ -287,9 +327,28 @@ def start_superres_job(payload: dict) -> dict:
 
 def update_job(job_id: str, **fields) -> None:
     with JOBS_LOCK:
-        job = JOBS[job_id]
+        job = JOBS.get(job_id) or load_job(job_id)
+        if job is None:
+            return
         job.update(fields)
         job["elapsed_seconds"] = round(time.time() - job["started_at"], 1)
+        JOBS[job_id] = job
+    save_job(job)
+
+
+def update_job_results(job_id: str, results: list[dict]) -> None:
+    with JOBS_LOCK:
+        job = JOBS.get(job_id) or load_job(job_id)
+        if job is None:
+            return
+        job["results"] = results[-25:]
+        JOBS[job_id] = job
+    save_job(job)
+
+
+def read_queue_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as fh:
+        return list(csv.DictReader(fh))
 
 
 def run_sentinel_job(
@@ -317,8 +376,7 @@ def run_sentinel_job(
             )
             result = sb._search_block(ee, block, windows, max_cloud)
             results.append(result)
-            with JOBS_LOCK:
-                JOBS[job_id]["results"] = results[-25:]
+            update_job_results(job_id, results)
             update_job(
                 job_id,
                 current=index,
@@ -337,59 +395,152 @@ def run_sentinel_job(
         update_job(job_id, status="error", message="Erro na busca Sentinel", error=f"{type(exc).__name__}: {exc}")
 
 
-def run_superres_job(job_id: str, queue_path: Path, rows: list[dict[str, str]], force: bool) -> None:
-    results = []
-    run_started = time.time()
+def tail_text(path: Path, max_chars: int = 12000) -> str:
+    if not path.exists():
+        return ""
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return text[-max_chars:]
+
+
+def handle_s2dr4_stdout_line(job_id: str, line: str, total: int, results: list[dict]) -> None:
+    stripped = line.strip()
+    if not stripped:
+        return
+    if stripped.startswith("[s2dr4] Importing"):
+        update_job(job_id, message="Importando S2DR4", progress=2, last_stdout=stripped)
+        return
+    if stripped.startswith("[s2dr4] Import complete"):
+        update_job(job_id, message="S2DR4 importado. Preparando itens.", progress=3, last_stdout=stripped)
+        return
+    match = re.search(r"\[s2dr4\] Processing (\d+)/(\d+)", stripped)
+    if match:
+        index = int(match.group(1))
+        count = int(match.group(2))
+        progress = round(((index - 1) / max(count, 1)) * 94 + 3, 1)
+        update_job(
+            job_id,
+            current=index - 1,
+            total=count,
+            progress=progress,
+            message=f"Executando S2DR4 {index}/{count}",
+            last_stdout=stripped,
+        )
+        return
+    match = re.search(r"\[s2dr4\] ([^:]+): (done|error|skipped_existing)", stripped)
+    if match:
+        block_id = match.group(1)
+        status = match.group(2)
+        results.append({"block_id": block_id, "status": status})
+        update_job_results(job_id, results)
+        done = len(results)
+        progress = round((done / max(total, 1)) * 94 + 3, 1)
+        update_job(
+            job_id,
+            current=done,
+            progress=progress,
+            message=f"{block_id}: {status}",
+            last_stdout=stripped,
+        )
+        return
+    update_job(job_id, last_stdout=stripped)
+
+
+def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[str, str]], force: bool) -> None:
+    job_log_dir = jobs_dir() / job_id
+    job_log_dir.mkdir(parents=True, exist_ok=True)
+    stdout_path = job_log_dir / "s2dr4_stdout.log"
+    stderr_path = job_log_dir / "s2dr4_stderr.log"
+    summary_path = queue_path.with_name("s2dr4_run_summary.json")
+    cmd = [
+        sys.executable,
+        "-u",
+        str(BASE_DIR / "scripts" / "run_s2dr4_queue.py"),
+        "--queue",
+        str(queue_path),
+        "--content-output-mode",
+        "symlink",
+    ]
+    if force:
+        cmd.append("--force")
+
+    results: list[dict] = []
     try:
-        from scripts import run_s2dr4_queue
+        update_job(
+            job_id,
+            status="running",
+            message="S2DR4 iniciado em subprocesso",
+            progress=2,
+            command=cmd,
+            queue_path=str(queue_path),
+            stdout_path=str(stdout_path),
+            stderr_path=str(stderr_path),
+        )
+        proc = subprocess.Popen(
+            cmd,
+            cwd=str(BASE_DIR),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            bufsize=1,
+        )
+        update_job(job_id, pid=proc.pid)
 
-        update_job(job_id, status="running", message="Importando S2DR4", progress=2)
-        inferutils = run_s2dr4_queue.import_s2dr4()
-        total = len(rows)
-        for index, row in enumerate(rows, start=1):
-            block_id = row.get("block_id") or f"item {index}"
-            update_job(
-                job_id,
-                current=index - 1,
-                progress=round(((index - 1) / total) * 94 + 3, 1) if total else 100,
-                message=f"Executando S2DR4 em {block_id}",
-            )
-            result = run_s2dr4_queue.process_row(
-                inferutils=inferutils,
-                row=row,
-                mode="symlink",
-                force=force,
-            )
-            results.append(result)
-            with JOBS_LOCK:
-                JOBS[job_id]["results"] = results[-25:]
-            update_job(
-                job_id,
-                current=index,
-                progress=round((index / total) * 94 + 3, 1) if total else 100,
-                message=f"{block_id}: {result['status']}",
-            )
+        def pump_stdout() -> None:
+            assert proc.stdout is not None
+            with stdout_path.open("a", encoding="utf-8") as fh:
+                for line in proc.stdout:
+                    fh.write(line)
+                    fh.flush()
+                    handle_s2dr4_stdout_line(job_id, line, len(rows), results)
 
-        summary = {
-            "queue": str(queue_path),
-            "started_at": time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(run_started)),
-            "finished_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-            "elapsed_seconds": round(time.time() - run_started, 1),
-            "total": len(rows),
-            "done": sum(1 for item in results if item["status"] == "done"),
-            "skipped": sum(1 for item in results if item["status"] == "skipped_existing"),
-            "errors": sum(1 for item in results if item["status"] == "error"),
-            "results": results,
-        }
-        summary_path = queue_path.with_name("s2dr4_run_summary.json")
-        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-        bundle = run_s2dr4_queue.bundle_run_products(summary, summary_path)
-        if bundle:
-            summary["bundle"] = bundle
-            summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-        update_job(job_id, status="done", message="S2DR4 concluido", progress=100, summary=summary)
+        def pump_stderr() -> None:
+            assert proc.stderr is not None
+            with stderr_path.open("a", encoding="utf-8") as fh:
+                for line in proc.stderr:
+                    fh.write(line)
+                    fh.flush()
+                    update_job(job_id, last_stderr=line.strip())
+
+        stdout_thread = threading.Thread(target=pump_stdout, daemon=True)
+        stderr_thread = threading.Thread(target=pump_stderr, daemon=True)
+        stdout_thread.start()
+        stderr_thread.start()
+        returncode = proc.wait()
+        stdout_thread.join(timeout=5)
+        stderr_thread.join(timeout=5)
+
+        stdout_tail = tail_text(stdout_path)
+        stderr_tail = tail_text(stderr_path)
+        if returncode != 0:
+            raise RuntimeError(
+                f"S2DR4 subprocesso terminou com codigo {returncode}. "
+                f"stderr: {stderr_tail[-1000:] or 'sem stderr'}"
+            )
+        if not summary_path.exists():
+            raise RuntimeError(f"S2DR4 terminou sem gerar resumo: {summary_path}")
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        update_job(
+            job_id,
+            status="done",
+            message="S2DR4 concluido",
+            current=summary.get("total", len(rows)),
+            progress=100,
+            summary=summary,
+            returncode=returncode,
+            stdout_tail=stdout_tail,
+            stderr_tail=stderr_tail,
+        )
     except Exception as exc:
-        update_job(job_id, status="error", message="Erro S2DR4", error=f"{type(exc).__name__}: {exc}")
+        update_job(
+            job_id,
+            status="error",
+            message="Erro S2DR4",
+            error=f"{type(exc).__name__}: {exc}",
+            stdout_tail=tail_text(stdout_path),
+            stderr_tail=tail_text(stderr_path),
+        )
 
 
 def main() -> None:

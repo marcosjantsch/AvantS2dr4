@@ -867,10 +867,10 @@
         } catch (err) {
           transientFailures += 1;
           logAi("s2dr4_poll_transient_error", {job_id: jobId, attempt: transientFailures, message: err.message});
-          if (transientFailures > 30) {
+          if (err.message.includes("Job not found") || err.message.includes("HTTP 404") || transientFailures > 12) {
             throw err;
           }
-          setRun("S2DR4 rodando", `Servidor ocupado durante o processamento. Tentando novamente (${transientFailures}/30).`, 88, "normal");
+          setRun("S2DR4 rodando", `Servidor ocupado durante o processamento. Tentando novamente (${transientFailures}/12).`, 88, "normal");
           await sleep(2500);
           continue;
         }
