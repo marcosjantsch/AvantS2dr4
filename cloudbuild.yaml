@@ -1,0 +1,14 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_IMAGE_NAME}
+      - .
+
+images:
+  - ${_IMAGE_NAME}
+
+substitutions:
+  _IMAGE_NAME: gcr.io/$PROJECT_ID/avant-s2dr4:latest
+
