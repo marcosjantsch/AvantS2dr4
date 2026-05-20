@@ -649,3 +649,86 @@ def prepare_superres_queue(farm_slug: str | None = None) -> dict[str, Any]:
         "items": len(rows),
         "capability": superres_capability(),
     }
+
+
+def sentinel_preview(fazenda_slug: str, block_id: str) -> dict[str, Any]:
+    manifest = load_manifest()
+    export_dir = Path(manifest["export_dir"])
+    block = _find_block(manifest, fazenda_slug, block_id)
+    if not block:
+        raise ValueError(f"Bloco nao encontrado: {fazenda_slug}/{block_id}")
+
+    sentinel_path = export_dir / fazenda_slug / "blocks" / block_id / "sentinel.json"
+    if not sentinel_path.exists():
+        raise ValueError(f"Sentinel ainda nao selecionado para o bloco {block_id}")
+
+    result = json.loads(sentinel_path.read_text(encoding="utf-8"))
+    image_info = result.get("image") or {}
+    system_id = image_info.get("system:id")
+    image_date = image_info.get("date")
+    if not system_id or not image_date:
+        raise ValueError(f"Imagem Sentinel invalida para o bloco {block_id}")
+
+    ee = init_earth_engine()
+    geom = ee.Geometry(block["geometry"])
+    image = ee.Image(system_id).clip(geom)
+    vis_params = {
+        "bands": ["B4", "B3", "B2"],
+        "min": 0,
+        "max": 3000,
+        "gamma": 1.2,
+    }
+    map_id = image.getMapId(vis_params)
+    download_url = image.select(["B4", "B3", "B2"]).getDownloadURL(
+        {
+            "name": f"{block_id}_{image_date}_sentinel2_rgb",
+            "region": geom,
+            "scale": 10,
+            "format": "GEO_TIFF",
+        }
+    )
+    return {
+        "ok": True,
+        "block_id": block_id,
+        "fazenda": block["fazenda"],
+        "fazenda_slug": fazenda_slug,
+        "image": image_info,
+        "tile_url": map_id["tile_fetcher"].url_format,
+        "download_url": download_url,
+        "bounds": _geometry_bounds(block["geometry"]),
+    }
+
+
+def _find_block(manifest: dict[str, Any], fazenda_slug: str, block_id: str) -> dict[str, Any] | None:
+    for farm in manifest.get("farms", []):
+        if farm.get("slug") != fazenda_slug:
+            continue
+        for block in farm.get("blocks", []):
+            if block.get("block_id") == block_id:
+                return block
+    return None
+
+
+def _geometry_bounds(geometry: dict[str, Any]) -> list[list[float]]:
+    coordinates = geometry.get("coordinates") or []
+    points: list[tuple[float, float]] = []
+
+    def collect(value: Any) -> None:
+        if (
+            isinstance(value, list)
+            and len(value) >= 2
+            and isinstance(value[0], (int, float))
+            and isinstance(value[1], (int, float))
+        ):
+            points.append((float(value[0]), float(value[1])))
+            return
+        if isinstance(value, list):
+            for item in value:
+                collect(item)
+
+    collect(coordinates)
+    if not points:
+        raise ValueError("Geometria sem coordenadas para calcular bounds")
+    lons = [point[0] for point in points]
+    lats = [point[1] for point in points]
+    return [[min(lats), min(lons)], [max(lats), max(lons)]]

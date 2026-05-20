@@ -11,7 +11,7 @@ from datetime import date
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from types import ModuleType
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -60,6 +60,19 @@ class AppHandler(SimpleHTTPRequestHandler):
         if parsed.path == "/api/superres/capability":
             sb = get_sentinel_blocks()
             self._send_json(sb.superres_capability())
+            return
+        if parsed.path == "/api/sentinel/preview":
+            try:
+                sb = get_sentinel_blocks()
+                params = parse_qs(parsed.query)
+                self._send_json(
+                    sb.sentinel_preview(
+                        fazenda_slug=(params.get("fazenda_slug") or [""])[0],
+                        block_id=(params.get("block_id") or [""])[0],
+                    )
+                )
+            except Exception as exc:
+                self._send_json({"ok": False, "error": str(exc), "type": type(exc).__name__}, status=500)
             return
         if parsed.path.startswith("/api/jobs/"):
             job_id = parsed.path.removeprefix("/api/jobs/").strip("/")
