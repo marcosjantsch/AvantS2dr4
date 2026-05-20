@@ -30,6 +30,9 @@ def main() -> None:
         "ee_project": os.getenv("EE_PROJECT", "ee-mapa01"),
         "app_geo_path": os.getenv("APP_GEO_PATH", "Data/VisitaGFP.shp"),
         "app_export_dir": os.getenv("APP_EXPORT_DIR", "export"),
+        "s2dr4_force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
+        "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
+        "nvidia_visible_devices": os.getenv("NVIDIA_VISIBLE_DEVICES", ""),
         "shapefile_exists": Path(os.getenv("APP_GEO_PATH", "Data/VisitaGFP.shp")).exists(),
         "modules": {
             name: module_ok(name)

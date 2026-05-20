@@ -7,8 +7,19 @@ ENV APP_GEO_PATH=Data/VisitaGFP.shp
 ENV APP_EXPORT_DIR=export
 ENV S2DR4_WHEEL_URL=https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl
 ENV S2DR4_WHEEL_PATH=/opt/wheels/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl
+ENV S2DR4_FORCE_CPU=1
+ENV S2DR4_TORCH_THREADS=1
+ENV CUDA_VISIBLE_DEVICES=
+ENV NVIDIA_VISIBLE_DEVICES=none
+ENV MPLBACKEND=Agg
+ENV OMP_NUM_THREADS=1
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
+ENV NUMEXPR_MAX_THREADS=1
 ENV PYTHONUNBUFFERED=1
 ENV PATH=/opt/venv/bin:$PATH
+
+ARG TORCH_INDEX_URL=https://download.pytorch.org/whl/cpu
 
 WORKDIR /app
 
@@ -31,7 +42,7 @@ COPY requirements.txt requirements-coderoom.txt ./
 
 RUN python3.12 -m venv --system-site-packages /opt/venv \
   && python -m pip install --upgrade pip setuptools wheel \
-  && pip install --index-url https://download.pytorch.org/whl/cu124 torch torchvision torchaudio \
+  && pip install --index-url "$TORCH_INDEX_URL" torch torchvision torchaudio \
   && pip install -r requirements-coderoom.txt \
   && pip install --no-deps py_tools_ds==0.24.1 geoarray==0.19.2 arosics==1.13.2 \
   && mkdir -p /opt/wheels \

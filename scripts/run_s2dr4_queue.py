@@ -17,16 +17,66 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue.csv"
 LAST_QUEUE = PROJECT_ROOT / "export" / "s2dr4_queue_last.csv"
 CONTENT_OUTPUT = Path("/content/output")
+TRUE_VALUES = {"1", "true", "yes", "on"}
+
+
+def configure_runtime_environment() -> None:
+    os.environ.setdefault("MPLBACKEND", "Agg")
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    os.environ.setdefault("MKL_NUM_THREADS", "1")
+    os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+    os.environ.setdefault("NUMEXPR_MAX_THREADS", "1")
+    if os.getenv("S2DR4_FORCE_CPU", "").lower() in TRUE_VALUES:
+        os.environ["CUDA_VISIBLE_DEVICES"] = ""
+        os.environ["NVIDIA_VISIBLE_DEVICES"] = "none"
+
+
+def memory_mb() -> float | None:
+    try:
+        import resource
+    except Exception:
+        return None
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return round(usage / 1024, 1)
+
+
+def print_runtime_diagnostics() -> None:
+    payload = {
+        "python": sys.version.split()[0],
+        "platform": sys.platform,
+        "force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
+        "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
+        "nvidia_visible_devices": os.getenv("NVIDIA_VISIBLE_DEVICES", ""),
+        "omp_num_threads": os.getenv("OMP_NUM_THREADS", ""),
+        "memory_mb": memory_mb(),
+    }
+    print(f"[s2dr4] Runtime: {json.dumps(payload, ensure_ascii=False, sort_keys=True)}", flush=True)
 
 
 def import_s2dr4():
     try:
-        import s2dr4.inferutils  # type: ignore
+        print("[s2dr4] Importing torch", flush=True)
+        import torch  # type: ignore
+
+        try:
+            torch.set_num_threads(int(os.getenv("S2DR4_TORCH_THREADS", "1")))
+        except Exception:
+            pass
+        print(
+            "[s2dr4] Torch imported "
+            f"version={torch.__version__} "
+            f"cuda_available={torch.cuda.is_available()} "
+            f"cuda_version={torch.version.cuda} "
+            f"memory_mb={memory_mb()}",
+            flush=True,
+        )
+        print("[s2dr4] Importing s2dr4.inferutils", flush=True)
+        import s2dr4.inferutils as inferutils  # type: ignore
     except Exception as exc:
         raise RuntimeError(
             "Could not import s2dr4. Run scripts/setup_coderoom.sh in a Linux/Python 3.12 environment first."
         ) from exc
-    return s2dr4.inferutils
+    return inferutils
 
 
 def read_queue(path: Path) -> list[dict[str, str]]:
@@ -207,7 +257,8 @@ def main() -> None:
     if not rows:
         raise SystemExit(f"No rows to process in {queue_path}")
 
-    print("[s2dr4] Importing s2dr4.inferutils", flush=True)
+    configure_runtime_environment()
+    print_runtime_diagnostics()
     inferutils = import_s2dr4()
     print("[s2dr4] Import complete", flush=True)
     run_started = time.time()

@@ -8,7 +8,7 @@ descobrir a biblioteca e o wheel S2DR4.
 
 - Linux x86_64
 - Python 3.12
-- GPU NVIDIA, preferencialmente T4 ou superior
+- GPU NVIDIA, preferencialmente T4 ou superior, para processamento mais rapido
 - acesso ao projeto Earth Engine `ee-mapa01`
 - shapefile em `Data/VisitaGFP.shp`
 
@@ -117,7 +117,8 @@ Procure por:
 
 - `python_ok: true`
 - `modules.s2dr4: true`
-- `torch.cuda_available: true`
+- `torch.cuda_available: true` em ambiente com GPU. Em Docker/Cloud Run sem GPU,
+  `false` e esperado e o Dockerfile usa PyTorch CPU para manter o import estavel.
 
 Se CUDA nao estiver disponivel, o ambiente ainda pode consultar Sentinel/GEE, mas
 a super-resolucao pode ficar lenta ou falhar por falta de GPU.
@@ -229,4 +230,3 @@ A biblioteca Gamma Earth informa uso para teste/validacao e pede contato para
 uso comercial ou funcionalidade estendida. Este projeto automatiza a inferencia
 com o pacote publico; nao extrai treinamento, pesos internos ou codigo fonte da
 biblioteca.
-

@@ -24,6 +24,7 @@ STATIC_DIR = BASE_DIR / "static"
 JOBS: dict[str, dict] = {}
 JOBS_LOCK = threading.Lock()
 SENTINEL_BLOCKS: ModuleType | None = None
+S2DR4_IMPORT_TIMEOUT_SECONDS = int(os.getenv("S2DR4_IMPORT_TIMEOUT_SECONDS", "75"))
 
 
 def export_dir() -> Path:
@@ -407,7 +408,15 @@ def handle_s2dr4_stdout_line(job_id: str, line: str, total: int, results: list[d
     if not stripped:
         return
     if stripped.startswith("[s2dr4] Importing"):
-        update_job(job_id, message="Importando S2DR4", progress=2, last_stdout=stripped)
+        message = "Importando dependencias S2DR4"
+        if "torch" in stripped.lower():
+            message = "Importando PyTorch"
+        elif "s2dr4.inferutils" in stripped:
+            message = "Importando S2DR4"
+        update_job(job_id, message=message, progress=2, last_stdout=stripped, import_started_at=time.time())
+        return
+    if stripped.startswith("[s2dr4] Torch imported"):
+        update_job(job_id, message="PyTorch importado. Entrando no S2DR4.", progress=2.5, last_stdout=stripped)
         return
     if stripped.startswith("[s2dr4] Import complete"):
         update_job(job_id, message="S2DR4 importado. Preparando itens.", progress=3, last_stdout=stripped)
@@ -507,12 +516,54 @@ def run_superres_subprocess_job(job_id: str, queue_path: Path, rows: list[dict[s
         stderr_thread = threading.Thread(target=pump_stderr, daemon=True)
         stdout_thread.start()
         stderr_thread.start()
-        returncode = proc.wait()
+        process_started_at = time.time()
+        while True:
+            try:
+                returncode = proc.wait(timeout=2)
+                break
+            except subprocess.TimeoutExpired:
+                job = load_job(job_id) or {}
+                elapsed = round(time.time() - process_started_at, 1)
+                last_stdout = str(job.get("last_stdout") or "")
+                import_started_at = float(job.get("import_started_at") or process_started_at)
+                if (
+                    last_stdout.startswith("[s2dr4] Importing")
+                    and time.time() - import_started_at > S2DR4_IMPORT_TIMEOUT_SECONDS
+                ):
+                    update_job(
+                        job_id,
+                        status="error",
+                        message="Import do S2DR4 excedeu o limite",
+                        progress=100,
+                        error=(
+                            f"TimeoutError: import do S2DR4 passou de "
+                            f"{S2DR4_IMPORT_TIMEOUT_SECONDS}s. Ultimo estagio: {last_stdout or 'sem stdout'}."
+                        ),
+                        stdout_tail=tail_text(stdout_path),
+                        stderr_tail=tail_text(stderr_path),
+                    )
+                    proc.terminate()
+                    try:
+                        returncode = proc.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        proc.kill()
+                        returncode = proc.wait(timeout=10)
+                    break
+                update_job(
+                    job_id,
+                    message=f"S2DR4 ainda ativo no subprocesso ({elapsed}s)",
+                    process_elapsed_seconds=elapsed,
+                    stdout_tail=tail_text(stdout_path, 2000),
+                    stderr_tail=tail_text(stderr_path, 2000),
+                )
         stdout_thread.join(timeout=5)
         stderr_thread.join(timeout=5)
 
         stdout_tail = tail_text(stdout_path)
         stderr_tail = tail_text(stderr_path)
+        final_job = load_job(job_id) or {}
+        if final_job.get("status") == "error":
+            return
         if returncode != 0:
             raise RuntimeError(
                 f"S2DR4 subprocesso terminou com codigo {returncode}. "

@@ -606,11 +606,13 @@ def superres_capability() -> dict[str, Any]:
         "platform": platform.platform(),
         "python": sys.version.split()[0],
         "package_s2dr4": package_ok,
+        "force_cpu": os.getenv("S2DR4_FORCE_CPU", ""),
+        "cuda_visible_devices": os.getenv("CUDA_VISIBLE_DEVICES", ""),
         "expected": "Linux com Python 3.12 e pacote s2dr4 instalado",
         "wheel": "https://storage.googleapis.com/0x7ff601307fa5/s2dr4-20260518.1-cp312-cp312-linux_x86_64.whl",
         "note": (
             "Neste ambiente o app consegue autenticar o GEE e preparar a fila. "
-            "A inferencia S2DR4 roda automaticamente apenas quando o ambiente atende aos requisitos do wheel."
+            "No Cloud Run o app usa PyTorch CPU por padrao para evitar estouro de memoria no import CUDA."
         ),
     }
 

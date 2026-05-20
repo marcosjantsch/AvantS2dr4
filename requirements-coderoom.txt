@@ -1,7 +1,7 @@
 -r requirements.txt
 
-# S2DR4 runtime dependencies. Torch is installed first by scripts/setup_coderoom.sh
-# so that a CUDA-enabled build is used when the CodeRoom has an NVIDIA GPU.
+# S2DR4 runtime dependencies. Torch is installed first by Dockerfile/setup:
+# CPU wheels by default for Cloud Run, CUDA wheels only when a GPU is present.
 # Ubuntu's python3-gdal package is compiled against NumPy 1.x.
 numpy<2
 tqdm

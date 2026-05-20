@@ -7,6 +7,7 @@ source scripts/env_coderoom.sh
 PYTHON_BIN="${PYTHON_BIN:-python3.12}"
 VENV_DIR="${VENV_DIR:-.venv}"
 TORCH_INDEX_URL="${TORCH_INDEX_URL:-https://download.pytorch.org/whl/cu124}"
+TORCH_CPU_INDEX_URL="${TORCH_CPU_INDEX_URL:-https://download.pytorch.org/whl/cpu}"
 
 say() {
   printf "\n[setup] %s\n" "$1"
@@ -48,13 +49,13 @@ say "Creating virtualenv at $VENV_DIR"
 source "$VENV_DIR/bin/activate"
 python -m pip install --upgrade pip setuptools wheel
 
-say "Installing CUDA-enabled PyTorch when possible"
+say "Installing PyTorch"
 if command -v nvidia-smi >/dev/null 2>&1; then
   nvidia-smi || true
   pip install --index-url "$TORCH_INDEX_URL" torch torchvision torchaudio || pip install torch torchvision torchaudio
 else
-  echo "nvidia-smi not found. Installing default PyTorch; S2DR4 may run slowly or fail without GPU."
-  pip install torch torchvision torchaudio
+  echo "nvidia-smi not found. Installing CPU PyTorch to avoid CUDA import overhead."
+  pip install --index-url "$TORCH_CPU_INDEX_URL" torch torchvision torchaudio
 fi
 
 say "Installing app and geospatial dependencies"
