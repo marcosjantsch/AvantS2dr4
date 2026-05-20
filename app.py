@@ -65,7 +65,12 @@ class AppHandler(SimpleHTTPRequestHandler):
         if parsed.path == "/api/superres/products":
             sb = get_sentinel_blocks()
             params = parse_qs(parsed.query)
-            self._send_json(sb.collect_superres_products(farm_slug=(params.get("farm_slug") or [None])[0] or None))
+            self._send_json(
+                sb.collect_superres_products(
+                    farm_slug=(params.get("farm_slug") or [None])[0] or None,
+                    block_id=(params.get("block_id") or [None])[0] or None,
+                )
+            )
             return
         if parsed.path == "/api/superres/products/download":
             try:
@@ -142,7 +147,12 @@ class AppHandler(SimpleHTTPRequestHandler):
                 self._send_json(sb.prepare_superres_queue(farm_slug=payload.get("farm_slug") or None))
                 return
             if parsed.path == "/api/superres/products/bundle":
-                self._send_json(sb.bundle_superres_products(farm_slug=payload.get("farm_slug") or None))
+                self._send_json(
+                    sb.bundle_superres_products(
+                        farm_slug=payload.get("farm_slug") or None,
+                        block_id=payload.get("block_id") or None,
+                    )
+                )
                 return
             self.send_error(404, "Not found")
         except Exception as exc:

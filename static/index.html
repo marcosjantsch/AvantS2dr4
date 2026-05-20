@@ -325,6 +325,26 @@
       white-space: pre-wrap;
     }
 
+    .log-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .log-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .log.secondary-log {
+      height: 260px;
+      background: #07121b;
+      color: #cbe3ff;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -453,7 +473,16 @@
           <h2 class="panel-title">Execucao</h2>
         </div>
         <div class="panel-body">
+          <div class="log-tabs">
+            <button id="simpleLogBtn" class="neutral">Log simples</button>
+            <button id="aiLogBtn" class="secondary">Log IA</button>
+          </div>
           <pre id="log" class="log"></pre>
+          <pre id="aiLog" class="log secondary-log" hidden></pre>
+          <div class="log-actions">
+            <button id="copyLogBtn" class="neutral">Copiar log</button>
+            <button id="downloadLogBtn" class="neutral">Baixar log</button>
+          </div>
         </div>
       </div>
     </aside>
@@ -498,7 +527,8 @@
                   <th>Mes</th>
                   <th>Data</th>
                   <th>Nuvens</th>
-                  <th>GeoTIFF</th>
+                  <th>GeoTIFF 10 m</th>
+                  <th>GeoTIFF SR</th>
                 </tr>
               </thead>
               <tbody id="resultsBody"></tbody>
@@ -523,7 +553,10 @@
       centerLayer: null,
       sentinelLayers: new Map(),
       sentinelDownloads: new Map(),
+      superresProducts: new Map(),
       s2dr4Logged: new Set(),
+      aiEvents: [],
+      activeLog: "simple",
       timerStartedAt: null,
       timerHandle: null,
       activeJob: null
@@ -540,6 +573,11 @@
       timeMetric: document.querySelector("#timeMetric"),
       farmSelect: document.querySelector("#farmSelect"),
       log: document.querySelector("#log"),
+      aiLog: document.querySelector("#aiLog"),
+      simpleLogBtn: document.querySelector("#simpleLogBtn"),
+      aiLogBtn: document.querySelector("#aiLogBtn"),
+      copyLogBtn: document.querySelector("#copyLogBtn"),
+      downloadLogBtn: document.querySelector("#downloadLogBtn"),
       mapInfo: document.querySelector("#mapInfo"),
       prepareBtn: document.querySelector("#prepareBtn"),
       authBtn: document.querySelector("#authBtn"),
@@ -561,14 +599,53 @@
       els.log.scrollTop = els.log.scrollHeight;
     }
 
+    function logAi(event, detail = {}) {
+      const entry = {
+        ts: new Date().toISOString(),
+        event,
+        selected_farm: selectedFarmSlug() || null,
+        run_title: els.runTitle ? els.runTitle.textContent : null,
+        progress: els.progressValue ? els.progressValue.textContent : null,
+        detail
+      };
+      state.aiEvents.push(entry);
+      els.aiLog.textContent += `${JSON.stringify(entry)}\n`;
+      els.aiLog.scrollTop = els.aiLog.scrollHeight;
+    }
+
     async function api(path, options = {}) {
-      const res = await fetch(path, {
-        headers: {"Content-Type": "application/json"},
-        ...options
-      });
-      const data = await res.json();
+      const startedAt = performance.now();
+      logAi("api_request", {path, method: options.method || "GET"});
+      let res;
+      try {
+        res = await fetch(path, {
+          headers: {"Content-Type": "application/json"},
+          ...options
+        });
+      } catch (err) {
+        logAi("api_network_error", {path, message: err.message});
+        throw err;
+      }
+      const contentType = res.headers.get("content-type") || "";
+      const raw = await res.text();
+      let data = null;
+      if (raw && contentType.includes("application/json")) {
+        try {
+          data = JSON.parse(raw);
+        } catch (err) {
+          logAi("api_json_parse_error", {path, status: res.status, contentType, raw: raw.slice(0, 500), message: err.message});
+          throw new Error(`Resposta JSON invalida em ${path}: ${err.message}`);
+        }
+      }
+      logAi("api_response", {path, status: res.status, ok: res.ok, elapsed_ms: Math.round(performance.now() - startedAt), contentType, body_preview: raw.slice(0, 500)});
       if (!res.ok) {
-        throw new Error(data.error || data.message || "Falha na chamada local");
+        const message = data && (data.error || data.message)
+          ? (data.error || data.message)
+          : `HTTP ${res.status} ${res.statusText}: ${raw.slice(0, 180) || "sem corpo"}`;
+        throw new Error(message);
+      }
+      if (!data) {
+        throw new Error(`Resposta sem JSON em ${path}: ${raw.slice(0, 180) || "sem corpo"}`);
       }
       return data;
     }
@@ -627,6 +704,7 @@
       const capability = await api("/api/superres/capability");
       els.s2Chip.textContent = capability.ready ? "S2DR4 pronto" : "S2DR4 fila local";
       els.s2Chip.className = capability.ready ? "chip good" : "chip warn";
+      logAi("superres_capability", capability);
     }
 
     function selectedFarmSlug() {
@@ -679,7 +757,7 @@
     async function prepareBlocks() {
       setBusy(true);
       startTimer();
-      setRun("Preparando blocos", "Gerando grade 4 x 4 km com 200 m de sobreposicao.", 12);
+      setRun("Preparando blocos", "Gerando cobertura por fazenda e evitando blocos duplicados.", 12);
       try {
         const manifest = await api("/api/prepare", {
           method: "POST",
@@ -721,6 +799,7 @@
     async function startSentinelSearch() {
       setBusy(true);
       state.results = [];
+      state.superresProducts.clear();
       renderResults();
       startTimer();
       const payload = {
@@ -738,6 +817,7 @@
         });
         state.activeJob = start.job_id;
         log(`Busca Sentinel iniciada: ${start.total} blocos.`);
+        logAi("sentinel_search_started", {job_id: start.job_id, total: start.total, payload});
         await pollJob(start.job_id);
       } catch (err) {
         setRun("Erro Sentinel", err.message, 100, "error");
@@ -751,6 +831,7 @@
     async function pollJob(jobId) {
       while (true) {
         const job = await api(`/api/jobs/${jobId}`);
+        logAi("sentinel_job_snapshot", job);
         const progress = Number(job.progress || 0);
         setRun(
           job.status === "done" ? "Busca Sentinel concluida" : "Busca Sentinel",
@@ -766,6 +847,7 @@
           renderResults();
           els.selectedMetric.textContent = job.summary.matches_under_cloud;
           log(`${job.summary.queried_blocks} blocos consultados. ${job.summary.matches_under_cloud} abaixo do limite; ${job.summary.fallback_matches} em fallback.`);
+          logAi("sentinel_search_done", job.summary);
           return;
         }
         if (job.status === "error") {
@@ -776,9 +858,24 @@
     }
 
     async function pollSuperresJob(jobId) {
+      let transientFailures = 0;
       while (true) {
-        const job = await api(`/api/jobs/${jobId}`);
+        let job;
+        try {
+          job = await api(`/api/jobs/${jobId}`);
+          transientFailures = 0;
+        } catch (err) {
+          transientFailures += 1;
+          logAi("s2dr4_poll_transient_error", {job_id: jobId, attempt: transientFailures, message: err.message});
+          if (transientFailures > 30) {
+            throw err;
+          }
+          setRun("S2DR4 rodando", `Servidor ocupado durante o processamento. Tentando novamente (${transientFailures}/30).`, 88, "normal");
+          await sleep(2500);
+          continue;
+        }
         const progress = Number(job.progress || 0);
+        logAi("s2dr4_job_snapshot", job);
         setRun(
           job.status === "done" ? "S2DR4 concluido" : "S2DR4 rodando",
           `${job.message} | ${job.current}/${job.total} blocos`,
@@ -821,6 +918,7 @@
         const payload = {farm_slug: selectedFarmSlug() || null};
         setRun("Baixar S2DR4", "Evento recebido. Preparando fila e iniciando super-resolucao.", 4);
         log("Evento Baixar S2DR4 recebido. Preparando fila, executando S2DR4 e baixando produtos.");
+        logAi("s2dr4_download_flow_started", {payload});
         state.s2dr4Logged.clear();
         const start = await api("/api/jobs/s2dr4/start", {
           method: "POST",
@@ -829,12 +927,11 @@
         els.s2Chip.textContent = "S2DR4 rodando";
         els.s2Chip.className = "chip warn";
         log(`S2DR4 iniciado: ${start.total} blocos. Fila: ${start.queue_path}.`);
+        logAi("s2dr4_job_started", start);
         await pollSuperresJob(start.job_id);
 
         setRun("Conferindo S2DR4", "Buscando produtos gerados para download.", 38);
-        const params = new URLSearchParams();
-        if (payload.farm_slug) params.set("farm_slug", payload.farm_slug);
-        const products = await api(`/api/superres/products?${params.toString()}`);
+        const products = await refreshSuperresProducts(payload.farm_slug);
         if (!products.items) {
           throw new Error("S2DR4 terminou, mas nenhum produto foi encontrado para baixar.");
         }
@@ -858,6 +955,7 @@
         link.remove();
         setRun("Download S2DR4 pronto", `${bundle.items} produtos no pacote ${bundle.file_name}.`, 100);
         log(`Pacote S2DR4 pronto: ${bundle.file_name} (${bundle.items} arquivos).`);
+        logAi("s2dr4_bundle_downloaded", bundle);
       } catch (err) {
         setRun("Erro ao baixar S2DR4", err.message, 100, "error");
         log(`Erro download S2DR4: ${err.message}`);
@@ -865,6 +963,51 @@
         if (stopPulse) stopPulse();
         setBusy(false);
         stopTimer();
+      }
+    }
+
+    async function refreshSuperresProducts(farmSlug = null) {
+      const params = new URLSearchParams();
+      if (farmSlug) params.set("farm_slug", farmSlug);
+      const products = await api(`/api/superres/products?${params.toString()}`);
+      state.superresProducts.clear();
+      for (const item of products.products || []) {
+        const key = `${item.fazenda_slug || ""}/${item.block_id || ""}`;
+        if (!state.superresProducts.has(key)) {
+          state.superresProducts.set(key, []);
+        }
+        state.superresProducts.get(key).push(item);
+      }
+      renderResults();
+      logAi("superres_products_refreshed", {items: products.items, size_bytes: products.size_bytes});
+      return products;
+    }
+
+    async function downloadSuperresBlock(item) {
+      setBusy(true);
+      setRun("Baixar GeoTIFF SR", `Empacotando super-resolucao de ${item.block_id}.`, 74);
+      log(`Download GeoTIFF SR solicitado para ${item.block_id}.`);
+      logAi("superres_block_download_started", {block_id: item.block_id, fazenda_slug: item.fazenda_slug});
+      try {
+        const bundle = await api("/api/superres/products/bundle", {
+          method: "POST",
+          body: JSON.stringify({farm_slug: item.fazenda_slug, block_id: item.block_id})
+        });
+        const link = document.createElement("a");
+        link.href = bundle.download_url;
+        link.download = bundle.file_name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setRun("GeoTIFF SR pronto", `${item.block_id}: ${bundle.items} arquivo(s) no pacote.`, 100);
+        log(`GeoTIFF SR pronto para ${item.block_id}: ${bundle.file_name}.`);
+        logAi("superres_block_download_done", bundle);
+      } catch (err) {
+        setRun("Erro GeoTIFF SR", err.message, 100, "error");
+        log(`Erro GeoTIFF SR ${item.block_id}: ${err.message}`);
+        logAi("superres_block_download_error", {block_id: item.block_id, message: err.message});
+      } finally {
+        setBusy(false);
       }
     }
 
@@ -945,7 +1088,11 @@
         const isChecked = state.sentinelLayers.has(key) ? "checked" : "";
         const downloadUrl = state.sentinelDownloads.get(key);
         const download = downloadUrl
-          ? `<a href="${escapeHtml(downloadUrl)}" target="_blank" rel="noopener">Baixar</a>`
+          ? `<a href="${escapeHtml(downloadUrl)}" target="_blank" rel="noopener">Baixar 10 m</a>`
+          : `<span class="empty">-</span>`;
+        const srProducts = state.superresProducts.get(key) || [];
+        const superDownload = srProducts.length
+          ? `<button class="neutral superres-block-download" data-superres-key="${escapeHtml(key)}">Baixar SR</button>`
           : `<span class="empty">-</span>`;
         return `<tr>
           <td>
@@ -959,6 +1106,7 @@
           <td>${escapeHtml(image.date || "-")}</td>
           <td>${cloud === undefined ? "-" : Number(cloud).toFixed(2)}</td>
           <td>${download}</td>
+          <td>${superDownload}</td>
         </tr>`;
       }).join("");
       document.querySelectorAll(".preview-toggle").forEach(input => {
@@ -966,6 +1114,13 @@
           const key = event.currentTarget.dataset.previewKey;
           const item = state.results.find(result => resultKey(result) === key);
           if (item) toggleSentinelPreview(item, event.currentTarget.checked);
+        });
+      });
+      document.querySelectorAll(".superres-block-download").forEach(button => {
+        button.addEventListener("click", event => {
+          const key = event.currentTarget.dataset.superresKey;
+          const item = state.results.find(result => resultKey(result) === key);
+          if (item) downloadSuperresBlock(item);
         });
       });
     }
@@ -1036,10 +1191,49 @@
       return String(value).replace(/["\\]/g, "\\$&");
     }
 
+    function showLog(kind) {
+      state.activeLog = kind;
+      els.log.hidden = kind !== "simple";
+      els.aiLog.hidden = kind !== "ai";
+    }
+
+    async function copyActiveLog() {
+      const text = state.activeLog === "ai" ? els.aiLog.textContent : els.log.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        log(`Log ${state.activeLog === "ai" ? "IA" : "simples"} copiado.`);
+      } catch (err) {
+        const area = document.createElement("textarea");
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+        log(`Log ${state.activeLog === "ai" ? "IA" : "simples"} copiado por fallback.`);
+      }
+    }
+
+    function downloadActiveLog() {
+      const isAi = state.activeLog === "ai";
+      const text = isAi ? els.aiLog.textContent : els.log.textContent;
+      const blob = new Blob([text], {type: isAi ? "application/jsonl" : "text/plain"});
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = isAi ? "avant_log_ia.jsonl" : "avant_log_simples.txt";
+      document.body.appendChild(link);
+      link.click();
+      URL.revokeObjectURL(link.href);
+      link.remove();
+    }
+
     els.prepareBtn.addEventListener("click", prepareBlocks);
     els.authBtn.addEventListener("click", checkAuth);
     els.searchBtn.addEventListener("click", startSentinelSearch);
     els.downloadSuperresBtn.addEventListener("click", downloadSuperresProducts);
+    els.simpleLogBtn.addEventListener("click", () => showLog("simple"));
+    els.aiLogBtn.addEventListener("click", () => showLog("ai"));
+    els.copyLogBtn.addEventListener("click", copyActiveLog);
+    els.downloadLogBtn.addEventListener("click", downloadActiveLog);
     els.farmSelect.addEventListener("change", () => {
       renderMap();
       setRun("Mapa atualizado", `${selectedFarmName()} selecionada.`, 0);

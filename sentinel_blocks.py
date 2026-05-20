@@ -184,38 +184,52 @@ def generate_blocks(
             .buffer(0)
         )
         minx, miny, maxx, maxy = farm_metric.bounds
-        x0 = math.floor(minx / step_m) * step_m
-        y0 = math.floor(miny / step_m) * step_m
-        x1 = math.ceil(maxx / step_m) * step_m
-        y1 = math.ceil(maxy / step_m) * step_m
-
         cells = []
         records = []
-        idx = 1
-        y = y0
-        while y <= y1:
-            x = x0
-            while x <= x1:
-                cell = box(x, y, x + block_size_m, y + block_size_m)
-                if cell.intersects(farm_metric):
-                    center = cell.centroid
-                    records.append(
-                        {
-                            "block_id": f"{farm_slug}_{idx:03d}",
-                            "fazenda": farm_name,
-                            "fazenda_slug": farm_slug,
-                            "size_m": block_size_m,
-                            "overlap_m": overlap_m,
-                            "step_m": step_m,
-                            "metric_crs": metric_crs.to_string(),
-                            "center_inside_farm": bool(center.within(farm_metric)),
-                            "farm_intersection_area_m2": float(cell.intersection(farm_metric).area),
-                        }
-                    )
-                    cells.append(cell)
-                    idx += 1
-                x += step_m
-            y += step_m
+        farm_width_m = maxx - minx
+        farm_height_m = maxy - miny
+
+        def add_cell(cell, idx: int, mode: str) -> None:
+            center = cell.centroid
+            cell_minx, cell_miny, cell_maxx, cell_maxy = cell.bounds
+            records.append(
+                {
+                    "block_id": f"{farm_slug}_{idx:03d}",
+                    "fazenda": farm_name,
+                    "fazenda_slug": farm_slug,
+                    "size_m": round(max(cell_maxx - cell_minx, cell_maxy - cell_miny), 3),
+                    "overlap_m": overlap_m,
+                    "step_m": step_m,
+                    "metric_crs": metric_crs.to_string(),
+                    "generation_mode": mode,
+                    "center_inside_farm": bool(center.within(farm_metric)),
+                    "farm_intersection_area_m2": float(cell.intersection(farm_metric).area),
+                }
+            )
+            cells.append(cell)
+
+        single_cover_limit_m = block_size_m + overlap_m
+        if farm_width_m <= single_cover_limit_m and farm_height_m <= single_cover_limit_m:
+            center_x = (minx + maxx) / 2
+            center_y = (miny + maxy) / 2
+            half = max(block_size_m, farm_width_m, farm_height_m) / 2
+            add_cell(box(center_x - half, center_y - half, center_x + half, center_y + half), 1, "single_cover")
+        else:
+            x0 = math.floor(minx / step_m) * step_m
+            y0 = math.floor(miny / step_m) * step_m
+            x1 = math.ceil(maxx / step_m) * step_m
+            y1 = math.ceil(maxy / step_m) * step_m
+            idx = 1
+            y = y0
+            while y <= y1:
+                x = x0
+                while x <= x1:
+                    cell = box(x, y, x + block_size_m, y + block_size_m)
+                    if cell.intersects(farm_metric):
+                        add_cell(cell, idx, "grid_intersection")
+                        idx += 1
+                    x += step_m
+                y += step_m
 
         if records:
             blocks_metric = gpd.GeoDataFrame(records, geometry=cells, crs=metric_crs)
@@ -278,6 +292,7 @@ def _write_blocks_csv(gdf: gpd.GeoDataFrame, path: Path) -> None:
         "overlap_m",
         "step_m",
         "metric_crs",
+        "generation_mode",
         "center_inside_farm",
         "farm_intersection_area_m2",
         "block_folder",
@@ -652,11 +667,13 @@ def prepare_superres_queue(farm_slug: str | None = None) -> dict[str, Any]:
     }
 
 
-def collect_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+def collect_superres_products(farm_slug: str | None = None, block_id: str | None = None) -> dict[str, Any]:
     manifest = load_manifest()
     export_dir = Path(manifest["export_dir"])
     products = []
     for block in get_blocks(farm_slug=farm_slug):
+        if block_id and block["block_id"] != block_id:
+            continue
         output_dir = export_dir / block["fazenda_slug"] / "blocks" / block["block_id"] / "s2dr4"
         if not output_dir.exists():
             continue
@@ -681,17 +698,17 @@ def collect_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
     }
 
 
-def bundle_superres_products(farm_slug: str | None = None) -> dict[str, Any]:
+def bundle_superres_products(farm_slug: str | None = None, block_id: str | None = None) -> dict[str, Any]:
     manifest = load_manifest()
     export_dir = Path(manifest["export_dir"])
-    collected = collect_superres_products(farm_slug=farm_slug)
+    collected = collect_superres_products(farm_slug=farm_slug, block_id=block_id)
     products = collected["products"]
     if not products:
         raise ValueError("Nenhum produto S2DR4 encontrado. Execute a super-resolucao antes de baixar.")
 
     bundle_dir = export_dir / "s2dr4_downloads"
     bundle_dir.mkdir(parents=True, exist_ok=True)
-    slug = farm_slug or "todos"
+    slug = block_id or farm_slug or "todos"
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     bundle_path = bundle_dir / f"s2dr4_produtos_{slug}_{timestamp}.zip"
     with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
